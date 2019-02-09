@@ -52,7 +52,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxInterop.WMPLib">
@@ -72,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="Classes\ControlTransparent.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -79,12 +81,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\IconType.cs" />
+    <Compile Include="Classes\InternetConnectivity.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
-    <Compile Include="frmBase.cs">
+    <Compile Include="frmMedia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MainContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,7 +99,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="line-awesome.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -108,10 +110,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\play-50.png" />
     <EmbeddedResource Include="dll\AxInterop.WMPLib.dll" />
     <EmbeddedResource Include="dll\Interop.WMPLib.dll" />
-    <Content Include="icon.ico" />
     <Content Include="ReadMe.txt" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>

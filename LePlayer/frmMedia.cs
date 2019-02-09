@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using System.Reflection;
-using System.IO;
 using AxWMPLib;
 
 namespace System
 {
-    public partial class frmBase : Form
+    public partial class frmMedia : Form
     {
-        private AxWindowsMediaPlayer ui_media;
+        #region [ Contractor ]
+
+        AxWindowsMediaPlayer ui_media;
         ControlTransparent ui_move;
         IconControl ui_close;
         IconControl ui_minus;
@@ -35,8 +30,10 @@ namespace System
         IconControl ui_stop;
 
         Panel ui_control;
+        
+        #endregion
 
-        public frmBase()
+        public frmMedia()
         {
             this.Text = "Player";
             this.Icon = LePlayer.Properties.Resources.icon;
@@ -59,7 +56,7 @@ namespace System
             // MEDIA
             ui_media = new AxWindowsMediaPlayer()
             {
-                Location = new Point(0, 1),
+                Location = new Point(0, 2),
                 Width = this.Width,
                 Height = this.Height - 7,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom,
@@ -211,7 +208,7 @@ namespace System
             ui_media.SendToBack();
         }
 
-        private void f_media_event_PlayStateChange(object sender, _WMPOCXEvents_PlayStateChangeEvent e)
+        void f_media_event_PlayStateChange(object sender, _WMPOCXEvents_PlayStateChangeEvent e)
         {
             /**** Don't add this if you want to play it on multiple screens***** /
              * 
