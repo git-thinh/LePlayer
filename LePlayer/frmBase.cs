@@ -69,7 +69,7 @@ namespace System
             this.Controls.Add(ui_media);
             ui_media.settings.volume = 100;
             ui_media.uiMode = "none";
-            ui_media.URL = @"D:\MrThinh\EL\[G.S Nguyễn Quốc Hùng] - Làm thế nào để tự xây dựng môi trường học tiếng anh hiệu quả -.mp4";
+            ui_media.URL = @"D:\Talk To Miss Lan\Pronunce\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
             //ui_media.URL = @"D:\MrThinh\EL\Luyện nghe tiếng Anh qua video VOA-Có phụ đề tiếng anh-Bài 1.mp4";
             //ui_media.URL = @"D:\EL\Social Networking\1. Choosing a Job.mp3";
 
