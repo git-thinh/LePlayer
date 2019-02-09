@@ -281,7 +281,7 @@ namespace LePlayer
                 _media.Hide();
                 ev.Cancel = true;
             };
-            _media.Show();
+            //_media.Show();
 
             _textToSpeech = new frmTextToSpeech(this);
             _textToSpeech.FormClosing += (se, ev) =>
@@ -289,6 +289,7 @@ namespace LePlayer
                 _media.Hide();
                 ev.Cancel = true;
             };
+            _textToSpeech.Show();
 
             //_browser = new frmBrowser();
             //_browser.FormClosing += (se, ev) =>

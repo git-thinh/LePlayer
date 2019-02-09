@@ -73,20 +73,20 @@ namespace LePlayer
             {
                 browser.ShowDevTools();
             };
-            browser.RequestHandler = new RequestHandler(this);
-            browser.MenuHandler = new MenuHandler(this);
-            browser.JsDialogHandler = new JsDialogHandler();
-            var requestResource = new RequestResourceHandlerFactory();
-            requestResource.OnEventUrlArrived += (string url) =>
-            {
-                LogBuilder.AppendLine(Environment.NewLine);
-                LogBuilder.AppendLine(url);
+            ////browser.RequestHandler = new RequestHandler(this);
+            ////browser.MenuHandler = new MenuHandler(this);
+            ////browser.JsDialogHandler = new JsDialogHandler();
+            ////var requestResource = new RequestResourceHandlerFactory();
+            ////requestResource.OnEventUrlArrived += (string url) =>
+            ////{
+            ////    LogBuilder.AppendLine(Environment.NewLine);
+            ////    LogBuilder.AppendLine(url);
 
-                Console.WriteLine(Environment.NewLine);
-                Console.WriteLine(url);
-            };
-            browser.ResourceHandlerFactory = requestResource;
-            browser.LifeSpanHandler = new BrowserLifeSpanHandler();
+            ////    Console.WriteLine(Environment.NewLine);
+            ////    Console.WriteLine(url);
+            ////};
+            ////browser.ResourceHandlerFactory = requestResource;
+            ////browser.LifeSpanHandler = new BrowserLifeSpanHandler();
             this.Controls.Add(browser);
             this.Browser = browser;
 
