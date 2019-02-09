@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LePlayer</RootNamespace>
     <AssemblyName>LePlayer</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +44,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -50,6 +54,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
@@ -58,12 +63,22 @@
   <ItemGroup>
     <Reference Include="AxInterop.WMPLib">
       <HintPath>dll\AxInterop.WMPLib.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp">
+      <HintPath>dll\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>dll\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms">
+      <HintPath>dll\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Interop.WMPLib">
       <HintPath>dll\Interop.WMPLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -77,13 +92,23 @@
     <Compile Include="Classes\ControlTransparent.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\CrossThreadExtensions.cs" />
+    <Compile Include="Classes\HookHandlerFactory.cs" />
     <Compile Include="Classes\IconControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\IconType.cs" />
     <Compile Include="Classes\InternetConnectivity.cs" />
+    <Compile Include="Classes\JobWorker.cs" />
+    <Compile Include="Classes\MenuHandler.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
-    <Compile Include="frmMedia.cs">
+    <Compile Include="Forms\frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTextToSpeech.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces.cs" />
@@ -99,6 +124,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,8 +136,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dll\AxInterop.WMPLib.dll" />
-    <EmbeddedResource Include="dll\Interop.WMPLib.dll" />
     <Content Include="ReadMe.txt" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>

@@ -3,8 +3,9 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using AxWMPLib;
+using System;
 
-namespace System
+namespace LePlayer
 {
     public partial class frmMedia : Form
     {
