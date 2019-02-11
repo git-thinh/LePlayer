@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace LePlayer
 {
-    public class frmTextToSpeech : frmBase, IForm
+    public class frmDictionary : frmBase, IForm
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
@@ -31,7 +31,7 @@ namespace LePlayer
         //const string URL = "https://youtube.com";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
-        public frmTextToSpeech(IContext context) : base(context)
+        public frmDictionary(IContext context) : base(context)
         {
             LogBuilder = new StringBuilder();
             this.Text = "";
@@ -101,7 +101,7 @@ namespace LePlayer
             Browser.Load(url);
         }
 
-        ~frmTextToSpeech()
+        ~frmDictionary()
         {
             this.Browser.Dispose();
         }

@@ -108,6 +108,9 @@
     <Compile Include="Forms\frmMedia.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmTextToSpeech.cs">
       <SubType>Form</SubType>
     </Compile>

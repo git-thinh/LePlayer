@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using CefSharp;
 using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 namespace LePlayer
 {
@@ -20,7 +21,7 @@ namespace LePlayer
         int _connectCheckCounter = 0;
 
         //readonly frmBrowser _browser;
-        //readonly frmDictionary _dictionary;
+        readonly frmDictionary _dictionary;
         readonly frmMedia _media;
         readonly frmTextToSpeech _textToSpeech;
 
@@ -57,6 +58,11 @@ namespace LePlayer
             //settings.CefCommandLineArgs.Add("renderer-process-limit", "1");
             //settings.CefCommandLineArgs.Add("renderer-startup-dialog", "1");
             //settings.CefCommandLineArgs.Add("enable-media-stream", "1"); //Enable WebRTC
+
+            //settings.CefCommandLineArgs.Add("disable-speech-api", "0");
+            //settings.CefCommandLineArgs.Add("enable-speech-dispatcher", "1");
+            //settings.CefCommandLineArgs.Add("enable-speech-input", "1");
+
             //settings.CefCommandLineArgs.Add("no-proxy-server", "1"); //Don't use a proxy server, always make direct connections. Overrides any other proxy server flags that are passed.
             //settings.CefCommandLineArgs.Add("debug-plugin-loading", "1"); //Dumps extra logging about plugin loading to the log file.
             //settings.CefCommandLineArgs.Add("disable-plugins-discovery", "1"); //Disable discovering third-party plugins. Effectively loading only ones shipped with the browser plus third-party ones as specified by --extra-plugin-dir and --load-plugin switches
@@ -201,11 +207,11 @@ namespace LePlayer
             if (Directory.Exists("hook/base") == false) Directory.CreateDirectory("hook/base");
             if (File.Exists("hook/base/www.js") == false) File.WriteAllText("hook/base/www.js", string.Empty);
             if (File.Exists("hook/base/www.css") == false) File.WriteAllText("hook/base/www.css", string.Empty);
-            ////settings.RegisterScheme(new CefCustomScheme
-            ////{
-            ////    SchemeName = "http",
-            ////    SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: "hook", schemeName: "http", hostName: "hook")
-            ////});
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = "http",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(rootFolder: "root", schemeName: "http", hostName: "root")
+            });
             //You can use the http/https schemes - best to register for a specific domain
             settings.RegisterScheme(new CefCustomScheme
             {
