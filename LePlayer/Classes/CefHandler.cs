@@ -1,0 +1,424 @@
+﻿using CefSharp;
+using CefSharp.Handler;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace System
+{
+
+    public class RequestHandler : DefaultRequestHandler
+    {
+        readonly IForm Parent;
+        public RequestHandler(IForm parent) : base() { this.Parent = parent; }
+
+        public override bool OnBeforeBrowse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
+        {
+            this.Parent.ClearLog();
+
+            if (frame.IsMain)
+            {
+                this.Parent.URL_NEXT = request.Url;
+                //Console.Clear();
+                //if (string.IsNullOrEmpty(request.ReferrerUrl))
+                //    return false;
+                //else
+                //{
+                //    this.Parent.Go(request.Url);
+                //    return true;
+                //}
+            }
+
+            return false;
+        }
+
+        private Dictionary<UInt64, MemoryStreamResponseFilter> responseDictionary = new Dictionary<UInt64, MemoryStreamResponseFilter>();
+
+        public override IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
+        {
+            var url = request.Url;
+            if (url == this.Parent.URL_NEXT)
+            {
+                Console.WriteLine(Environment.NewLine + "###################>: " + request.Url);
+
+
+                //if (request.Url.Equals(CefExample.ResponseFilterTestUrl, StringComparison.OrdinalIgnoreCase))
+                //{
+                //    return new FindReplaceResponseFilter("REPLACE_THIS_STRING", "This is the replaced string!");
+                //}
+
+                //if (request.Url.Equals("custom://cefsharp/assets/js/jquery.js", StringComparison.OrdinalIgnoreCase))
+                //{
+                //    return new AppendResponseFilter(System.Environment.NewLine + "//CefSharp Appended this comment.");
+                //}
+
+                ////Only called for our customScheme
+                var dataFilter = new MemoryStreamResponseFilter(this.Parent);
+                responseDictionary.Add(request.Identifier, dataFilter);
+                return dataFilter;
+
+                //return new AppendResponseFilter(System.Environment.NewLine + 
+                //    "<!-- CefSharp Appended this comment. -->" + 
+                //    this.Parent.Context.CoreCSS + this.Parent.Context.CoreJS);
+            }
+
+            //return new PassThruResponseFilter();
+            return null;
+        }
+
+        public override void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
+        {
+            var url = request.Url;
+            if (url == browserControl.Address)
+            {
+                MemoryStreamResponseFilter filter;
+                if (responseDictionary.TryGetValue(request.Identifier, out filter))
+                {
+                    //TODO: Do something with the data here
+                    var data = filter.Data;
+                    var dataLength = filter.Data.Length;
+                    //NOTE: You may need to use a different encoding depending on the request
+                    var dataAsUtf8String = Encoding.UTF8.GetString(data);
+                }
+            }
+        }
+    }
+
+    public class AppendResponseFilter : IResponseFilter
+    {
+        private static Encoding encoding = Encoding.UTF8;
+
+        /// <summary>
+        /// Overflow from the output buffer.
+        /// </summary>
+        private List<byte> overflow = new List<byte>();
+
+        public AppendResponseFilter(string stringToAppend)
+        {
+            //Add the encoded string into the overflow.
+            overflow.AddRange(encoding.GetBytes(stringToAppend));
+        }
+
+        bool IResponseFilter.InitFilter()
+        {
+            return true;
+        }
+
+        FilterStatus IResponseFilter.Filter(Stream dataIn, out long dataInRead, Stream dataOut, out long dataOutWritten)
+        {
+            if (dataIn == null)
+            {
+                dataInRead = 0;
+                dataOutWritten = 0;
+
+                return FilterStatus.Done;
+            }
+
+            //We'll read all the data
+            dataInRead = dataIn.Length;
+            dataOutWritten = Math.Min(dataInRead, dataOut.Length);
+
+            if (dataIn.Length > 0)
+            {
+                //Copy all the existing data first
+                dataIn.CopyTo(dataOut);
+            }
+
+            // If we have overflow data and remaining space in the buffer then write the overflow.
+            if (overflow.Count > 0)
+            {
+                // Number of bytes remaining in the output buffer.
+                var remainingSpace = dataOut.Length - dataOutWritten;
+                // Maximum number of bytes we can write into the output buffer.
+                var maxWrite = Math.Min(overflow.Count, remainingSpace);
+
+                // Write the maximum portion that fits in the output buffer.
+                if (maxWrite > 0)
+                {
+                    dataOut.Write(overflow.ToArray(), 0, (int)maxWrite);
+                    dataOutWritten += maxWrite;
+                }
+
+                if (maxWrite == 0 && overflow.Count > 0)
+                {
+                    //We haven't yet got space to append our data
+                    return FilterStatus.NeedMoreData;
+                }
+
+                if (maxWrite < overflow.Count)
+                {
+                    // Need to write more bytes than will fit in the output buffer. 
+                    // Remove the bytes that were written already
+                    overflow.RemoveRange(0, (int)(maxWrite - 1));
+                }
+                else
+                {
+                    overflow.Clear();
+                }
+            }
+
+            if (overflow.Count > 0)
+            {
+                return FilterStatus.NeedMoreData;
+            }
+
+            return FilterStatus.Done;
+        }
+
+        public void Dispose()
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// MemoryStreamResponseFilter - copies all data from IResponseFilter.Filter
+    /// to a MemoryStream. This is provided as an example to get you started and has not been
+    /// production tested. If you experience problems you should refer to the CEF documentation
+    /// and ask any questions you have on http://magpcss.org/ceforum/index.php
+    /// Make sure to ask your question in the context of the CEF API (remember that CefSharp is just a wrapper).
+    /// https://magpcss.org/ceforum/apidocs3/projects/(default)/CefResponseFilter.html#Filter(void*,size_t,size_t&,void*,size_t,size_t&)
+    /// </summary>
+    public class MemoryStreamResponseFilter : IResponseFilter
+    {
+        readonly IForm Parent;
+        public MemoryStreamResponseFilter(IForm parent) : base() { this.Parent = parent; }
+
+        private MemoryStream memoryStream;
+
+        bool IResponseFilter.InitFilter()
+        {
+            //NOTE: We could initialize this earlier, just one possible use of InitFilter
+            memoryStream = new MemoryStream();
+
+            return true;
+        }
+
+        FilterStatus IResponseFilter.Filter(Stream dataIn, out long dataInRead, Stream dataOut, out long dataOutWritten)
+        {
+            if (dataIn == null)
+            {
+                dataInRead = 0;
+                dataOutWritten = 0;
+
+                return FilterStatus.Done;
+            }
+
+            //Calculate how much data we can read, in some instances dataIn.Length is
+            //greater than dataOut.Length
+            dataInRead = Math.Min(dataIn.Length, dataOut.Length);
+            dataOutWritten = dataInRead;
+
+            var readBytes = new byte[dataInRead];
+            dataIn.Read(readBytes, 0, readBytes.Length);
+            dataOut.Write(readBytes, 0, readBytes.Length);
+
+            //////var dataBody = Encoding.UTF8.GetString(readBytes).TrimEnd();
+            //////if (dataBody.Contains("<html"))
+            //////{                
+            //////    var bufHok = Encoding.ASCII.GetBytes("<div id='hok___'/>");
+            //////    List<byte> ls = new List<byte>(bufHok.Length + readBytes.Length);
+            //////    ls.AddRange(bufHok);
+            //////    ls.AddRange(readBytes);
+
+            //////    dataOut.Write(ls.ToArray(), 0, ls.ToArray().Length);
+            //////    dataOutWritten = dataInRead + bufHok.Length;
+            //////}
+            //////else {
+            //////    dataOut.Write(readBytes, 0, readBytes.Length);
+            //////}
+
+            //Write buffer to the memory stream
+            memoryStream.Write(readBytes, 0, readBytes.Length);
+
+            //If we read less than the total amount avaliable then we need
+            //return FilterStatus.NeedMoreData so we can then write the rest
+            if (dataInRead < dataIn.Length)
+            {
+                return FilterStatus.NeedMoreData;
+            }
+
+            var dataAsUtf8String = Encoding.UTF8.GetString(readBytes).TrimEnd();
+            if (dataAsUtf8String.EndsWith("</html>"))
+            {
+                Uri uri = new Uri(this.Parent.URL_NEXT);
+                string host = uri.Host.ToLower();
+                if (host.StartsWith("www.")) host = host.Substring(4);
+
+                string textHook = @"<link href=http://f/w.css?" + host + @" rel=stylesheet><script src=http://f/w.js?" + host + @"></script>";
+
+                //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
+                var bufs = Encoding.ASCII.GetBytes(textHook);
+                dataOutWritten = dataInRead + bufs.Length;
+                dataOut.Write(bufs, 0, bufs.Length);
+            }
+
+            return FilterStatus.Done;
+        }
+
+        void IDisposable.Dispose()
+        {
+            memoryStream.Dispose();
+            memoryStream = null;
+        }
+
+        public byte[] Data
+        {
+            get { return memoryStream.ToArray(); }
+        }
+    }
+
+    public class RequestResourceHandlerFactory : IResourceHandlerFactory
+    {
+        /// <summary>
+        /// Raised when a request resource event arrives.
+        /// </summary>
+        public event Action<string> OnEventUrlArrived;
+
+        bool IResourceHandlerFactory.HasHandlers
+        {
+            get { return true; }
+        }
+
+        void SendLogUrl(string url)
+        {
+            if (url.Contains("chrome-devtools") || url.Contains("chrome-extension")) return;
+            if (OnEventUrlArrived != null) OnEventUrlArrived(url);
+        }
+
+        IResourceHandler IResourceHandlerFactory.GetResourceHandler(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request)
+        {
+            string url = request.Url;
+
+            if (url.Contains("facebook")
+                //|| url.Contains("google") 
+                || url.Contains("google-analytics")
+                || url.Contains("googlesyndication")
+                || url.Contains("adservice.google.com")
+                || url.Contains("googletagservices")
+                || url.Contains("click")
+                || url.Contains("sharethis")
+                || url.Contains("counter")
+                || url.Contains("adserver")
+                || url.Contains("reach")
+                || url.Contains("visitor"))
+            {
+                SendLogUrl("##> " + request.Method + ": " + url);
+                return new RequestResourceCanceler();
+            }
+
+            SendLogUrl("--> " + request.Method + ": " + url);
+            return null;
+        }
+    }
+
+    public class RequestResourceCanceler : ResourceHandler
+    {
+        public override bool ProcessRequestAsync(IRequest request, ICallback callback)
+        {
+            callback.Continue();
+            return true;
+        }
+    }
+
+    public class RequestResourceHandler : ResourceHandler
+    {
+        public override bool ProcessRequestAsync(IRequest request, ICallback callback)
+        {
+            return false;
+
+            ////Task.Run(() =>
+            ////{
+            ////    using (callback)
+            ////    {
+            ////        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://samples.mplayerhq.hu/SWF/zeldaADPCM5bit.swf");
+
+            ////        var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            ////        // Get the stream associated with the response.
+            ////        var receiveStream = httpWebResponse.GetResponseStream();
+            ////        var mime = httpWebResponse.ContentType;
+
+            ////        var stream = new MemoryStream();
+            ////        receiveStream.CopyTo(stream);
+            ////        httpWebResponse.Close();
+
+            ////        //Reset the stream position to 0 so the stream can be copied into the underlying unmanaged buffer
+            ////        stream.Position = 0;
+
+            ////        //Populate the response values - No longer need to implement GetResponseHeaders (unless you need to perform a redirect)
+            ////        ResponseLength = stream.Length;
+            ////        MimeType = mime;
+            ////        StatusCode = (int)HttpStatusCode.OK;
+            ////        Stream = stream;
+
+            ////        callback.Continue();
+            ////    }
+            ////});
+            ////return true;
+        }
+    }
+
+    public class BrowserLifeSpanHandler : ILifeSpanHandler
+    {
+        public bool OnBeforePopup(IWebBrowser browserControl, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName,
+            WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo,
+            IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser)
+        {
+            newBrowser = null;
+            // Preserve new windows to be opened and load all popup urls in the same browser view
+            //browserControl.Load(targetUrl);
+            //frame.ExecuteJavaScriptAsync("setTimeout(function () { location.href = '" + targetUrl + "'; }, 1);");
+            frame.ExecuteJavaScriptAsync(" location.href = '" + targetUrl + "'; ");
+            return true;
+        }
+
+        public void OnAfterCreated(IWebBrowser browserControl, IBrowser browser)
+        {
+            //
+        }
+
+        public bool DoClose(IWebBrowser browserControl, IBrowser browser)
+        {
+            return false;
+        }
+
+        public void OnBeforeClose(IWebBrowser browserControl, IBrowser browser)
+        {
+            //nothing
+        }
+    }
+
+    public class JsDialogHandler : IJsDialogHandler
+    {
+        bool IJsDialogHandler.OnJSDialog(IWebBrowser browserControl, IBrowser browser, string originUrl, CefJsDialogType dialogType, string messageText, string defaultPromptText, IJsDialogCallback callback, ref bool suppressMessage)
+        {
+            return false;
+        }
+
+        bool IJsDialogHandler.OnBeforeUnloadDialog(IWebBrowser browserControl, IBrowser browser, string message, bool isReload, IJsDialogCallback callback)
+        {
+            //Custom implementation would look something like
+            // - Create/Show dialog on UI Thread
+            // - execute callback once user has responded
+            // - callback.Continue(true);
+            // - return true
+
+            //NOTE: Returning false will trigger the default behaviour, no need to execute the callback if you return false.
+            return false;
+        }
+
+        void IJsDialogHandler.OnResetDialogState(IWebBrowser browserControl, IBrowser browser)
+        {
+
+        }
+
+        void IJsDialogHandler.OnDialogClosed(IWebBrowser browserControl, IBrowser browser)
+        {
+
+        }
+    }
+}

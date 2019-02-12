@@ -23,7 +23,7 @@ namespace LePlayer
         //readonly frmBrowser _browser;
         readonly frmDictionary _dictionary;
         readonly frmMedia _media;
-        readonly frmTextToSpeech _textToSpeech;
+        //readonly frmTextToSpeech _textToSpeech;
 
         #endregion
 
@@ -271,15 +271,15 @@ namespace LePlayer
 
             setupIcon();
 
-            //_dictionary = new frmDictionary(this);
-            //_dictionary.FormClosing += (se, ev) =>
-            //{
-            //    _dictionary.Hide();
-            //    ev.Cancel = true;
-            //    //??????????????????????????????????
-            //    this.ExitThreadCore();
-            //};
-            ////_dictionary.Show();
+            _dictionary = new frmDictionary(this);
+            _dictionary.FormClosing += (se, ev) =>
+            {
+                _dictionary.Hide();
+                ev.Cancel = true;
+                //??????????????????????????????????
+                this.ExitThreadCore();
+            };
+            _dictionary.Show();
 
             _media = new frmMedia();
             _media.FormClosing += (se, ev) =>
@@ -289,13 +289,13 @@ namespace LePlayer
             };
             //_media.Show();
 
-            _textToSpeech = new frmTextToSpeech(this);
-            _textToSpeech.FormClosing += (se, ev) =>
-            {
-                _media.Hide();
-                ev.Cancel = true;
-            };
-            _textToSpeech.Show();
+            //_textToSpeech = new frmTextToSpeech(this);
+            //_textToSpeech.FormClosing += (se, ev) =>
+            //{
+            //    _media.Hide();
+            //    ev.Cancel = true;
+            //};
+            //_textToSpeech.Show();
 
             //_browser = new frmBrowser();
             //_browser.FormClosing += (se, ev) =>
@@ -329,7 +329,7 @@ namespace LePlayer
 
         void textToSpeech_Show()
         {
-            _textToSpeech.Show();
+            //_textToSpeech.Show();
         }
 
         private void browser_Show()
@@ -339,7 +339,7 @@ namespace LePlayer
 
         private void dictionary_Show()
         {
-            //_dictionary.Show();
+            _dictionary.Show();
         }
 
         private void media_Show()

@@ -102,6 +102,7 @@
     <Compile Include="Classes\JobWorker.cs" />
     <Compile Include="Classes\MenuHandler.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
+    <Compile Include="Classes\CefHandler.cs" />
     <Compile Include="Forms\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,9 +110,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDictionary.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmTextToSpeech.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces.cs" />
