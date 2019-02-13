@@ -31,7 +31,7 @@ namespace LePlayer
         //const string URL = "https://youtube.com";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
-        public frmDictionary(IContext context) : base(context)
+        public frmDictionary(IContext context) : base(context, FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
             LogBuilder = new StringBuilder();
             this.Text = "";
@@ -43,8 +43,8 @@ namespace LePlayer
 
             this.Shown += (se, ev) =>
             {
-                this.Top = 0;
-                this.Left = Screen.PrimaryScreen.WorkingArea.Width - 1030;
+                //this.Top = 0;
+                //this.Left = Screen.PrimaryScreen.WorkingArea.Width - 1030;
                 this.Width = 1030;// Screen.PrimaryScreen.WorkingArea.Width / 2;
                 this.Height = 610;
                 //this.Height = Screen.PrimaryScreen.WorkingArea.Height;
@@ -77,7 +77,7 @@ namespace LePlayer
             };
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {
-                browser.ShowDevTools();
+                //browser.ShowDevTools();
             };
             browser.RequestHandler = new RequestHandler(this);
             browser.MenuHandler = new MenuHandler(this);

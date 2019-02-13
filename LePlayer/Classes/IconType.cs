@@ -6,6 +6,7 @@ namespace System
 {
     public enum IconType
     {
+        arrow_alt = 0xf124,
         close = 0xf191,
         minus = 0xf28e,
         play = 0xf2be,

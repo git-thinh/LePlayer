@@ -253,7 +253,13 @@ namespace System
                 //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
                 var bufs = Encoding.ASCII.GetBytes(textHook);
                 dataOutWritten = dataInRead + bufs.Length;
-                dataOut.Write(bufs, 0, bufs.Length);
+                if (dataOutWritten > dataOut.Length) {
+
+                }
+                else
+                {
+                    dataOut.Write(bufs, 0, bufs.Length);
+                }
             }
 
             return FilterStatus.Done;

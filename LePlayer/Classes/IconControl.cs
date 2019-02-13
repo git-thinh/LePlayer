@@ -9,7 +9,30 @@ namespace System
     {
         public int FontSize { set; get; }
         private static byte[] bufferFont;
-        public IconControl(Color normalColor, IconType type = IconType.play, int fontSize = 24)
+
+        public IconControl(FROM_STYLE formStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE, IconType type = IconType.play, int fontSize = 24)
+        {
+            switch (formStyle)
+            {
+                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                    NormalColor = Color.Black;
+                    BackColor = Color.White;
+                    break;
+                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                    NormalColor = Color.White;
+                    BackColor = Color.Black;
+                    break;
+            }
+            Init(type, fontSize);
+        }
+
+        //public IconControl(Color normalColor, IconType type = IconType.play, int fontSize = 24)
+        //{
+        //    NormalColor = normalColor;
+        //    Init(type, fontSize);
+        //}
+
+        void Init(IconType type, int fontSize)
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
@@ -20,9 +43,7 @@ namespace System
             Height = fontSize;
 
             IconType = type;
-            NormalColor = normalColor;
         }
-
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -107,8 +128,9 @@ namespace System
             ////e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
             //0, 0, FontSize, FontSize);
 
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), 0, 0, FontSize, FontSize);
-            //graphics.FillRectangle(Brushes.Red, new Rectangle(10, 10, 200, 200));
+            //e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), 0, 0, FontSize, FontSize);
+            //graphics.FillRectangle(Brushes.Red, new Rectangle(0, 0, FontSize, FontSize));
+            graphics.FillRectangle(new SolidBrush(this.BackColor), new Rectangle(0, 0, FontSize, FontSize));
 
             // Draw string to screen.
             graphics.DrawString(IconChar, IconFont, IconBrush, new PointF(left, top));

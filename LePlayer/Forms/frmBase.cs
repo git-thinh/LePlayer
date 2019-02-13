@@ -12,24 +12,24 @@ namespace System
     public partial class frmBase : Form, IForm
     {
         #region [ Contractor ]
-        //ControlTransparent ui_move;
 
+        Label ui_title;
         IconControl ui_close;
         IconControl ui_minus;
 
-        IconControl ui_list;
-        IconControl ui_arrow_right;
-        IconControl ui_arrow_left;
+        IconControl ui_move;
+        IconControl ui_menu;
 
         Panel ui_control;
-        Label ui_title;
 
         const int _TITLE_HEIGHT = 17;
 
         #endregion
 
-        public frmBase(IContext context)
+        public FROM_STYLE _FormStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE;
+        public frmBase(IContext context, FROM_STYLE formStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
+            this._FormStyle = formStyle;
             this.Context = context;
 
             ui_control = new Panel()
@@ -37,122 +37,131 @@ namespace System
                 Padding = new Padding(0),
                 Height = 800,
                 Width = 600,
-                Location = new Point(0, _TITLE_HEIGHT),
+                //Location = new Point(0, _TITLE_HEIGHT),
                 BackColor = Color.Blue,
             };
             this.Controls.Add(ui_control);
 
             this.Icon = LePlayer.Properties.Resources.icon;
-            this.BackColor = Color.White;
             this.FormBorderStyle = FormBorderStyle.None;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.Shown += (se, ev) => LoadControls();
+
+            switch (this._FormStyle)
+            {
+                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                    this.BackColor = Color.White;
+                    break;
+                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                    this.BackColor = Color.Black;
+                    break;
+            }
         }
 
         void LoadControls()
         {
             this.Width = 600;
             this.Height = 340;
+            Color TEXT_COLOR = Color.Black;
+            Color BG_COLOR = Color.White;
 
-            ////ui_move = new ControlTransparent()
-            ////{
-            ////    Location = new Point(0, 0),
-            ////    Width = this.Width - 5,
-            ////    Height = this.Height - 5,
-            ////    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom,
-            ////};
-            ////this.Controls.Add(ui_move);
-            ////ui_move.MouseMove += f_form_move_MouseDown;
-            ////ui_move.MouseClick += (s, v) => { };
-
-            ui_title = new Label()
+            Label ui_box_close = null;
+            switch (this._FormStyle)
             {
-                Height = _TITLE_HEIGHT,
-                Padding = new Padding(_TITLE_HEIGHT, 2, 0, 0),
-                BackColor = Color.Black,
-                ForeColor = Color.White,
-                Text = Guid.NewGuid().ToString(),
-                Dock = DockStyle.Top
-            };
-            //this.Controls.Add(ui_title);
-            ui_title.MouseMove += f_form_move_MouseDown;
+                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                    TEXT_COLOR = Color.Black;
+                    BG_COLOR = Color.White;
+                    break;
+                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                    TEXT_COLOR = Color.White;
+                    BG_COLOR = Color.Black;
+                    break;
+            }
 
-            ////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////
-
-            ui_list = new IconControl(Color.WhiteSmoke, IconType.menu, 11)
+            //////////////////////////////////////////////////////////////////////////// 
+            ui_title = new Label() { ForeColor = TEXT_COLOR, BackColor = BG_COLOR };
+            ui_move = new IconControl(this._FormStyle, IconType.arrow_alt, 11)
             {
                 Location = new Point(2, 2),
-                Anchor = AnchorStyles.Top | AnchorStyles.Left,
-                BackColor = Color.Black,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left
             };
-            this.Controls.Add(ui_list);
-
-            ui_minus = new IconControl(Color.White, IconType.minus, 11)
+            ui_menu = new IconControl(this._FormStyle, IconType.menu, 11)
+            {
+                Location = new Point(4, this.Height - 15),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+            };
+            ui_minus = new IconControl(this._FormStyle, IconType.minus, 11)
             {
                 Width = 16,
                 Height = 14,
                 Location = new Point(this.Width - 32, 2),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                BackColor = Color.Black,
             };
-            ui_minus.Click += (s, v) =>
-            {
-                WindowState = FormWindowState.Minimized;
-            };
-            this.Controls.Add(ui_minus);
-
-            ui_close = new IconControl(Color.WhiteSmoke, IconType.close, 11)
+            ui_close = new IconControl(this._FormStyle, IconType.close, 11)
             {
                 Width = 16,
                 Height = 14,
                 Location = new Point(this.Width - 16, 2),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                BackColor = Color.Black,
             };
+            ui_box_close = new Label()
+            {
+                BackColor = BG_COLOR,
+                Width = 36,
+                Height = 16,
+                Location = new Point(this.Width - 36, -1),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+            };
+
+            //////////////////////////////////////////////////////////////////////////// 
+            ui_title.Height = _TITLE_HEIGHT;
+            ui_title.Padding = new Padding(_TITLE_HEIGHT, 2, 0, 0);
+            ui_title.Text = Guid.NewGuid().ToString();
+            ui_title.Dock = DockStyle.Top;
+            ui_title.MouseMove += f_form_move_MouseDown;
+            ui_move.MouseMove += f_form_move_MouseDown;
+
+            //////////////////////////////////////////////////////////////////////////// 
+            ui_title.Visible = false;
+            ui_control.Location = new Point(0, 0);
+            ui_control.Height = this.Height - 5;
+            switch (this._FormStyle)
+            {
+                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                    break;
+                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                    //ui_move.Visible = false;
+                    //ui_control.Location = new Point(0, _TITLE_HEIGHT);
+                    //ui_control.Height = this.Height - _TITLE_HEIGHT - 5;
+                    break;
+            }
+            //////////////////////////////////////////////////////////////////////////// 
+            this.Controls.Add(ui_title);
+            this.Controls.Add(ui_move);
+            this.Controls.Add(ui_minus);
             this.Controls.Add(ui_close);
+            this.Controls.Add(ui_box_close);
+            this.Controls.Add(ui_menu);
+
+            ui_minus.Click += (s, v) =>
+            {
+                WindowState = FormWindowState.Minimized;
+            };
             ui_close.Click += (s, v) =>
             {
                 this.Close();
             };
-            this.Controls.Add(new Label()
-            {
-                Width = 36,
-                Height = 16,
-                Location = new Point(this.Width - 36, 0),
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                BackColor = Color.Black,
-            });
-
-            ////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////
-
-            const int _iconSize = 18;
-            //ui_control = new Panel()
-            //{
-            //    Padding = new Padding(0),
-            //    Height = this.Height - _TITLE_HEIGHT - 5,
-            //    Width = this.Width,
-            //    Location = new Point(0, _TITLE_HEIGHT),
-            //    BackColor = Color.Blue,
-            //    Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left,
-            //};
-            //this.Controls.Add(ui_control);
-
-            ui_arrow_left = new IconControl(Color.OrangeRed, IconType.arrow_left, _iconSize) { Dock = DockStyle.Left };
-            ui_arrow_right = new IconControl(Color.OrangeRed, IconType.arrow_right, _iconSize) { Dock = DockStyle.Left };
 
             //////////////////////////////////////////////////////////////////////////// 
-            ui_control.Height = this.Height - _TITLE_HEIGHT - 5;
             ui_control.Width = this.Width;
             ui_control.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             ui_control.SendToBack();
-
             ui_title.SendToBack();
         }
 
-        public void AddControl(Control control) {
+        public void AddControl(Control control)
+        {
             this.ui_control.Controls.Add(control);
         }
 
@@ -203,7 +212,7 @@ namespace System
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void f_form_move_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        public void f_form_move_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -258,10 +267,10 @@ namespace System
 
                 var margins = new NativeMethods.MARGINS()
                 {
-                    cyBottomHeight = 1,
-                    cxLeftWidth = 1,
-                    cxRightWidth = 1,
-                    cyTopHeight = 1
+                    cyBottomHeight = 0,
+                    cxLeftWidth = 0,
+                    cxRightWidth = 0,
+                    cyTopHeight = 0
                 };
 
                 NativeMethods.DwmExtendFrameIntoClientArea(Handle, ref margins);

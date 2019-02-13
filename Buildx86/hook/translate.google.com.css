@@ -1,6 +1,7 @@
 ﻿.input-button-container,
 .tlid-language-bar,
 header#gb,
+#itamenu,
 div.feedback-link,
 div.gp-footer {
     display: none;
@@ -18,14 +19,16 @@ div.gp-footer {
     top: auto;
 }
 
-/*************************************/
-/*************************************/
-/*************************************/
+#gt-input-tool {
+    min-width: 10px;
+}
 
+/*************************************/
+/*************************************/
+/*************************************/
 /*.frame {
     overflow: hidden !important;
 }*/
-
 .result {
     background-color: #fff !important;
 }
