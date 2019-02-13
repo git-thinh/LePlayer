@@ -46,21 +46,25 @@ namespace LePlayer
                 this.Top = 0;
                 this.Left = Screen.PrimaryScreen.WorkingArea.Width - 1030;
                 this.Width = 1030;// Screen.PrimaryScreen.WorkingArea.Width / 2;
-                //this.Height = 610; 
-                this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+                this.Height = 610;
+                //this.Height = Screen.PrimaryScreen.WorkingArea.Height;
 
-                Browser.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-                BackColor = Color.Black;
-                Browser.SendToBack();
+                //Browser.Location = new System.Drawing.Point(1, 1);
+                //Browser.Width = this.Width - 16;
+                //Browser.Height = this.Height - 10;
+                //Browser.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+                //BackColor = Color.Black;
+                //Browser.SendToBack();
             };
 
             var browser = new ChromiumWebBrowser(URL)
             {
-                Location = new System.Drawing.Point(3, 7),
-                Width = 1024,
-                //Height = 600,
-                Height = Screen.PrimaryScreen.WorkingArea.Height - 10,
-                Dock = DockStyle.None,
+                //Location = new System.Drawing.Point(3, 7),
+                //Width = 1024,
+                //Height = 800,
+                ////Height = Screen.PrimaryScreen.WorkingArea.Height - 10,
+                //Dock = DockStyle.None,
+                Dock = DockStyle.Fill,
                 BrowserSettings =
                 {
                     DefaultEncoding = "UTF-8",
@@ -89,7 +93,8 @@ namespace LePlayer
             ////};
             ////browser.ResourceHandlerFactory = requestResource;
             ////browser.LifeSpanHandler = new BrowserLifeSpanHandler();
-            this.Controls.Add(browser);
+            //this.Controls.Add(browser);
+            this.AddControl(browser);
             this.Browser = browser;
 
 

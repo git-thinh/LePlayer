@@ -271,6 +271,13 @@ namespace LePlayer
 
             setupIcon();
 
+            //var f = new frmBase(null);
+            //f.Shown += (s, e) => {
+            //    f.Width = 800;
+            //    f.Height = 600;
+            //};
+            //f.Show();
+
             _dictionary = new frmDictionary(this);
             _dictionary.FormClosing += (se, ev) =>
             {
