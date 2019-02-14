@@ -40,9 +40,19 @@ namespace System
         public override IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
             var url = request.Url;
+
+            if (url.StartsWith("http"))
+                Console.WriteLine(Environment.NewLine + "---->: " + url);
+
+            //if (url.Contains("translate_tts"))
+            //{
+            //    request.Dispose();
+            //    return null;
+            //}
+
             if (url == this.Parent.URL_NEXT)
             {
-                Console.WriteLine(Environment.NewLine + "###################>: " + request.Url);
+                Console.WriteLine(Environment.NewLine + "####>: " + url);
 
 
                 //if (request.Url.Equals(CefExample.ResponseFilterTestUrl, StringComparison.OrdinalIgnoreCase))
@@ -253,7 +263,8 @@ namespace System
                 //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
                 var bufs = Encoding.ASCII.GetBytes(textHook);
                 dataOutWritten = dataInRead + bufs.Length;
-                if (dataOutWritten > dataOut.Length) {
+                if (dataOutWritten > dataOut.Length)
+                {
 
                 }
                 else
@@ -299,24 +310,30 @@ namespace System
         {
             string url = request.Url;
 
-            if (url.Contains("facebook")
-                //|| url.Contains("google") 
-                || url.Contains("google-analytics")
-                || url.Contains("googlesyndication")
-                || url.Contains("adservice.google.com")
-                || url.Contains("googletagservices")
-                || url.Contains("click")
-                || url.Contains("sharethis")
-                || url.Contains("counter")
-                || url.Contains("adserver")
-                || url.Contains("reach")
-                || url.Contains("visitor"))
+            //if (url.Contains("facebook")
+            //    //|| url.Contains("google") 
+            //    || url.Contains("google-analytics")
+            //    || url.Contains("googlesyndication")
+            //    || url.Contains("adservice.google.com")
+            //    || url.Contains("googletagservices")
+            //    || url.Contains("click")
+            //    || url.Contains("sharethis")
+            //    || url.Contains("counter")
+            //    || url.Contains("adserver")
+            //    || url.Contains("reach")
+            //    || url.Contains("visitor"))
+            //{
+            //    SendLogUrl("##> " + request.Method + ": " + url);
+            //    return new RequestResourceCanceler();
+            //}
+            
+            if (url.Contains("translate_tts"))
             {
-                SendLogUrl("##> " + request.Method + ": " + url);
+                Console.WriteLine(Environment.NewLine + "!!!!>: " + url);
                 return new RequestResourceCanceler();
             }
 
-            SendLogUrl("--> " + request.Method + ": " + url);
+            //SendLogUrl("--> " + request.Method + ": " + url);
             return null;
         }
     }

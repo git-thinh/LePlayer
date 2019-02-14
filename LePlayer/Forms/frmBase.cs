@@ -10,26 +10,35 @@ namespace System
     public partial class frmBase : Form, IForm
     {
         static Dictionary<FORM_TYPE, object> storeForm = new Dictionary<FORM_TYPE, object>() { };
-        public static void createAndShowForm(FORM_TYPE formType)
+        public static void createAndShowForm(IContext context, FORM_TYPE formType)
         {
             if (storeForm.ContainsKey(formType))
             {
                 Form f = (Form)storeForm[formType];
-                f.Show();
+                if (f.IsDisposed) {
+                    storeForm.Remove(formType);
+                    createAndShowForm(context, formType);
+                }
+                else f.Show();
             }
             else
             {
                 switch (formType)
                 {
-                    case FORM_TYPE.MEDIA_VIDEO:
-                        var video = new frmMediaVideo(null);
-                        storeForm.Add(formType, video);
-                        video.Show();
+                    case FORM_TYPE.BROWSER:
+                        var w = new frmBrowser(context);
+                        storeForm.Add(formType, w);
+                        w.Show();
                         break;
                     case FORM_TYPE.DICTIONARY:
-                        var dic = new frmDictionary(null);
+                        var dic = new frmDictionary(context);
                         storeForm.Add(formType, dic);
                         dic.Show();
+                        break;
+                    case FORM_TYPE.MEDIA_VIDEO:
+                        var video = new frmMediaVideo(context);
+                        storeForm.Add(formType, video);
+                        video.Show();
                         break;
                 }
             }
@@ -213,8 +222,7 @@ namespace System
         {
             this.ui_control.Controls.Add(control);
         }
-
-
+        
         public IContext Context { get; private set; }
         public string URL_NEXT { get; set; }
 

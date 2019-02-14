@@ -74,8 +74,9 @@ namespace LePlayer
             this.AddControl(ui_media);
             ui_media.settings.volume = 100;
             ui_media.uiMode = "none";
-            ui_media.URL = @"C:\test\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
-            //////////ui_media.URL = @"D:\Talk To Miss Lan\Pronunce\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
+            //ui_media.URL = @"https://translate.google.com/translate_tts?ie=UTF-8&q=common&tl=en&total=1&idx=0&textlen=6&tk=202366.361594&client=webapp&prev=input";
+            //ui_media.URL = @"C:\test\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
+            ui_media.URL = @"D:\Talk To Miss Lan\Pronunce\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
             ////////ui_media.URL = @"D:\MrThinh\EL\Luyện nghe tiếng Anh qua video VOA-Có phụ đề tiếng anh-Bài 1.mp4";
             ////////ui_media.URL = @"D:\EL\Social Networking\1. Choosing a Job.mp3";
 

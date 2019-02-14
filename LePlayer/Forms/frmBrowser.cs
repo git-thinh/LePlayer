@@ -15,14 +15,14 @@ using System.Windows.Forms;
 
 namespace LePlayer
 {
-    public class frmDictionary : frmBase, IForm_Dictionary
+    public class frmBrowser : frmBase, IForm_Browser
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
         //const string URL = "https://gitter.im/";
-        const string URL = "https://translate.google.com/#view=home&op=translate&sl=en&tl=vi";
+        //const string URL = "https://translate.google.com/#view=home&op=translate&sl=en&tl=vi";
         //const string URL = "file:///G:/_EL/Document/forME/Vietnamese/Cau_truc_tieng_anh_The_Windy.pdf";
-        //const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
+        const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
         //const string URL = "http://root/texttospeech/index.html";
         //const string URL = "localfolder://cefsharp/home.html";
         //const string URL = "http://hook/base.js";
@@ -30,8 +30,9 @@ namespace LePlayer
         //const string URL = "https://dictionary.cambridge.org/";
         //const string URL = "https://youtube.com";
         //const string URL = "https://youtube.com";
+
         readonly StringBuilder LogBuilder;
-        public frmDictionary(IContext context) : base(FORM_TYPE.DICTIONARY, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmBrowser(IContext context) : base(FORM_TYPE.DICTIONARY, context, FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK)
         {
             this.Text = "";
             this.VisiblePanelTransparentToMove = false;
@@ -48,9 +49,9 @@ namespace LePlayer
             this.Shown += (se, ev) =>
             {
                 //this.Top = 0;
-                this.Left = 0;// Screen.PrimaryScreen.WorkingArea.Width - 1030;
-                this.Width = 450;// Screen.PrimaryScreen.WorkingArea.Width / 2;
-                this.Height = 610;
+                this.Left = (Screen.PrimaryScreen.WorkingArea.Width - 1024) / 2;
+                this.Width = 1024;// Screen.PrimaryScreen.WorkingArea.Width / 2;
+                this.Height = 768;
                 //this.Height = Screen.PrimaryScreen.WorkingArea.Height;
 
                 //Browser.Location = new System.Drawing.Point(1, 1);
@@ -81,33 +82,27 @@ namespace LePlayer
             };
             browser.IsBrowserInitializedChanged += (se, ev) =>
             {
-                browser.ShowDevTools();
+                //browser.ShowDevTools();
             };
-            browser.RequestHandler = new RequestHandler(this);
+            ////browser.RequestHandler = new RequestHandler(this);
             browser.MenuHandler = new MenuHandler(this);
-            ////browser.JsDialogHandler = new JsDialogHandler();
-            var requestResource = new DictionaryRequestResourceHandlerFactory();
-            requestResource.OnEventUrlArrived += (string url) =>
-            {
-                //LogBuilder.AppendLine(Environment.NewLine);
-                //LogBuilder.AppendLine(url);
+            ////////browser.JsDialogHandler = new JsDialogHandler();
+            ////var requestResource = new RequestResourceHandlerFactory();
+            ////requestResource.OnEventUrlArrived += (string url) =>
+            ////{
+            ////    //LogBuilder.AppendLine(Environment.NewLine);
+            ////    //LogBuilder.AppendLine(url);
 
-                //Console.WriteLine(Environment.NewLine);
-                //Console.WriteLine(url);
-            };
-            requestResource.OnEventUrlVoiceCallback += (string url) =>
-            {
-
-            };
-            browser.ResourceHandlerFactory = requestResource;
-            ////browser.LifeSpanHandler = new BrowserLifeSpanHandler();
+            ////    //Console.WriteLine(Environment.NewLine);
+            ////    //Console.WriteLine(url);
+            ////}; 
+            ////browser.ResourceHandlerFactory = requestResource;
+            browser.LifeSpanHandler = new BrowserLifeSpanHandler();
             //this.Controls.Add(browser);
             this.AddControl(browser);
-            this.Browser = browser;
-
-
+            this.Browser = browser; 
         }
-        ~frmDictionary()
+        ~frmBrowser()
         {
             this.Browser.Dispose();
         }
@@ -142,57 +137,6 @@ namespace LePlayer
 
         public override void ClearLog() { LogBuilder.Clear(); }
     }
-
-    public class DictionaryRequestResourceHandlerFactory : IResourceHandlerFactory
-    {
-        /// <summary>
-        /// Raised when a request resource event arrives.
-        /// </summary>
-        public event Action<string> OnEventUrlArrived;
-        public event Action<string> OnEventUrlVoiceCallback;
-
-        bool IResourceHandlerFactory.HasHandlers
-        {
-            get { return true; }
-        }
-
-        void SendLogUrl(string url)
-        {
-            if (url.Contains("chrome-devtools") || url.Contains("chrome-extension")) return;
-            if (OnEventUrlArrived != null) OnEventUrlArrived(url);
-        }
-
-        IResourceHandler IResourceHandlerFactory.GetResourceHandler(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request)
-        {
-            string url = request.Url;
-
-            //if (url.Contains("facebook")
-            //    //|| url.Contains("google") 
-            //    || url.Contains("google-analytics")
-            //    || url.Contains("googlesyndication")
-            //    || url.Contains("adservice.google.com")
-            //    || url.Contains("googletagservices")
-            //    || url.Contains("click")
-            //    || url.Contains("sharethis")
-            //    || url.Contains("counter")
-            //    || url.Contains("adserver")
-            //    || url.Contains("reach")
-            //    || url.Contains("visitor"))
-            //{
-            //    SendLogUrl("##> " + request.Method + ": " + url);
-            //    return new RequestResourceCanceler();
-            //}
-
-            if (url.Contains("translate_tts"))
-            {
-                Console.WriteLine(Environment.NewLine + "!!!!>: " + url);
-                if (OnEventUrlVoiceCallback != null) OnEventUrlVoiceCallback(url);
-                //return new RequestResourceCanceler();
-            }
-
-            //SendLogUrl("--> " + request.Method + ": " + url);
-            return null;
-        }
-    }
+     
 }
 

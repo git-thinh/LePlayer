@@ -21,6 +21,9 @@ namespace System
         void Go(string url);
     }
 
+    public interface IForm_Browser
+    {
+    }
     public interface IForm_Dictionary
     {
     }
@@ -42,6 +45,8 @@ namespace System
         MEDIA_VIDEO = 2,
         MEDIA_LIST = 3,
         MEDIA_SHORTCUT = 4,
+        MEDIA_YOUTUBE_SEARCH = 5,
+        MEDIA_YOUTUBE_VIDEO = 6,
 
         GITTER_CHAT = 10,
     }

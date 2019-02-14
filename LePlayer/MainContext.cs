@@ -266,6 +266,8 @@ namespace LePlayer
 
             setupIcon();
 
+            frmBase.createAndShowForm(this, FORM_TYPE.BROWSER);
+
             //var f = new frmBase(null);
             //f.Shown += (s, e) => {
             //    f.Width = 800;
@@ -313,10 +315,10 @@ namespace LePlayer
             _mainIcon.Text = "Player";
             _mainIcon.Icon = LePlayer.Properties.Resources.icon;
             _mainIcon.ContextMenu = new ContextMenu();
-            //_mainIcon.ContextMenu.MenuItems.Add("Browser...", onOpenBrowserClicked);
-            //_mainIcon.ContextMenu.MenuItems.Add("-");
-            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowForm(FORM_TYPE.DICTIONARY));
-            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO));
+            _mainIcon.ContextMenu.MenuItems.Add("Browser...", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.BROWSER));
+            _mainIcon.ContextMenu.MenuItems.Add("-");
+            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY));
+            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.MEDIA_VIDEO));
             //_mainIcon.ContextMenu.MenuItems.Add("Text to speech", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO)); 
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) => { MessageBox.Show("Learn English - Mr Thinh: http://iot.vn"); });
@@ -330,7 +332,7 @@ namespace LePlayer
             {
                 if (ev.Button == MouseButtons.Left)
                 {
-                    frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO);
+                    frmBase.createAndShowForm(this, FORM_TYPE.MEDIA_VIDEO);
                 }
             };
 
