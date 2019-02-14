@@ -26,6 +26,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "hook", "Buildx86\hook\", "{
 		SlnRelativePath = "Buildx86\hook\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "root", "Buildx86\root\", "{343950F1-D860-4AAE-8D0D-5B91C60A31C5}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49964"
+		Debug.AspNetCompiler.PhysicalPath = "Buildx86\root\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49964\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49964"
+		Release.AspNetCompiler.PhysicalPath = "Buildx86\root\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49964\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49964"
+		SlnRelativePath = "Buildx86\root\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +71,14 @@ Global
 		{3FA0EE98-05D9-423C-9141-3748C48AC470}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{3FA0EE98-05D9-423C-9141-3748C48AC470}.Release|x86.ActiveCfg = Debug|Any CPU
 		{3FA0EE98-05D9-423C-9141-3748C48AC470}.Release|x86.Build.0 = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Release|x86.ActiveCfg = Debug|Any CPU
+		{343950F1-D860-4AAE-8D0D-5B91C60A31C5}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
