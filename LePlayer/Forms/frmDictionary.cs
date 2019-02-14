@@ -111,7 +111,9 @@ namespace LePlayer
         {
             this.Browser.Dispose();
         }
-                
+         
+        
+               
         public override void Go(string url)
         {
             Browser.Stop();

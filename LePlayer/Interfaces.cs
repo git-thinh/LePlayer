@@ -8,6 +8,13 @@ namespace System
     {
     }
 
+    public interface ICrawler
+    {
+        IContext Context { get; }
+        string URL_NEXT { get; set; }
+        void Go(string url);
+    }
+
     public interface IForm
     {
         FORM_TYPE FormType { get; }

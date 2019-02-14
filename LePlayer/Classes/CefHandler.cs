@@ -9,6 +9,99 @@ using System.Threading.Tasks;
 
 namespace System
 {
+    public class CrawlerRequestHandler : DefaultRequestHandler
+    {
+        readonly ICrawler Crawler;
+        public CrawlerRequestHandler(ICrawler crawler) : base() { this.Crawler = crawler; }
+
+        public override bool OnBeforeBrowse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, bool userGesture, bool isRedirect)
+        {
+            if (frame.IsMain)
+            {
+                this.Crawler.URL_NEXT = request.Url;
+            }
+            return false;
+        }
+
+        private Dictionary<UInt64, MemoryStreamResponseFilter> responseDictionary = new Dictionary<UInt64, MemoryStreamResponseFilter>();
+
+        public override IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
+        {
+            var url = request.Url;
+
+            Console.WriteLine(Environment.NewLine + "---->: " + url);
+
+            if (url == this.Crawler.URL_NEXT)
+            {
+                Console.WriteLine(Environment.NewLine + "####>: " + url);
+
+                ////Only called for our customScheme
+                var dataFilter = new MemoryStreamResponseFilter(null);
+                responseDictionary.Add(request.Identifier, dataFilter);
+                return dataFilter;
+            }
+
+            return null;
+        }
+
+        public override void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
+        {
+            var url = request.Url;
+            if (url == browserControl.Address)
+            {
+                MemoryStreamResponseFilter filter;
+                if (responseDictionary.TryGetValue(request.Identifier, out filter))
+                {
+                    //TODO: Do something with the data here
+                    var data = filter.Data;
+                    var dataLength = filter.Data.Length;
+                    //NOTE: You may need to use a different encoding depending on the request
+                    var dataAsUtf8String = Encoding.UTF8.GetString(data);
+                }
+            }
+        }
+    }
+
+    public class CrawlerRequestResourceHandlerFactory : IResourceHandlerFactory
+    {
+        readonly ICrawler Crawler;
+        public CrawlerRequestResourceHandlerFactory(ICrawler crawler) : base() { this.Crawler = crawler; }
+
+        /// <summary>
+        /// Raised when a request resource event arrives.
+        /// </summary>
+        public event Action<string> OnEventUrlArrived;
+
+        bool IResourceHandlerFactory.HasHandlers
+        {
+            get { return true; }
+        }
+
+        IResourceHandler IResourceHandlerFactory.GetResourceHandler(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request)
+        {
+            string url = request.Url;
+
+            if (url.Contains("translate_tts"))
+            {
+                Console.WriteLine(Environment.NewLine + "!!!!>: " + url);
+                return new RequestResourceCanceler();
+            }
+
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public class RequestHandler : DefaultRequestHandler
     {
@@ -203,7 +296,6 @@ namespace System
         {
             //NOTE: We could initialize this earlier, just one possible use of InitFilter
             memoryStream = new MemoryStream();
-
             return true;
         }
 
@@ -213,33 +305,16 @@ namespace System
             {
                 dataInRead = 0;
                 dataOutWritten = 0;
-
                 return FilterStatus.Done;
             }
 
-            //Calculate how much data we can read, in some instances dataIn.Length is
-            //greater than dataOut.Length
+            //Calculate how much data we can read, in some instances dataIn.Length is greater than dataOut.Length
             dataInRead = Math.Min(dataIn.Length, dataOut.Length);
             dataOutWritten = dataInRead;
 
             var readBytes = new byte[dataInRead];
             dataIn.Read(readBytes, 0, readBytes.Length);
             dataOut.Write(readBytes, 0, readBytes.Length);
-
-            //////var dataBody = Encoding.UTF8.GetString(readBytes).TrimEnd();
-            //////if (dataBody.Contains("<html"))
-            //////{                
-            //////    var bufHok = Encoding.ASCII.GetBytes("<div id='hok___'/>");
-            //////    List<byte> ls = new List<byte>(bufHok.Length + readBytes.Length);
-            //////    ls.AddRange(bufHok);
-            //////    ls.AddRange(readBytes);
-
-            //////    dataOut.Write(ls.ToArray(), 0, ls.ToArray().Length);
-            //////    dataOutWritten = dataInRead + bufHok.Length;
-            //////}
-            //////else {
-            //////    dataOut.Write(readBytes, 0, readBytes.Length);
-            //////}
 
             //Write buffer to the memory stream
             memoryStream.Write(readBytes, 0, readBytes.Length);
@@ -251,24 +326,19 @@ namespace System
                 return FilterStatus.NeedMoreData;
             }
 
-            var dataAsUtf8String = Encoding.UTF8.GetString(readBytes).TrimEnd();
-            if (dataAsUtf8String.EndsWith("</html>"))
+            if (this.Parent != null)
             {
-                Uri uri = new Uri(this.Parent.URL_NEXT);
-                string host = uri.Host.ToLower();
-                if (host.StartsWith("www.")) host = host.Substring(4);
-
-                string textHook = @"<link href=http://f/w.css?" + host + @" rel=stylesheet><script src=http://f/w.js?" + host + @"></script>";
-
-                //var bufs = Encoding.UTF8.GetBytes(" <script> alert('123') </script>");
-                var bufs = Encoding.ASCII.GetBytes(textHook);
-                dataOutWritten = dataInRead + bufs.Length;
-                if (dataOutWritten > dataOut.Length)
+                var dataAsUtf8String = Encoding.UTF8.GetString(readBytes).TrimEnd();
+                if (dataAsUtf8String.EndsWith("</html>"))
                 {
+                    Uri uri = new Uri(this.Parent.URL_NEXT);
+                    string host = uri.Host.ToLower();
+                    if (host.StartsWith("www.")) host = host.Substring(4);
 
-                }
-                else
-                {
+                    string textHook = @"<link href=http://f/w.css?" + host + @" rel=stylesheet><script src=http://f/w.js?" + host + @"></script>";
+
+                    var bufs = Encoding.ASCII.GetBytes(textHook);
+                    dataOutWritten = dataInRead + bufs.Length;
                     dataOut.Write(bufs, 0, bufs.Length);
                 }
             }
@@ -326,7 +396,7 @@ namespace System
             //    SendLogUrl("##> " + request.Method + ": " + url);
             //    return new RequestResourceCanceler();
             //}
-            
+
             if (url.Contains("translate_tts"))
             {
                 Console.WriteLine(Environment.NewLine + "!!!!>: " + url);

@@ -266,14 +266,15 @@ namespace LePlayer
 
             setupIcon();
 
-            frmBase.createAndShowForm(this, FORM_TYPE.BROWSER);
+            //frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY);
 
-            //var f = new frmBase(null);
-            //f.Shown += (s, e) => {
-            //    f.Width = 800;
-            //    f.Height = 600;
-            //};
-            //f.Show();
+            var f = new frmCrawler();
+            f.Shown += (s, e) =>
+            {
+                f.Width = 800;
+                f.Height = 600;
+            };
+            f.Show();
 
             //_dictionary = new frmDictionary(this);
             //_dictionary.FormClosing += (se, ev) =>
@@ -288,6 +289,39 @@ namespace LePlayer
             _timerRefresh.Tick += tm_refresh_Tick;
             tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
             _timerRefresh.Start();
+
+            //createBrowser();
+        }
+      
+
+        void createBrowser()
+        {
+            const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
+            //const string URL = "http://root/texttospeech/index.html";
+            //const string URL = "localfolder://cefsharp/home.html";
+            //const string URL = "http://hook/base.js";
+            //const string URL = "https://www.eslfast.com/";
+            //const string URL = "https://dictionary.cambridge.org/";
+            var browser = new ChromiumWebBrowser(URL)
+            {
+                BrowserSettings =
+                {
+                    DefaultEncoding = "UTF-8",
+                    WebGl = CefState.Disabled,
+                    WebSecurity = CefState.Disabled,
+                    FileAccessFromFileUrls = CefState.Enabled,
+                    UniversalAccessFromFileUrls = CefState.Enabled,
+                    //ApplicationCache = CefState.Disabled
+                }
+            };
+            var crawler = new Crawler(this, URL);
+            browser.RequestHandler = new CrawlerRequestHandler(crawler);
+            var requestResource = new CrawlerRequestResourceHandlerFactory(crawler);
+            //requestResource.OnEventUrlVoiceCallback += (string url) =>
+            //{
+
+            //};
+            browser.ResourceHandlerFactory = requestResource;
         }
 
         public void freeResource()
@@ -423,5 +457,23 @@ namespace LePlayer
 
         #endregion
 
+    }
+
+    public class Crawler : ICrawler
+    {
+        public Crawler(IContext context, string url)
+        {
+            this.Context = context;
+            this.URL_NEXT = url;
+        }
+
+        public IContext Context { get; private set; }
+
+        public string URL_NEXT { get; set; }
+
+        public void Go(string url)
+        {
+
+        }
     }
 }

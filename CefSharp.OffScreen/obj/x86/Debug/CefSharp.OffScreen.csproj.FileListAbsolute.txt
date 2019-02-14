@@ -1,0 +1,7 @@
+G:\LePlayer\CefSharp.OffScreen\bin\x86\Debug\CefSharp.OffScreen.dll
+G:\LePlayer\CefSharp.OffScreen\bin\x86\Debug\CefSharp.OffScreen.pdb
+G:\LePlayer\CefSharp.OffScreen\bin\x86\Debug\CefSharp.Core.dll
+G:\LePlayer\CefSharp.OffScreen\bin\x86\Debug\CefSharp.dll
+G:\LePlayer\CefSharp.OffScreen\obj\x86\Debug\CefSharp.OffScreen.csprojResolveAssemblyReference.cache
+G:\LePlayer\CefSharp.OffScreen\obj\x86\Debug\CefSharp.OffScreen.dll
+G:\LePlayer\CefSharp.OffScreen\obj\x86\Debug\CefSharp.OffScreen.pdb
