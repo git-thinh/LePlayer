@@ -2,16 +2,43 @@
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using AxWMPLib;
-using System;
-using System.IO;
-using System.Diagnostics;
+using System.Collections.Generic;
+using LePlayer;
 
 namespace System
 {
     public partial class frmBase : Form, IForm
     {
+        static Dictionary<FORM_TYPE, object> storeForm = new Dictionary<FORM_TYPE, object>() { };
+        public static void createAndShowForm(FORM_TYPE formType)
+        {
+            if (storeForm.ContainsKey(formType))
+            {
+                Form f = (Form)storeForm[formType];
+                f.Show();
+            }
+            else
+            {
+                switch (formType)
+                {
+                    case FORM_TYPE.MEDIA_VIDEO:
+                        var video = new frmMediaVideo(null);
+                        storeForm.Add(formType, video);
+                        video.Show();
+                        break;
+                    case FORM_TYPE.DICTIONARY:
+                        var dic = new frmDictionary(null);
+                        storeForm.Add(formType, dic);
+                        dic.Show();
+                        break;
+                }
+            }
+        }
+
         #region [ Contractor ]
+
+        //ControlTransparent ui_panel_transparent;
+        ControlTransparent ui_panel_transparent;
 
         Label ui_title;
         IconControl ui_close;
@@ -26,10 +53,16 @@ namespace System
 
         #endregion
 
-        public FROM_STYLE _FormStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE;
-        public frmBase(IContext context, FROM_STYLE formStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public FORM_STYLE FormStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE;
+        public FORM_TYPE FormType { get; private set; }
+        public bool VisibleMoveButton { get; set; }
+        public bool VisibleMenuButton { get; set; }
+        public bool VisiblePanelTransparentToMove { get; set; }
+
+        public frmBase(FORM_TYPE formType, IContext context, FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
-            this._FormStyle = formStyle;
+            this.FormType = formType;
+            this.FormStyle = formStyle;
             this.Context = context;
 
             ui_control = new Panel()
@@ -48,12 +81,12 @@ namespace System
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.Shown += (se, ev) => LoadControls();
 
-            switch (this._FormStyle)
+            switch (this.FormStyle)
             {
-                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
                     this.BackColor = Color.White;
                     break;
-                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     this.BackColor = Color.Black;
                     break;
             }
@@ -67,13 +100,13 @@ namespace System
             Color BG_COLOR = Color.White;
 
             Label ui_box_close = null;
-            switch (this._FormStyle)
+            switch (this.FormStyle)
             {
-                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
                     TEXT_COLOR = Color.Black;
                     BG_COLOR = Color.White;
                     break;
-                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     TEXT_COLOR = Color.White;
                     BG_COLOR = Color.Black;
                     break;
@@ -81,24 +114,35 @@ namespace System
 
             //////////////////////////////////////////////////////////////////////////// 
             ui_title = new Label() { ForeColor = TEXT_COLOR, BackColor = BG_COLOR };
-            ui_move = new IconControl(this._FormStyle, IconType.arrow_alt, 11)
+            ui_panel_transparent = new ControlTransparent()
+            {
+                Location = new Point(0, 0),
+                Height = this.Height - 5,
+                Width = this.Width,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right,
+                Visible = this.VisiblePanelTransparentToMove,
+                //BackColor = Color.Red,
+            };
+            ui_move = new IconControl(this.FormStyle, ICON_TYPE.arrow_alt, 11)
             {
                 Location = new Point(2, 2),
-                Anchor = AnchorStyles.Top | AnchorStyles.Left
+                Anchor = AnchorStyles.Top | AnchorStyles.Left,
+                Visible = this.VisibleMoveButton,
             };
-            ui_menu = new IconControl(this._FormStyle, IconType.menu, 11)
+            ui_menu = new IconControl(this.FormStyle, ICON_TYPE.menu, 11)
             {
                 Location = new Point(4, this.Height - 15),
-                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left,
+                Visible = this.VisibleMenuButton,
             };
-            ui_minus = new IconControl(this._FormStyle, IconType.minus, 11)
+            ui_minus = new IconControl(this.FormStyle, ICON_TYPE.minus, 11)
             {
                 Width = 16,
                 Height = 14,
                 Location = new Point(this.Width - 32, 2),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
             };
-            ui_close = new IconControl(this._FormStyle, IconType.close, 11)
+            ui_close = new IconControl(this.FormStyle, ICON_TYPE.close, 11)
             {
                 Width = 16,
                 Height = 14,
@@ -109,7 +153,7 @@ namespace System
             {
                 BackColor = BG_COLOR,
                 Width = 36,
-                Height = 16,
+                Height = 17,
                 Location = new Point(this.Width - 36, -1),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
             };
@@ -121,16 +165,17 @@ namespace System
             ui_title.Dock = DockStyle.Top;
             ui_title.MouseMove += f_form_move_MouseDown;
             ui_move.MouseMove += f_form_move_MouseDown;
+            ui_panel_transparent.MouseMove += f_form_move_MouseDown;
 
             //////////////////////////////////////////////////////////////////////////// 
             ui_title.Visible = false;
             ui_control.Location = new Point(0, 0);
             ui_control.Height = this.Height - 5;
-            switch (this._FormStyle)
+            switch (this.FormStyle)
             {
-                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
                     break;
-                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     //ui_move.Visible = false;
                     //ui_control.Location = new Point(0, _TITLE_HEIGHT);
                     //ui_control.Height = this.Height - _TITLE_HEIGHT - 5;
@@ -143,6 +188,7 @@ namespace System
             this.Controls.Add(ui_close);
             this.Controls.Add(ui_box_close);
             this.Controls.Add(ui_menu);
+            this.Controls.Add(ui_panel_transparent);
 
             ui_minus.Click += (s, v) =>
             {
@@ -150,14 +196,17 @@ namespace System
             };
             ui_close.Click += (s, v) =>
             {
-                this.Close();
+                //this.Close();
+                this.Hide();
             };
 
             //////////////////////////////////////////////////////////////////////////// 
             ui_control.Width = this.Width;
             ui_control.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            ui_control.SendToBack();
+
+            ui_panel_transparent.SendToBack();
             ui_title.SendToBack();
+            ui_control.SendToBack();
         }
 
         public void AddControl(Control control)

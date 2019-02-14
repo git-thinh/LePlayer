@@ -20,11 +20,6 @@ namespace LePlayer
         bool _connectivityIssues = false;
         int _connectCheckCounter = 0;
 
-        //readonly frmBrowser _browser;
-        readonly frmDictionary _dictionary;
-        readonly frmMedia _media;
-        //readonly frmTextToSpeech _textToSpeech;
-
         #endregion
 
         static void CefInit()
@@ -278,39 +273,15 @@ namespace LePlayer
             //};
             //f.Show();
 
-            _dictionary = new frmDictionary(this);
-            _dictionary.FormClosing += (se, ev) =>
-            {
-                _dictionary.Hide();
-                ev.Cancel = true;
-                //??????????????????????????????????
-                this.ExitThreadCore();
-            };
-            //_dictionary.Show();
-
-            _media = new frmMedia(this);
-            _media.FormClosing += (se, ev) =>
-            {
-                _media.Hide();
-                ev.Cancel = true;
-            };
-            _media.Show();
-
-            //_textToSpeech = new frmTextToSpeech(this);
-            //_textToSpeech.FormClosing += (se, ev) =>
+            //_dictionary = new frmDictionary(this);
+            //_dictionary.FormClosing += (se, ev) =>
             //{
-            //    _media.Hide();
+            //    _dictionary.Hide();
             //    ev.Cancel = true;
+            //    //??????????????????????????????????
+            //    this.ExitThreadCore();
             //};
-            //_textToSpeech.Show();
-
-            //_browser = new frmBrowser();
-            //_browser.FormClosing += (se, ev) =>
-            //{
-            //    _browser.Hide();
-            //    ev.Cancel = true;
-            //};
-            ////_browser.Show();
+            ////_dictionary.Show();
 
             _timerRefresh.Tick += tm_refresh_Tick;
             tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
@@ -334,26 +305,6 @@ namespace LePlayer
 
         #region [ Voids ]
 
-        void textToSpeech_Show()
-        {
-            //_textToSpeech.Show();
-        }
-
-        private void browser_Show()
-        {
-            //_browser.Show();
-        }
-
-        private void dictionary_Show()
-        {
-            _dictionary.Show();
-        }
-
-        private void media_Show()
-        {
-            //_media.Show();
-        }
-
         /// <summary>
         /// Places the Black-Sink icon in the Windows Task Tray
         /// </summary>
@@ -364,9 +315,9 @@ namespace LePlayer
             _mainIcon.ContextMenu = new ContextMenu();
             //_mainIcon.ContextMenu.MenuItems.Add("Browser...", onOpenBrowserClicked);
             //_mainIcon.ContextMenu.MenuItems.Add("-");
-            //_mainIcon.ContextMenu.MenuItems.Add("Dictionary...", onOpenDictionaryClicked);
-            _mainIcon.ContextMenu.MenuItems.Add("Media Player", (s, e) => media_Show());
-            _mainIcon.ContextMenu.MenuItems.Add("Text to speech", (s, e) => textToSpeech_Show());
+            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowForm(FORM_TYPE.DICTIONARY));
+            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO));
+            //_mainIcon.ContextMenu.MenuItems.Add("Text to speech", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO)); 
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) => { MessageBox.Show("Learn English - Mr Thinh: http://iot.vn"); });
             _mainIcon.ContextMenu.MenuItems.Add("-");
@@ -379,7 +330,7 @@ namespace LePlayer
             {
                 if (ev.Button == MouseButtons.Left)
                 {
-                    media_Show();
+                    frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO);
                 }
             };
 

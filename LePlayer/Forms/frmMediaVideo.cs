@@ -7,7 +7,7 @@ using System;
 
 namespace LePlayer
 {
-    public partial class frmMedia : frmBase
+    public partial class frmMediaVideo : frmBase, IForm_MediaVideo
     {
         #region [ Contractor ]
 
@@ -35,8 +35,12 @@ namespace LePlayer
         
         #endregion
 
-        public frmMedia(IContext context): base(context,FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK)
+        public frmMediaVideo(IContext context): base(FORM_TYPE.MEDIA_VIDEO, context, FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK)
         {
+            this.VisiblePanelTransparentToMove = true;
+            this.VisibleMenuButton = true;
+            this.VisibleMoveButton = false;
+
             this.Text = "Player";
             this.Icon = LePlayer.Properties.Resources.icon;
             this.BackColor = Color.Black;
@@ -71,9 +75,9 @@ namespace LePlayer
             ui_media.settings.volume = 100;
             ui_media.uiMode = "none";
             ui_media.URL = @"C:\test\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
-            ////ui_media.URL = @"D:\Talk To Miss Lan\Pronunce\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
-            //ui_media.URL = @"D:\MrThinh\EL\Luyện nghe tiếng Anh qua video VOA-Có phụ đề tiếng anh-Bài 1.mp4";
-            //ui_media.URL = @"D:\EL\Social Networking\1. Choosing a Job.mp3";
+            //////////ui_media.URL = @"D:\Talk To Miss Lan\Pronunce\Bài 03 Nguyên Âm-Phần 01 Nguyên Âm Đơn_Trim.mp4";
+            ////////ui_media.URL = @"D:\MrThinh\EL\Luyện nghe tiếng Anh qua video VOA-Có phụ đề tiếng anh-Bài 1.mp4";
+            ////////ui_media.URL = @"D:\EL\Social Networking\1. Choosing a Job.mp3";
 
             ui_move = new ControlTransparent()
             {
@@ -172,20 +176,20 @@ namespace LePlayer
             };
             this.Controls.Add(ui_control);
 
-            ui_arrow_left = new IconControl(this._FormStyle, IconType.arrow_left, _iconSize) { Dock = DockStyle.Left };
-            ui_arrow_right = new IconControl(this._FormStyle, IconType.arrow_right, _iconSize) { Dock = DockStyle.Left };
+            ui_arrow_left = new IconControl(this.FormStyle, ICON_TYPE.arrow_left, _iconSize) { Dock = DockStyle.Left };
+            ui_arrow_right = new IconControl(this.FormStyle, ICON_TYPE.arrow_right, _iconSize) { Dock = DockStyle.Left };
 
-            ui_play = new IconControl(this._FormStyle, IconType.play, _iconSize) { Dock = DockStyle.Left, Visible = false };
-            ui_pause = new IconControl(this._FormStyle, IconType.pause, _iconSize) { Dock = DockStyle.Left };
-            ui_stop = new IconControl(this._FormStyle, IconType.stop, _iconSize) { Dock = DockStyle.Left };
+            ui_play = new IconControl(this.FormStyle, ICON_TYPE.play, _iconSize) { Dock = DockStyle.Left, Visible = false };
+            ui_pause = new IconControl(this.FormStyle, ICON_TYPE.pause, _iconSize) { Dock = DockStyle.Left };
+            ui_stop = new IconControl(this.FormStyle, ICON_TYPE.stop, _iconSize) { Dock = DockStyle.Left };
 
-            ui_repeat = new IconControl(this._FormStyle, IconType.repeat, _iconSize) { Dock = DockStyle.Left };
-            ui_random = new IconControl(this._FormStyle, IconType.random, _iconSize) { Dock = DockStyle.Left };
-            ui_edit_cc = new IconControl(this._FormStyle, IconType.cc, _iconSize) { Dock = DockStyle.Left };
-            ui_cc = new IconControl(this._FormStyle, IconType.cc, _iconSize) { Dock = DockStyle.Left };
-            ui_star = new IconControl(this._FormStyle, IconType.star, _iconSize) { Dock = DockStyle.Left };
-            ui_volum_down = new IconControl(this._FormStyle, IconType.volum_down, _iconSize) { Dock = DockStyle.Left };
-            ui_volum_up = new IconControl(this._FormStyle, IconType.volum_up, _iconSize) { Dock = DockStyle.Left };
+            ui_repeat = new IconControl(this.FormStyle, ICON_TYPE.repeat, _iconSize) { Dock = DockStyle.Left };
+            ui_random = new IconControl(this.FormStyle, ICON_TYPE.random, _iconSize) { Dock = DockStyle.Left };
+            ui_edit_cc = new IconControl(this.FormStyle, ICON_TYPE.cc, _iconSize) { Dock = DockStyle.Left };
+            ui_cc = new IconControl(this.FormStyle, ICON_TYPE.cc, _iconSize) { Dock = DockStyle.Left };
+            ui_star = new IconControl(this.FormStyle, ICON_TYPE.star, _iconSize) { Dock = DockStyle.Left };
+            ui_volum_down = new IconControl(this.FormStyle, ICON_TYPE.volum_down, _iconSize) { Dock = DockStyle.Left };
+            ui_volum_up = new IconControl(this.FormStyle, ICON_TYPE.volum_up, _iconSize) { Dock = DockStyle.Left };
 
             ui_control.Controls.AddRange(new Control[] {
                 //ui_repeat,

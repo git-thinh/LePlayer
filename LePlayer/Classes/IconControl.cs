@@ -10,15 +10,15 @@ namespace System
         public int FontSize { set; get; }
         private static byte[] bufferFont;
 
-        public IconControl(FROM_STYLE formStyle = FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE, IconType type = IconType.play, int fontSize = 24)
+        public IconControl(FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE, ICON_TYPE type = ICON_TYPE.play, int fontSize = 24)
         {
             switch (formStyle)
             {
-                case FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
+                case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
                     NormalColor = Color.Black;
                     BackColor = Color.White;
                     break;
-                case FROM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
+                case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     NormalColor = Color.White;
                     BackColor = Color.Black;
                     break;
@@ -32,7 +32,7 @@ namespace System
         //    Init(type, fontSize);
         //}
 
-        void Init(IconType type, int fontSize)
+        void Init(ICON_TYPE type, int fontSize)
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
@@ -89,8 +89,8 @@ namespace System
         }
 
         private string IconChar { get; set; }
-        private IconType _iconType = IconType.play;
-        public IconType IconType
+        private ICON_TYPE _iconType = ICON_TYPE.play;
+        public ICON_TYPE IconType
         {
             get { return _iconType; }
             set

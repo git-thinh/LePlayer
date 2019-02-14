@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace LePlayer
 {
-    public class frmDictionary : frmBase
+    public class frmDictionary : frmBase, IForm_Dictionary
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
@@ -31,10 +31,14 @@ namespace LePlayer
         //const string URL = "https://youtube.com";
         //const string URL = "https://youtube.com";
         readonly StringBuilder LogBuilder;
-        public frmDictionary(IContext context) : base(context, FROM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmDictionary(IContext context) : base(FORM_TYPE.DICTIONARY, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
-            LogBuilder = new StringBuilder();
             this.Text = "";
+            this.VisiblePanelTransparentToMove = false;
+            this.VisibleMenuButton = true;
+            this.VisibleMoveButton = true;
+
+            LogBuilder = new StringBuilder();
 
 
             //Only perform layout when control has completly finished resizing
