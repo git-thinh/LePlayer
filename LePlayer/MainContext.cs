@@ -5,22 +5,17 @@ using System.Linq;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
+using System.Collections.Concurrent;
 
 namespace LePlayer
 {
     public class MainContext : ApplicationContext, IContext
     {
-        #region [ Crucial Variables ]
-
-        //For the task tray icon.
+        ConcurrentDictionary<string, string> _storeHtml = new ConcurrentDictionary<string, string>();
         NotifyIcon _mainIcon = new NotifyIcon();
-
-        //Check if it's time to update.
         Timer _timerRefresh = new Timer() { Interval = 1000 * 60 };
         bool _connectivityIssues = false;
         int _connectCheckCounter = 0;
-
-        #endregion
 
         static void CefInit()
         {
@@ -257,9 +252,6 @@ namespace LePlayer
             //Cef.AddCrossOriginWhitelistEntry("http://hook/", "http", "hook", false);
         }
 
-        /// <summary>
-        /// Gets this whole application rolling
-        /// </summary>
         public MainContext()
         {
             CefInit();
@@ -268,13 +260,13 @@ namespace LePlayer
 
             //frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY);
 
-            var f = new frmCrawler();
-            f.Shown += (s, e) =>
-            {
-                f.Width = 800;
-                f.Height = 600;
-            };
-            f.Show();
+            //var f = new frmCrawler();
+            //f.Shown += (s, e) =>
+            //{
+            //    f.Width = 800;
+            //    f.Height = 600;
+            //};
+            //f.Show();
 
             //_dictionary = new frmDictionary(this);
             //_dictionary.FormClosing += (se, ev) =>
@@ -290,45 +282,19 @@ namespace LePlayer
             tm_refresh_Tick(_timerRefresh, new EventArgs()); //Fire the first event
             _timerRefresh.Start();
 
-            //createBrowser();
+            CrawlerHtml.Start(this);
         }
-      
 
-        void createBrowser()
+        public void crawler_callbackResultStore(string url, string html)
         {
-            const string URL = "https://www.rong-chang.com/easyspeak/es/school01.htm";
-            //const string URL = "http://root/texttospeech/index.html";
-            //const string URL = "localfolder://cefsharp/home.html";
-            //const string URL = "http://hook/base.js";
-            //const string URL = "https://www.eslfast.com/";
-            //const string URL = "https://dictionary.cambridge.org/";
-            var browser = new ChromiumWebBrowser(URL)
-            {
-                BrowserSettings =
-                {
-                    DefaultEncoding = "UTF-8",
-                    WebGl = CefState.Disabled,
-                    WebSecurity = CefState.Disabled,
-                    FileAccessFromFileUrls = CefState.Enabled,
-                    UniversalAccessFromFileUrls = CefState.Enabled,
-                    //ApplicationCache = CefState.Disabled
-                }
-            };
-            var crawler = new Crawler(this, URL);
-            browser.RequestHandler = new CrawlerRequestHandler(crawler);
-            var requestResource = new CrawlerRequestResourceHandlerFactory(crawler);
-            //requestResource.OnEventUrlVoiceCallback += (string url) =>
-            //{
-
-            //};
-            browser.ResourceHandlerFactory = requestResource;
+            if (!_storeHtml.ContainsKey(url)) _storeHtml.TryAdd(url, html);
+            //Console.WriteLine(html);
         }
 
-        public void freeResource()
+        void freeResource()
         {
             _mainIcon.Visible = false;
             _mainIcon.Dispose();
-
             _timerRefresh.Stop();
             _timerRefresh.Dispose();
         }
@@ -339,41 +305,38 @@ namespace LePlayer
             base.ExitThreadCore();
         }
 
-        #region [ Voids ]
-
-        /// <summary>
-        /// Places the Black-Sink icon in the Windows Task Tray
-        /// </summary>
-        private void setupIcon()
+        void setupIcon()
         {
             _mainIcon.Text = "Player";
             _mainIcon.Icon = LePlayer.Properties.Resources.icon;
             _mainIcon.ContextMenu = new ContextMenu();
-            _mainIcon.ContextMenu.MenuItems.Add("Browser...", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.BROWSER));
+            _mainIcon.ContextMenu.MenuItems.Add("Browser...", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.BROWSER));
             _mainIcon.ContextMenu.MenuItems.Add("-");
-            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY));
-            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowForm(this, FORM_TYPE.MEDIA_VIDEO));
+            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.DICTIONARY));
+            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO));
             //_mainIcon.ContextMenu.MenuItems.Add("Text to speech", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO)); 
             _mainIcon.ContextMenu.MenuItems.Add("-");
-            _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) => { MessageBox.Show("Learn English - Mr Thinh: http://iot.vn"); });
+            _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) =>
+            {
+                CrawlerHtml.getSourceAsync("https://dictionary.cambridge.org/grammar/british-grammar/");
+            });
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("Quit", (s, e) => { this.ExitThreadCore(); });
             _mainIcon.BalloonTipClicked += (s, e) =>
             {
-
             };
             _mainIcon.MouseClick += (se, ev) =>
             {
                 if (ev.Button == MouseButtons.Left)
                 {
-                    frmBase.createAndShowForm(this, FORM_TYPE.MEDIA_VIDEO);
+                    frmBase.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO);
                 }
             };
 
             _mainIcon.Visible = true;
         }
 
-        private void tm_refresh_Tick(object sender, EventArgs e)
+        void tm_refresh_Tick(object sender, EventArgs e)
         {
             //bool active = Properties.Settings.Default.is_setup;
             if (checkInternet())
@@ -397,16 +360,6 @@ namespace LePlayer
             }
         }
 
-        /// <summary>
-        /// Algorithm to check internet connection.
-        /// [Broken] [Level -1] The state of the system when internet has been declared unavailable.
-        /// [Level 0] If the system reports no cable/wifi connection, there is no connection
-        /// [Level 1] If the system reports cable/wifi, we can assume there is a connection for now
-        /// [Level 2] The system reported cable/wifi, be believed it, but let's check by pinging Google
-        /// [Level 3] If the system still reports cable/wifi, but a Google ping failed to work, we'll hope for the best and give it one more shot
-        /// [Level 4] Failed twice or more, so there is no connection because something's broken.
-        /// </summary>
-        /// <returns></returns>
         private bool checkInternet()
         {
             if (_connectCheckCounter == -1)
@@ -454,26 +407,6 @@ namespace LePlayer
                 return false;
             }
         }
-
-        #endregion
-
     }
 
-    public class Crawler : ICrawler
-    {
-        public Crawler(IContext context, string url)
-        {
-            this.Context = context;
-            this.URL_NEXT = url;
-        }
-
-        public IContext Context { get; private set; }
-
-        public string URL_NEXT { get; set; }
-
-        public void Go(string url)
-        {
-
-        }
-    }
 }

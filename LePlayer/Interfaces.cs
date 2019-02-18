@@ -4,15 +4,43 @@ using System.Text;
 
 namespace System
 {
-    public interface IContext
+    public class CONST
     {
+        public static ContextOption DIC_WORD_CRAWLE =
+            new ContextOption(new FORM_TYPE[] {
+                FORM_TYPE.DICTIONARY
+            }, new CONTEXT_ACTION[] {
+                CONTEXT_ACTION.CRAWLE_CAMBRIDGE___DIC_WORD
+            });
+
+
     }
 
-    public interface ICrawler
+    public class ContextOption
+    {
+        public CONTEXT_ACTION[] Actions { set; get; }
+        public FORM_TYPE[] FormTypes { set; get; }
+        public ContextOption(FORM_TYPE[] formTypes, CONTEXT_ACTION[] actions) {
+            this.FormTypes = formTypes;
+            this.Actions = actions;
+        }
+    }
+
+    public interface IContext
+    {
+        void crawler_callbackResultStore(string url, string html);
+    }
+
+    public enum CONTEXT_ACTION
+    {
+        CRAWLE_CAMBRIDGE___DIC_WORD = 0,
+    }
+
+    public interface IContextUrl
     {
         IContext Context { get; }
-        string URL_NEXT { get; set; }
-        void Go(string url);
+        ContextOption Option { get; set; }
+        string Url { get; set; }
     }
 
     public interface IForm

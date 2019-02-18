@@ -4,20 +4,22 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Collections.Generic;
 using LePlayer;
+using System.Collections.Concurrent;
 
 namespace System
 {
     public partial class frmBase : Form, IForm
     {
-        static Dictionary<FORM_TYPE, object> storeForm = new Dictionary<FORM_TYPE, object>() { };
-        public static void createAndShowForm(IContext context, FORM_TYPE formType)
+        static ConcurrentDictionary<FORM_TYPE, object> storeForm = new ConcurrentDictionary<FORM_TYPE, object>() { };
+        public static void createAndShowByFormType(IContext context, FORM_TYPE formType)
         {
             if (storeForm.ContainsKey(formType))
             {
                 Form f = (Form)storeForm[formType];
                 if (f.IsDisposed) {
-                    storeForm.Remove(formType);
-                    createAndShowForm(context, formType);
+                    object val = null;
+                    storeForm.TryRemove(formType, out val);
+                    createAndShowByFormType(context, formType);
                 }
                 else f.Show();
             }
@@ -27,17 +29,17 @@ namespace System
                 {
                     case FORM_TYPE.BROWSER:
                         var w = new frmBrowser(context);
-                        storeForm.Add(formType, w);
+                        storeForm.TryAdd(formType, w);
                         w.Show();
                         break;
                     case FORM_TYPE.DICTIONARY:
                         var dic = new frmDictionary(context);
-                        storeForm.Add(formType, dic);
+                        storeForm.TryAdd(formType, dic);
                         dic.Show();
                         break;
                     case FORM_TYPE.MEDIA_VIDEO:
                         var video = new frmMediaVideo(context);
-                        storeForm.Add(formType, video);
+                        storeForm.TryAdd(formType, video);
                         video.Show();
                         break;
                 }
