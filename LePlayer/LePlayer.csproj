@@ -106,10 +106,14 @@
     <Compile Include="Classes\MenuHandler.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Classes\CefHandler.cs" />
+    <Compile Include="CONST.cs" />
     <Compile Include="Forms\frmBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmCrawler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMediaShortcut.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmMediaVideo.cs">

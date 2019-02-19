@@ -22,6 +22,10 @@ namespace System
                     NormalColor = Color.White;
                     BackColor = Color.Black;
                     break;
+                case FORM_STYLE.TEXT_COLOR_GRAY___BG_COLOR_BLACK:
+                    NormalColor = Color.Gray;
+                    BackColor = Color.Black;
+                    break;
             }
             Init(type, fontSize);
         }

@@ -82,7 +82,7 @@ namespace System
                 Height = 800,
                 Width = 600,
                 //Location = new Point(0, _TITLE_HEIGHT),
-                BackColor = Color.Blue,
+                //BackColor = Color.Blue,
             };
             this.Controls.Add(ui_control);
 
@@ -97,6 +97,7 @@ namespace System
                 case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
                     this.BackColor = Color.White;
                     break;
+                case FORM_STYLE.TEXT_COLOR_GRAY___BG_COLOR_BLACK:
                 case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     this.BackColor = Color.Black;
                     break;
@@ -119,6 +120,10 @@ namespace System
                     break;
                 case FORM_STYLE.TEXT_COLOR_WHITE___BG_COLOR_BLACK:
                     TEXT_COLOR = Color.White;
+                    BG_COLOR = Color.Black;
+                    break;
+                case FORM_STYLE.TEXT_COLOR_GRAY___BG_COLOR_BLACK:
+                    TEXT_COLOR = Color.Gray;
                     BG_COLOR = Color.Black;
                     break;
             }

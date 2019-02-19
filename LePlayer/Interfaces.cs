@@ -4,18 +4,6 @@ using System.Text;
 
 namespace System
 {
-    public class CONST
-    {
-        public static ContextOption DIC_WORD_CRAWLE =
-            new ContextOption(new FORM_TYPE[] {
-                FORM_TYPE.DICTIONARY
-            }, new CONTEXT_ACTION[] {
-                CONTEXT_ACTION.CRAWLE_CAMBRIDGE___DIC_WORD
-            });
-
-
-    }
-
     public class ContextOption
     {
         public CONTEXT_ACTION[] Actions { set; get; }
@@ -90,10 +78,12 @@ namespace System
     {
         TEXT_COLOR_BLACK___BG_COLOR_WHITE = 0,
         TEXT_COLOR_WHITE___BG_COLOR_BLACK = 1,
+        TEXT_COLOR_GRAY___BG_COLOR_BLACK = 2,
     }
 
     public enum ICON_TYPE
     {
+        refresh = 0xf2d5,
         arrow_alt = 0xf124,
         close = 0xf191,
         minus = 0xf28e,

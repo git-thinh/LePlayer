@@ -260,13 +260,13 @@ namespace LePlayer
 
             //frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY);
 
-            //var f = new frmCrawler();
-            //f.Shown += (s, e) =>
-            //{
-            //    f.Width = 800;
-            //    f.Height = 600;
-            //};
-            //f.Show();
+            var f = new frmMediaShortcut(this);
+            f.FormClosing += (se, ev) =>
+            { 
+                ev.Cancel = true; 
+                this.ExitThreadCore();
+            };
+            f.Show();
 
             //_dictionary = new frmDictionary(this);
             //_dictionary.FormClosing += (se, ev) =>
@@ -318,7 +318,7 @@ namespace LePlayer
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) =>
             {
-                CrawlerHtml.getSourceAsync("https://dictionary.cambridge.org/grammar/british-grammar/");
+                CrawlerHtml.getSourceAsync("https://dictionary.cambridge.org/grammar/british-grammar/", CONST.DIC_WORD_CRAWLE);
             });
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("Quit", (s, e) => { this.ExitThreadCore(); });
