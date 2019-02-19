@@ -12,3 +12,4 @@ https://translate.google.com/translate_tts?ie=UTF-8&q=speak&tl=en&total=1&idx=0&
 
 
 
+http://www.simon-li.com/projects/itunes/
