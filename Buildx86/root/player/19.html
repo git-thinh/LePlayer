@@ -1,0 +1,200 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/emilcarlsson/pen/GqbdVB" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <style class="cp-pen-styles">
+        *:focus {
+            outline: none;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "proxima-nova", "Lato", sans-serif;
+            background: #9b59b6;
+        }
+
+            body #project-wrapper {
+                height: 100vh;
+                display: flex;
+                display: -webkit-flex;
+                -webkit-align-items: center;
+                align-items: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+
+                body #project-wrapper #project-container {
+                    background: url("http://www.upsetmagazine.com/wp-content/uploads/2015/09/Bring-Me-The-Horizon_16.jpg");
+                    background-size: cover;
+                    background-position: top center;
+                    color: white;
+                    /* height: auto; */
+                    height: 180px;
+                    min-width: 300px;
+                    width: 300px;
+                    position: relative;
+                    z-index: 2;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    -webkit-box-shadow: 0px 3px 15px -1px rgba(0, 0, 0, 0.5);
+                    -moz-box-shadow: 0px 3px 15px -1px rgba(0, 0, 0, 0.5);
+                    box-shadow: 0px 3px 15px -1px rgba(0, 0, 0, 0.5);
+                }
+
+                    body #project-wrapper #project-container #overlay {
+                        position: absolute;
+                        height: calc(100% + 1px);
+                        width: calc(100% + 1px);
+                        z-index: 2;
+                        background: -moz-linear-gradient(-45deg, #333333 0%, #222222 100%);
+                        /* FF3.6-15 */
+                        background: -webkit-linear-gradient(-45deg, #333333 0%, #222222 100%);
+                        /* Chrome10-25,Safari5.1-6 */
+                        background: linear-gradient(135deg, #333333 0%, #222222 100%);
+                        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                        opacity: .85;
+                    }
+
+                    body #project-wrapper #project-container #content {
+                        text-align: center;
+                        position: relative;
+                        z-index: 3;
+                    }
+
+                        body #project-wrapper #project-container #content h2 {
+                            font-size: 1.3em;
+                            margin: 35px 0 0 0;
+                            font-weight: 600;
+                        }
+
+                        body #project-wrapper #project-container #content h3 {
+                            margin: 7px 0 15px 0;
+                            font-size: 0.9em;
+                            opacity: .4;
+                        }
+
+                        body #project-wrapper #project-container #content input {
+                            width: 100%;
+                            height: 2px;
+                            margin: 0 0 15px 0;
+                            background: -moz-linear-gradient(left, #3498db 0%, #9b59b6 72%);
+                            /* FF3.6-15 */
+                            background: -webkit-linear-gradient(left, #3498db 0%, #9b59b6 72%);
+                            /* Chrome10-25,Safari5.1-6 */
+                            background: linear-gradient(to right, #3498db 0%, #9b59b6 72%);
+                            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                        }
+
+                            body #project-wrapper #project-container #content input::-webkit-slider-thumb {
+                                -webkit-appearance: none;
+                                height: 8px;
+                                width: 8px;
+                                border-radius: 10px;
+                                background: #ffffff;
+                                cursor: pointer;
+                            }
+
+                        body #project-wrapper #project-container #content #controls {
+                            height: 50px;
+                            display: flex;
+                            display: -webkit-flex;
+                            -webkit-align-items: center;
+                            align-items: center;
+                            -webkit-justify-content: center;
+                            justify-content: center;
+                        }
+
+                            body #project-wrapper #project-container #content #controls .column {
+                                float: left;
+                            }
+
+                                body #project-wrapper #project-container #content #controls .column:nth-child(even) {
+                                    font-size: 1.3em;
+                                }
+
+                                body #project-wrapper #project-container #content #controls .column:nth-child(n+2):nth-child(-n+4) {
+                                    color: white !important;
+                                }
+
+                                body #project-wrapper #project-container #content #controls .column:nth-child(3) {
+                                    font-size: 2em;
+                                }
+
+                                body #project-wrapper #project-container #content #controls .column.active {
+                                    color: #9b59b6;
+                                }
+
+                                body #project-wrapper #project-container #content #controls .column i {
+                                    margin: 0 15px;
+                                    cursor: pointer;
+                                }
+
+            body #dailyui {
+                position: fixed;
+                font-size: 12em;
+                font-weight: 700;
+                margin: 0 0 -28px 0;
+                padding: 0;
+                right: 0;
+                bottom: 0;
+                color: rgba(0, 0, 0, 0.3);
+                z-index: 1;
+                text-align: right;
+                font-family: 'proxima-nova', 'Lato', sans-serif;
+            }
+    </style>
+</head>
+<body>
+    <div id="project-wrapper">
+        <div id="project-container">
+            <div id="overlay"></div>
+            <div id="content">
+                <h2>Throne</h2>
+                <h3>Bring Me The Horizon</h3>
+                <input type="range" value="30" />
+                <div id="controls">
+                    <div class="column"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+                    <div class="column"><i class="fa fa-step-backward" aria-hidden="true"></i></div>
+                    <div class="column"><i class="fa fa-play play-btn fa-fw" aria-hidden="true"></i></div>
+                    <div class="column"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
+                    <div class="column active"><i class="fa fa-random" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 id="dailyui">009</h1>
+    <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script>
+$('.play-btn').click(function () {
+	if ($(this).hasClass("fa-play")) {
+		$(this).removeClass("fa-play");
+		$(this).addClass("fa-pause");
+	} else {
+		$(this).removeClass("fa-pause");
+		$(this).addClass("fa-play");
+	}
+});
+
+$('.column').click(function () {
+	$(this).toggleClass("active");
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>

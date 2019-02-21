@@ -1,0 +1,205 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/sarnakov/pen/RRNzJK" />
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <style class="cp-pen-styles">
+        .wrapper {
+            background: #263238;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+        }
+
+            .wrapper .player {
+                width: 320px;
+                height: 568px;
+                background: white;
+                margin: 30px auto;
+            }
+
+                .wrapper .player .close {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 40px;
+                    opacity: .7;
+                    cursor: pointer;
+                    color: white;
+                    border: 2px solid white;
+                    z-index: 1;
+                    text-align: center;
+                }
+
+                    .wrapper .player .close:hover {
+                        opacity: 1;
+                    }
+
+                    .wrapper .player .close i {
+                        line-height: 38px;
+                        font-weight: 100;
+                    }
+
+                .wrapper .player .image {
+                    display: block;
+                    border-top-left-radius: 2px;
+                    border-top-right-radius: 2px;
+                    height: 75%;
+                    position: relative;
+                    background: linear-gradient(to top right, rgba(126, 197, 49, 0.55), rgba(0, 140, 255, 0.7)), url("https://images.unsplash.com/photo-1461770354136-8f58567b617a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f0c8c34fe56f9669d1c6d129f597f895") center center;
+                    background-size: cover;
+                }
+
+                    .wrapper .player .image .bottom-content {
+                        position: absolute;
+                        bottom: 0;
+                        height: 60px;
+                        line-height: 60px;
+                        color: white;
+                        font-weight: 100;
+                        width: 100%;
+                    }
+
+                        .wrapper .player .image .bottom-content .repeat {
+                            left: 0;
+                        }
+
+                        .wrapper .player .image .bottom-content .shuffle {
+                            right: 0;
+                        }
+
+                        .wrapper .player .image .bottom-content .title {
+                            width: 100%;
+                            padding: 0 50px;
+                            line-height: 15px;
+                        }
+
+                            .wrapper .player .image .bottom-content .title .song-name,
+                            .wrapper .player .image .bottom-content .title .artist-name {
+                                font-size: 16px !important;
+                            }
+
+                        .wrapper .player .image .bottom-content .repeat,
+                        .wrapper .player .image .bottom-content .shuffle {
+                            width: 50px;
+                            cursor: pointer;
+                        }
+
+                        .wrapper .player .image .bottom-content .repeat,
+                        .wrapper .player .image .bottom-content .title,
+                        .wrapper .player .image .bottom-content .shuffle {
+                            text-align: center;
+                            position: absolute;
+                        }
+
+                .wrapper .player .controls {
+                    width: 100%;
+                    height: 15%;
+                    align-items: center;
+                    display: flex;
+                    align-content: center;
+                    border-bottom: 2px solid #b0bec5;
+                }
+
+                    .wrapper .player .controls .player-controls_btn {
+                        color: #263238;
+                        width: 10%;
+                        cursor: pointer;
+                        margin: 0 5%;
+                        text-align: center;
+                    }
+
+                        .wrapper .player .controls .player-controls_btn i {
+                            font-size: 28px;
+                        }
+
+                .wrapper .player .next-song {
+                    display: flex;
+                    flex-wrap: no-wrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 10%;
+                    padding: 0 10px;
+                }
+
+                    .wrapper .player .next-song .cover {
+                        background: url("https://images.unsplash.com/photo-1461770354136-8f58567b617a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f0c8c34fe56f9669d1c6d129f597f895") center center;
+                        background-size: cover;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 40px;
+                    }
+
+                    .wrapper .player .next-song .title {
+                        text-align: left;
+                        line-height: 16px;
+                        min-width: calc(100% - 100px);
+                    }
+
+                        .wrapper .player .next-song .title .next-title {
+                            font-weight: bold;
+                            font-size: 12px;
+                        }
+
+                    .wrapper .player .next-song .playlist {
+                        font-weight: 28px;
+                        width: 40px;
+                        height: 40px;
+                        cursor: pointer;
+                        text-align: center;
+                    }
+
+                        .wrapper .player .next-song .playlist i {
+                            line-height: 40px;
+                            color: #263238;
+                        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="card player">
+            <div class="z-depth-1 close"><i class="material-icons">close</i></div>
+            <div class="image">
+                <div class="bottom-content">
+                    <div class="repeat"><i class="material-icons">repeat</i></div>
+                    <div class="title">
+                        <h6 class="song-name">Someone</h6><span class="artist-name">Hozier</span>
+                    </div>
+                    <div class="shuffle"><i class="material-icons">shuffle</i></div>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="player-controls_btn player-controls__btn_add" id="player-controls__btn_add"><i class="material-icons">add</i></div>
+
+                <div class="player-controls_btn player-controls__btn_prev" id="player-controls__btn_prev"><i class="material-icons">skip_previous</i></div>
+                <div class="player-controls_btn player-controls__btn_play"><i class="material-icons">play_arrow</i></div>
+                <div class="player-controls_btn  player-controls__btn_next  player-controls__btn_disabled" title=""><i class="material-icons">skip_next</i></div>
+                <div class="player-controls_btn  player-controls__btn_share" title=""><i class="material-icons">share</i></div>
+            </div>
+            <div class="next-song">
+                <div class="cover"></div>
+                <div class="title">
+                    <span class="next-title">
+                        Далі
+                    </span>
+                    <br /> Silver Moon
+                </div>
+                <div class="playlist"><i class="material-icons">queue_music</i></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

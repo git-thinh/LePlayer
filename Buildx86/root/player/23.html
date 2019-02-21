@@ -1,0 +1,380 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/jonathanobino/pen/yeqgvr" />
+
+
+    <style class="cp-pen-styles">
+        @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+        @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+        @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+        @import url(https://unpkg.com/ionicons@4.1.1/dist/css/ionicons.min.css);
+
+        [class*="iconicfill-"]:before {
+            font-family: 'IconicFill', sans-serif;
+            font-size: 2rem;
+            position: relative;
+            top: -0.3rem;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .fa.fa-angle-up,
+        .fa.fa-angle-down {
+            cursor: pointer;
+        }
+
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgba(153, 192, 150, 0.85), rgba(153, 192, 150, 0.85)), url(http://www.disclosureshop.com/img/logo.png);
+            background-size: 100%;
+            background-position: 0% 0%;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        #player {
+            overflow: hidden;
+            border-radius: 5px;
+            -webkit-transform: scale(0.5, 0.5);
+            transform: scale(0.5, 0.5);
+            position: absolute;
+            height: 500px;
+            width: 350px;
+            background: black;
+            top: calc(50% - 250px);
+            left: calc(50% - 175px);
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.4);
+        }
+
+            #player .scrollDown {
+                position: absolute;
+                height: 130%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.85);
+                top: -140%;
+                z-index: 2;
+            }
+
+                #player .scrollDown .content {
+                    position: absolute;
+                    bottom: 0;
+                    height: 77%;
+                    width: 100%;
+                    padding: 10px 17px;
+                    box-sizing: border-box;
+                    color: #99c096;
+                }
+
+                    #player .scrollDown .content .header {
+                        font-size: 1.5rem;
+                        margin-bottom: 20px;
+                    }
+
+                    #player .scrollDown .content span {
+                        display: inline-block;
+                        font-weight: 300;
+                    }
+
+                        #player .scrollDown .content span:first-child {
+                            min-width: 20px;
+                        }
+
+                        #player .scrollDown .content span:nth-child(2) {
+                            min-width: 230px;
+                            max-width: 200px;
+                            padding-left: 15px;
+                            box-sizing: border-box;
+                            font-weight: 400;
+                        }
+
+                    #player .scrollDown .content h3 {
+                        font-family: "Montserrat",sans-serif;
+                        margin-top: 40px;
+                        padding-left: 15px;
+                        font-size: 2.6rem;
+                        margin-bottom: 40px;
+                    }
+
+                    #player .scrollDown .content ul {
+                        list-style: none;
+                        padding-left: 20px;
+                    }
+
+                        #player .scrollDown .content ul li {
+                            font-family: "Lato",sans-serif;
+                            font-size: .843rem;
+                            margin-bottom: 15px;
+                            margin-left: 0;
+                            color: rgba(255, 255, 255, 0.8);
+                        }
+
+                    #player .scrollDown .content span.fa-angle-up {
+                        min-width: 10px;
+                        font-size: 2rem;
+                        float: right;
+                    }
+
+            #player .top {
+                position: relative;
+                color: white;
+            }
+
+                #player .top .floating {
+                    position: absolute;
+                    font-size: 2rem;
+                    right: 5%;
+                    top: 10px;
+                }
+
+                #player .top .container {
+                    font-family: 'Montserrat', sans-serif;
+                    margin-top: -100px;
+                    padding: 0 10%;
+                }
+
+                    #player .top .container p {
+                        font-family: 'Lato', sans-serif;
+                        font-weight: 300;
+                        color: rgba(255, 255, 255, 0.35);
+                        font-size: .9rem;
+                    }
+
+                    #player .top .container h3 {
+                        font-size: 3rem;
+                        margin: -19px 0 10px;
+                    }
+
+                        #player .top .container h3 .iconicfill-pause {
+                            float: right;
+                            color: #99c096;
+                            position: relative;
+                            top: 2px;
+                        }
+
+                            #player .top .container h3 .iconicfill-pause:before {
+                                font-size: 1.5rem;
+                            }
+
+                #player .top .cover {
+                    width: 100%;
+                    padding: 50% 0;
+                    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), black), url(https://consequenceofsound.files.wordpress.com/2015/07/screen-shot-2015-07-27-at-7-58-42-am.png?w=746);
+                    background-size: contain;
+                }
+
+                #player .top .timing {
+                    margin-bottom: 15px;
+                    margin-top: 40px;
+                    padding: 0 10% 20px;
+                    font-family: "Montserrat",sans-serif;
+                    font-size: .9rem;
+                    color: rgba(255, 255, 255, 0.9);
+                }
+
+                    #player .top .timing span:before,
+                    #player .top .timing span:after {
+                        clear: both;
+                    }
+
+                    #player .top .timing span:last-child {
+                        color: rgba(153, 153, 153, 0.45);
+                    }
+
+                #player .top .progress {
+                    width: 80%;
+                    height: 1px;
+                    background: rgba(153, 153, 153, 0.45);
+                    margin: 0 auto;
+                    position: relative;
+                }
+
+                    #player .top .progress:before {
+                        background: #99c096;
+                        width: 35%;
+                        height: 100%;
+                        content: "";
+                        display: block;
+                        transition: all .5s;
+                    }
+
+            #player .bottom {
+                position: absolute;
+                z-index: 1;
+                bottom: 0;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.7rem;
+                height: 50px;
+            }
+
+                #player .bottom i {
+                    transition: all .5s;
+                    color: rgba(153, 153, 153, 0.5);
+                    position: absolute;
+                }
+
+                    #player .bottom i:first-child {
+                        left: 10%;
+                    }
+
+                    #player .bottom i:nth-child(2) {
+                        left: 50%;
+                        -webkit-transform: translatex(-50%);
+                        transform: translatex(-50%);
+                        color: #99c096;
+                    }
+
+                    #player .bottom i:last-child {
+                        right: 10%;
+                    }
+
+                    #player .bottom i:hover {
+                        color: rgba(153, 153, 153, 0.8);
+                    }
+    </style>
+</head>
+<body>
+    <div id="player">
+        <div class="scrollDown">
+            <div class="content">
+                <span class="fa fa-angle-up"></span>
+                <h3>Running</h3>
+                <ul>
+                    <li class="header">
+                        <span>#</span>
+                        <span>title</span>
+                        <span class="fa fa-clock-o"></span>
+                    </li>
+                    <li>
+                        <span class="fa fa-signal"></span>
+                        <span>Omen</span>
+                        <span>3:17</span> </span>
+                    </li>
+                    <li>
+                        <span>2</span>
+                        <span>When a Fire Starts To Burn</span>
+                        <span>4:44</span>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        <span>Latch</span>
+                        <span>4:16</span>
+                    </li>
+                    <li>
+                        <span>4</span>
+                        <span>You & Me (Flume Remix)</span>
+                        <span>4:43</span>
+                    </li>
+                    <li>
+                        <span>5</span>
+                        <span>Grab Her!</span>
+                        <span>5:13</span>
+                    </li>
+                    <li>
+                        <span>6</span>
+                        <span>Stimulation</span>
+                        <span>5:20</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top">
+            <span class="fa fa-angle-down floating"></span>
+            <div class="cover"></div>
+            <div class="container">
+                <p>Disclosure<br>Omen</p>
+                <h3>Omen <span class="iconicfill-pause"></span></h3>
+            </div>
+            <div class="timing">
+                <span class="left">1:12</span><span class="right">3:17</span>
+            </div>
+            <div class="progress"></div>
+        </div>
+        <div class="bottom">
+            <i class="icon ion-md-repeat"></i>
+            <i class="icon ion-md-heart"></i>
+            <i class="icon ion-md-shuffle"></i>
+        </div>
+    </div>
+    <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+    <script src='https://facebook.github.io/rebound-js/rebound.js'></script>
+    <script>
+ /*Click on the down arrow to see some phisical-based animation :D*/
+
+var transform = function transform(el, what) {
+  el.style.mozTransform =
+  el.style.msTransform =
+  el.style.webkitTransform =
+  el.style.transform = what;
+};
+
+var player = document.querySelector('#player');
+
+var caretUp = document.querySelector('.fa-angle-up');
+var caretDown = document.querySelector('.fa-angle-down');
+var divDown = document.querySelector('.scrollDown');
+
+var spring = new rebound.SpringSystem();
+
+var animation = spring.createSpring(60, 5);
+
+var scrollDown = spring.createSpring(70, 7);
+
+var expand = function expand(el, val) {
+  transform(el, 'scale(' + val + ',' + val + ')');
+};
+
+var down = function down(el, val) {
+  el.style.top = '-' + val + '%';
+};
+
+animation.addListener({
+  onSpringUpdate: function onSpringUpdate(spring) {
+    var current = spring.getCurrentValue();
+    var val = rebound.MathUtil.mapValueInRange(current, 0, 1, 0.5, 1);
+    expand(player, val);
+  } });
+
+
+scrollDown.addListener({
+  onSpringUpdate: function onSpringUpdate(spring) {
+    var current = spring.getCurrentValue();
+    var val = rebound.MathUtil.mapValueInRange(current, 0, 1, 140, 30);
+    down(divDown, val);
+  } });
+
+
+caretDown.addEventListener('click', function () {
+  scrollDown.setEndValue(1);
+});
+
+caretUp.addEventListener('click', function () {
+  scrollDown.setEndValue(0);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  animation.setEndValue(1);
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>

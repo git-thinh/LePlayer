@@ -1,0 +1,688 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/enwaara/pen/rrNQvW" />
+    <link rel="stylesheet" href="https://use.typekit.net/tsl0qfs.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <style class="cp-pen-styles">
+        @-webkit-keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                top: -180px;
+            }
+
+            100% {
+                opacity: 1;
+                top: -160px;
+            }
+        }
+
+        @-moz-keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                top: -180px;
+            }
+
+            100% {
+                opacity: 1;
+                top: -160px;
+            }
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                top: -180px;
+            }
+
+            100% {
+                opacity: 1;
+                top: -160px;
+            }
+        }
+
+        @-webkit-keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+                top: -160px;
+            }
+
+            100% {
+                opacity: 0;
+                top: -180px;
+            }
+        }
+
+        @-moz-keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+                top: -160px;
+            }
+
+            100% {
+                opacity: 0;
+                top: -180px;
+            }
+        }
+
+        @keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+                top: -160px;
+            }
+
+            100% {
+                opacity: 0;
+                top: -180px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-transition: 0.4s ease-in-out;
+            -moz-transition: 0.4s ease-in-out;
+            -o-transition: 0.4s ease-in-out;
+            transition: 0.4s ease-in-out;
+            font-family: "proxima-nova", sans-serif;
+            font-size: 1em;
+            font-weight: 400;
+            color: #2f3640;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+            *:focus {
+                outline: none;
+            }
+
+        body {
+            background-color: #FFE5E5;
+        }
+
+        #wrapper {
+            position: absolute;
+            top: 50%;
+            margin-top: -335px;
+            left: 0;
+            width: 100%;
+        }
+
+        #container {
+            width: 375px;
+            height: 670px;
+            margin: 0 auto;
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            background: #dbedff;
+            background: -moz-linear-gradient(45deg, #dbedff 0%, #eff7ff 32%, white 99%);
+            background: -webkit-linear-gradient(45deg, #dbedff 0%, #eff7ff 32%, white 99%);
+            background: linear-gradient(45deg, #dbedff 0%, #eff7ff 32%, white 99%);
+        }
+
+        .blur.active {
+            filter: blur(10px);
+        }
+
+        .songs {
+            min-width: 100%;
+            height: auto;
+            padding-top: 60px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: top;
+        }
+
+            .songs li {
+                list-style: none;
+                margin: 0 20px;
+            }
+
+                .songs li img {
+                    width: 250px;
+                    border-radius: 50%;
+                    position: relative;
+                    margin-bottom: 24px;
+                    box-shadow: 0px 4px 10px 0px rgba(116, 185, 255, 0.8);
+                }
+
+                .songs li h2 {
+                    width: 100%;
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 2em;
+                    margin-bottom: 12px;
+                    letter-spacing: 2px;
+                }
+
+                .songs li p {
+                    width: 100%;
+                    text-align: center;
+                    font-size: 1em;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                    .songs li p i {
+                        margin-right: 8px;
+                        margin-left: -8px;
+                    }
+
+        .time {
+            width: 100%;
+            padding-right: 40px;
+            padding-left: 40px;
+        }
+
+            .time p {
+                width: 50%;
+                float: left;
+                font-size: 0.8em;
+                margin-bottom: 4px;
+            }
+
+                .time p:nth-child(2) {
+                    text-align: right;
+                }
+
+        #time {
+            width: 100%;
+            clear: both;
+            background-color: #2f3640;
+        }
+
+            #time .ui-slider-handle {
+                width: 7px;
+                height: 7px;
+                margin-left: -4px;
+                margin-top: -1px;
+            }
+
+        .controls {
+            width: 100%;
+            padding-top: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .controls i {
+                cursor: pointer;
+            }
+
+            .controls .arrow {
+                font-size: 1.4em;
+                -webkit-transition: none;
+                -moz-transition: none;
+                -o-transition: none;
+                transition: none;
+            }
+
+                .controls .arrow.mouse-click {
+                    color: #74b9ff;
+                }
+
+            .controls .play-button {
+                font-size: 5em;
+                text-align: center;
+                margin-right: 60px;
+                margin-left: 60px;
+            }
+
+                .controls .play-button:hover {
+                    color: #74b9ff;
+                }
+
+        .options {
+            width: 100%;
+            padding-top: 40px;
+            padding-right: 10px;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+            .options i {
+                font-size: 1.2em;
+                cursor: pointer;
+            }
+
+                .options i:hover {
+                    color: #74b9ff;
+                }
+
+                .options i.active {
+                    color: #74b9ff;
+                }
+
+        .menu {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(47, 54, 64, 0.95);
+            width: 100%;
+            height: 0px;
+        }
+
+            .menu .fa-times {
+                color: #ecf0f1;
+                float: right;
+                cursor: pointer;
+                font-size: 1.6em;
+                margin-right: 40px;
+                margin-top: 40px;
+            }
+
+                .menu .fa-times:hover {
+                    color: #74b9ff;
+                }
+
+        .menu-items {
+            width: 100%;
+            height: 82%;
+            padding-right: 40px;
+            padding-left: 40px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            clear: both;
+        }
+
+            .menu-items li {
+                color: #ecf0f1;
+                letter-spacing: 0.5px;
+                list-style: none;
+                width: 100%;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                font-size: 1.2em;
+                cursor: pointer;
+            }
+
+                .menu-items li:nth-last-child(1) {
+                    padding-bottom: 0px;
+                }
+
+                .menu-items li:hover {
+                    color: #74b9ff;
+                }
+
+                    .menu-items li:hover i {
+                        color: #74b9ff;
+                    }
+
+                .menu-items li.hidden {
+                    display: none;
+                }
+
+                .menu-items li i {
+                    width: 40px;
+                    color: #ecf0f1;
+                }
+
+                    .menu-items li i.fa-music {
+                        position: relative;
+                    }
+
+                    .menu-items li i.fa-plus-circle {
+                        width: 10px;
+                        position: absolute;
+                        top: -4px;
+                        left: -4px;
+                        font-size: 0.7em;
+                    }
+
+        .sound {
+            width: 100%;
+            padding-right: 40px;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+            .sound i {
+                font-size: 1em;
+                width: 24px;
+                color: #ecf0f1;
+            }
+
+                .sound i.fa-volume-up {
+                    padding-left: 11px;
+                }
+
+        #volume {
+            width: calc(100% - 48px);
+            background-color: #576574;
+        }
+
+            #volume .ui-slider-handle {
+                width: 12px;
+                height: 12px;
+                margin-left: -6px;
+                margin-top: -3.5px;
+            }
+
+        #volume, #time {
+            border-radius: 15px;
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            transition: none;
+            height: 5px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+            #volume .ui-slider-range-min, #time .ui-slider-range-min {
+                height: 5px;
+                width: 300px;
+                position: absolute;
+                background: #74b9ff;
+                border: none;
+                border-radius: 10px;
+                outline: none;
+                -webkit-transition: none;
+                -moz-transition: none;
+                -o-transition: none;
+                transition: none;
+            }
+
+            #volume .ui-slider-handle, #time .ui-slider-handle {
+                border-radius: 50%;
+                background: #fff;
+                position: absolute;
+                cursor: pointer;
+                outline: none;
+                box-shadow: 0px 0px 4px 0px black;
+                -webkit-transition: none;
+                -moz-transition: none;
+                -o-transition: none;
+                transition: none;
+            }
+
+                #volume .ui-slider-handle.handle-scale, #time .ui-slider-handle.handle-scale {
+                    -ms-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+
+        .bluetooth {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(47, 54, 64, 0.95);
+            width: 100%;
+            height: 0px;
+        }
+
+            .bluetooth h2 {
+                width: 100%;
+                clear: both;
+                padding-left: 40px;
+                padding-top: 40px;
+                font-size: 2em;
+                font-weight: 700;
+                color: #ecf0f1;
+            }
+
+            .bluetooth .fa-times {
+                color: #ecf0f1;
+                float: right;
+                cursor: pointer;
+                font-size: 1.6em;
+                margin-right: 40px;
+                margin-top: 40px;
+            }
+
+                .bluetooth .fa-times:hover {
+                    color: #74b9ff;
+                }
+
+        .bluetooth-items {
+            clear: both;
+            width: 100%;
+            padding: 40px;
+            height: 68%;
+        }
+
+            .bluetooth-items .bluetooth-item {
+                list-style: none;
+                width: 100%;
+                letter-spacing: 0.5px;
+                color: #ecf0f1;
+                font-size: 1.2em;
+                padding: 20px;
+                border: 1px solid #ecf0f1;
+                border-radius: 5px;
+                margin-bottom: 24px;
+                cursor: pointer;
+            }
+
+                .bluetooth-items .bluetooth-item.active {
+                    background-color: #74b9ff;
+                    border: 1px solid #74b9ff;
+                    color: #2f3640;
+                }
+
+                    .bluetooth-items .bluetooth-item.active i {
+                        color: #2f3640;
+                    }
+
+                .bluetooth-items .bluetooth-item i {
+                    color: #ecf0f1;
+                    width: 40px;
+                }
+
+        button {
+            width: calc(100% - 80px);
+            height: 46px;
+            line-height: 46px;
+            border-radius: 5px;
+            background-color: transparent;
+            border: none;
+            color: #74b9ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+            margin: 0px 40px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                color: #0984e3;
+            }
+
+        @media screen and (max-width: 1440px) {
+            #wrapper {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="container">
+
+            <ul class="songs blur">
+                <li>
+                    <img src="http://enwaara.se/codepen/bruno-mars.jpg" />
+                    <h2>Bruno Mars</h2>
+                    <p><i class="fas fa-compact-disc"></i>Just the way you are</p>
+                </li>
+                <li>
+                    <img src="http://enwaara.se/codepen/post-malone.jpg" />
+                    <h2>Post Malone</h2>
+                    <p><i class="fas fa-compact-disc"></i>I Fall Apart</p>
+                </li>
+                <li>
+                    <img src="http://enwaara.se/codepen/avicii-1.jpg" />
+                    <h2>Avicii</h2>
+                    <p><i class="fas fa-compact-disc"></i>Without you<br>(feat. Sandro Cavazza)</p>
+                </li>
+            </ul>
+
+            <div class="time blur">
+                <p>0:00</p>
+                <p>3:43</p>
+                <div id="time"></div>
+            </div>
+
+            <div class="controls blur">
+                <i class="fas fa-step-backward arrow"></i>
+                <i class="far fa-play-circle play-button"></i>
+                <i class="fas fa-step-forward arrow"></i>
+            </div>
+
+            <div class="options blur">
+                <i class="fas fa-random option"></i>
+                <i class="fas fa-sync-alt option"></i>
+                <i class="fab fa-bluetooth active"></i>
+                <i class="fas fa-ellipsis-h menu-icon"></i>
+            </div>
+
+            <div class="menu">
+
+                <i class="fas fa-times close-icon"></i>
+
+                <ul class="menu-items">
+                    <li class="favorite"><i class="far fa-heart"></i>Favorit</li>
+                    <li><i class="fas fa-music"><i class="fas fa-plus-circle"></i></i>Lägg till i spellista</li>
+                    <li><i class="fas fa-compact-disc"></i>Visa album</li>
+                    <li><i class="fas fa-user"></i>Visa artist</li>
+                    <li><i class="fas fa-share-square"></i>Dela</li>
+                </ul>
+
+                <div class="sound">
+                    <i class="fas fa-volume-down"></i>
+                    <div id="volume"></div>
+                    <i class="fas fa-volume-up"></i>
+                </div>
+
+            </div>
+
+            <div class="bluetooth">
+
+                <i class="fas fa-times close-bluetooth"></i>
+
+                <h2>Choose device</h2>
+
+                <ul class="bluetooth-items">
+                    <li class="bluetooth-item active"><i class="fas fa-headphones-alt"></i>Bose #9503</li>
+                    <li class="bluetooth-item"><i class="fas fa-car"></i>Kia Motors</li>
+                    <li class="bluetooth-item"><i class="fas fa-desktop"></i>Home Chromecast</li>
+                </ul>
+
+                <button>Add new device</button>
+
+            </div>
+
+        </div>
+    </div>
+    <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+    <script>
+$("#volume").slider({
+  min: 0,
+  max: 100,
+  value: 0,
+  range: "min" });
+
+
+$("#time").slider({
+  min: 0,
+  max: 100,
+  value: 0,
+  range: "min" });
+
+
+$('.ui-slider-handle').mousedown(function () {
+  $(this).addClass('handle-scale');
+});
+$('.ui-slider-handle').mouseup(function () {
+  $(this).removeClass('handle-scale');
+});
+
+$('.play-button').click(function () {
+  if ($(this).hasClass('fa-play-circle')) {
+    $(this).removeClass('fa-play-circle');
+    $(this).addClass('fa-pause-circle');
+  } else {
+    $(this).removeClass('fa-pause-circle');
+    $(this).addClass('fa-play-circle');
+  }
+});
+
+$('.favorite').click(function () {
+  if ($(this).children('i').hasClass('far')) {
+    $(this).children('i').removeClass('far');
+    $(this).children('i').addClass('fas');
+  } else {
+    $(this).children('i').addClass('far');
+    $(this).children('i').removeClass('fas');
+  }
+});
+
+$('.option').click(function () {
+  $(this).toggleClass('active');
+});
+
+$('.arrow').mousedown(function () {
+  $(this).addClass('mouse-click');
+});
+$('.arrow').mouseup(function () {
+  $(this).removeClass('mouse-click');
+});
+
+$('.menu-icon').click(function () {
+  $('.menu').css('height', '100%');
+  $('.blur').addClass('active');
+});
+$('.close-icon').click(function () {
+  $('.menu').css('height', '0px');
+  $('.blur').removeClass('active');
+});
+
+$('.bluetooth-item').click(function () {
+  if ($(this).hasClass('active')) {
+    $(this).removeClass('active');
+  } else {
+    $('.bluetooth-item').removeClass('active');
+    $(this).addClass('active');
+  }
+});
+
+$('.fa-bluetooth').click(function () {
+  $('.bluetooth').css('height', '100%');
+  $('.blur').addClass('active');
+});
+$('.close-bluetooth').click(function () {
+  $('.bluetooth').css('height', '0px');
+  $('.blur').removeClass('active');
+  if ($('.bluetooth-item').hasClass('active')) {
+    $('.fa-bluetooth').addClass('active');
+  } else {
+    $('.fa-bluetooth').removeClass('active');
+  }
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>

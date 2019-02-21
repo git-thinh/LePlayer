@@ -1,0 +1,349 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/Merevy/pen/egYrmB" />
+
+
+    <style class="cp-pen-styles">
+        body {
+            background: radial-gradient(#A2A09D, #302E2D);
+        }
+
+        .screen {
+            position: relative;
+            width: 290px;
+            height: 480px;
+            background: #a0a0a0;
+            border-radius: 4px;
+            background-image: url(https://s24.postimg.org/8r0kzlfjp/rsz_piano2.jpg);
+        }
+
+        .phone {
+            position: fixed;
+            width: 290px;
+            height: 21px;
+            position: absolute;
+            z-index: 9999;
+            background: /*#4d4d63*/ left center repeat-x scroll;
+        }
+
+            .phone ul {
+                list-style-type: none;
+                margin: 4px 5px 0 5px;
+                padding: 0;
+                overflow: hidden;
+                font-family: Arial;
+                font-size: 10px;
+            }
+
+            .phone li {
+                float: left;
+                padding: 1px;
+            }
+
+
+
+        /*Testing Here and Stuff*/
+
+
+        .left-nav {
+            height: 410px;
+            width: 140px;
+            position: fixed;
+            left: 0;
+            background-color: #DB3B53;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 70px;
+            position: absolute;
+            -webkit-box-shadow: inset 6px 0px 30px -7px rgba(0,0,0,0.75), inset -6px 0px 30px -7px rgba(0,0,0,0.75);
+            -moz-box-shadow: inset 6px 0px 30px -7px rgba(0,0,0,0.75), inset -6px 0px 30px -7px rgba(0,0,0,0.75);
+            box-shadow: inset 6px 0px 30px -7px rgba(0,0,0,0.75), inset -6px 0px 30px -7px rgba(0,0,0,0.75);
+        }
+
+
+            .left-nav a {
+                padding: 8px 8px 8px 5px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .left-nav a:hover, .offcanvas a:focus {
+                    color: #f1f1f1;
+                }
+
+            .left-nav .closebtn {
+                position: absolute;
+                top: 12px;
+                right: 17px;
+                font-size: 36px;
+                margin-left: 20px;
+                color: #fff;
+            }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 28px 0 0 18px;
+        }
+
+        .left-nav p {
+            font-family: arial;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
+
+        /*@media screen and (max-height: 450px) {
+          .left-nav {padding-top: 15px;}
+          .left-nav a {font-size: 18px;}
+        }*/
+
+        .record {
+            padding: 22px 35px 0 0;
+        }
+        /*.record img{
+            animation:4.5s rotateRight infinite linear;
+        }
+        @keyframes rotateRight{
+            0%{ transform:rotate(0deg); transform-origin:50% 50%; }
+            100%{ transform:rotate(360deg); }
+        }*/
+        /*img {
+          -webkit-transition: -webkit-transform 7s ease-in-out;
+          transition: transform 7s ease-in-out;
+        }
+        img:hover {
+          -webkit-transform: rotate(720deg);
+          transform: rotate(720deg);
+        }*/
+
+        img {
+            -webkit-transition: all 0.0s;
+            -moz-transition: all 0.0s;
+            -o-transition: all 0.0s;
+            transition: all 0.0s;
+        }
+
+            img:hover {
+                -webkit-transform: rotate(2520deg);
+                -moz-transform: rotate(2520deg);
+                transform: rotate(2520deg);
+                -webkit-transition: all 33s ease;
+                -moz-transition: all 33s ease;
+                -o-transition: all 33s ease;
+                transition: all 33s ease;
+            }
+
+        .functions ul {
+            list-style-type: none;
+            margin: 4px 5px 0 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial;
+        }
+
+        .functions li {
+            padding: 1px;
+        }
+
+        p.song {
+            font-family: arial;
+            font-size: 15px;
+            color: #fff;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .functions a {
+            color: #ffffff;
+            text-decoration: none;
+            background: transparent;
+        }
+
+        p.artist {
+            font-family: arial;
+            font-size: 9px;
+            color: #CCCCCC;
+            margin-top: -15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .controls ul {
+            list-style-type: none;
+            margin: 4px 38px 0 38px;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial;
+            font-size: 20px;
+        }
+
+        .controls li {
+            float: left;
+            padding: 1px;
+        }
+
+            .controls li a {
+                color: #fff;
+            }
+
+                .controls li a.pause {
+                    color: #DB3B53;
+                }
+
+        /*Progress Bar*/
+        .bar {
+            width: 205px;
+            height: 4px;
+            overflow: hidden;
+            border-radius: 50px;
+            margin: 22px 0 0 0;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .seeker {
+            float: left;
+            width: 80px;
+            height: 7px;
+            border: 10px solid #DB3B53;
+        }
+
+        a[href="#seek"] {
+            display: block;
+            width: 13px;
+            height: 13px;
+            margin: -9px 0 0 0;
+            background: #DB3B53;
+            border-radius: 100%;
+            transition: none;
+        }
+
+        .current {
+            font-family: arial;
+            color: #fff;
+            float: left;
+            margin: -13px 0 0 12px;
+            font-size: 12px;
+        }
+
+        .duration {
+            font-family: arial;
+            color: #fff;
+            float: right;
+            margin: -13px 12px 0 0;
+            font-size: 12px;
+        }
+
+        .credits {
+            font-size: 8px;
+            text-align: right;
+            width: 290px;
+            font-family: arial;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bdbdbd;
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One|Biryani|Raleway:300|Source+Code+Pro|Muli" rel="stylesheet">
+    <!--<body>--><center>
+
+        <div class="screen">
+            <div class="phone">
+                <ul>
+                    <li style="color:#fff;"><span class="fa fa-circle" aria-hidden="true"></span></li>
+                    <li style="color:#fff;"><span class="fa fa-circle" aria-hidden="true"></span></li>
+                    <li style="color:#fff;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                    <li style="color:#fff;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                    <li style="color:#fff;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                    <li style="padding-left:4px;color:#fff;"><span class="fa fa-wifi" aria-hidden="true"></span></li>
+                    <li style="margin-left:46px;color: #fff;">9:30 PM</li>
+                    <li style="float:right;color: #fff;">70% <span class="fa fa-battery-3" aria-hidden="true"></span></li>
+                </ul>
+            </div>
+
+            <!--SideNav-->
+            <div id="mySidenav" class="left-nav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="navoptions">
+                    <a href="#" style="color:#fff;margin:0 0 5px 0;"><span class="fa fa-music" aria-hidden="true"></span><p>music</p></a>
+                    <a href="#" style="color:#fff;margin-bottom:5px;"><span class="fa fa-star-o" aria-hidden="true"></span><p>favorites</p></a>
+                    <a href="#" style="color:#fff;margin-bottom:5px;"><span class="fa fa-share-alt" aria-hidden="true"></span><p>share</p></a>
+                    <a href="#" style="color:#fff;margin-bottom:5px;"><span class="fa fa-gear" aria-hidden="true"></span><p>settings</p></a>
+                    <a href="#" style="color:#fff;margin-bottom:5px;"><span class="fa fa-search" aria-hidden="true"></span><p>search</p></a>
+                    <a href="#" style="color:#fff;"><span class="fa fa-power-off" aria-hidden="true"></span><p>exit</p></a>
+                </div>
+            </div>
+
+            <div id="main">
+                <span style="font-size:20px;color:#DB3B53;cursor:pointer;float:left;" onclick="openNav()">&#9776;</span>
+            </div>
+            <div class="record"><img src="https://s30.postimg.cc/ojpilzmfl/Abbey_Music2.png" style="height:175px;" onmouseover="document.getElementById('audio').play()" onmouseout="document.getElementById('audio').pause()"></div>
+
+            <div class="functions">
+                <ul>
+                    <li style="color:#fff;font-size:16px;padding-top:18px;"><a href=""><span class="fa fa-heart-o" aria-hidden="true"></a></span></li>
+                    <p class="song">Song Title</p>
+                    <p class="artist">Artist</p>
+                    <a href="">
+                        <li style="color:#fff;font-size: 5px;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                        <li style="color:#fff;font-size: 5px;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                        <li style="color:#fff;font-size: 5px;"><span class="fa fa-circle-thin" aria-hidden="true"></span></li>
+                    </a>
+                    <a href=""><li style="color:#fff;font-size:30px;margin-top:1px;">+</li></a>
+                </ul>
+            </div>
+
+            <div class="controls">
+                <ul>
+                    <li style="color:#fff;margin-top:12px;"><a href=""><span class="fa fa-sliders" aria-hidden="true"></a></span></li>
+                    <li style="color:#fff;padding-left:25px;margin-top:12px;"><a href=""><span class="fa fa-fast-backward" aria-hidden="true"></a></span></li>
+                    <li style="color:#DB3B53;margin-left:15px;font-size:32px;border:solid 1px #DB3B53;border-radius:50%;padding:5px 10px 5px 10px;" id="play"><a class="pause" href=""><span class="fa fa-pause" aria-hidden="true"></a></span></li>
+                    <li style="color:#fff;padding-left:15px;margin-top:12px;"><a href=""><span class="fa fa-fast-forward" aria-hidden="true"></a></span></li>
+                    <li style="color:#fff;padding-left:25px;margin-top:12px;"> <a href=""><span class="fa fa-random" aria-hidden="true"></span></li></a>
+                </ul>
+            </div>
+
+
+            <div class="bar">
+                <div class="seeker"></div>
+            </div>
+            <a href=#seek></a>
+            <div class="time">
+                <span class="current" name="current">1:54</span>
+                <span class="duration" name="duration">3:09</span>
+            </div>
+        </div>
+        <audio id="audio">
+            <source src="http://k003.kiwi6.com/hotlink/jy3ih6iqm2/Stay_The_Night.mp3" type="audio/mpeg">
+            <source src="http://k003.kiwi6.com/hotlink/3lkbjn04rg/Stay_The_Night.ogg" type="audio/ogg">
+        </audio>
+        <div style="font-size:8px;text-align:right;width:290px;font-family:arial;text-transform:uppercase;letter-spacing:3px;color:#bdbdbd;">Alyne ∞</div>
+        <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+        <script>
+            //INSPIRATION FROM: https://play.google.com/store/apps/details?id=com.omagrahari.abbeymusicplayernew&hl=en//
+
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "140px"; document.getElementById("main").style.marginLeft = "140px";
+            }
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0"; document.getElementById("main").style.marginLeft = "0";
+            }
+//# sourceURL=pen.js
+        </script>
+</body>
+</html>

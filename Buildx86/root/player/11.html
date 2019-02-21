@@ -1,0 +1,514 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/drewendly/pen/qOweWb" />
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <style class="cp-pen-styles">
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #111415;
+        }
+
+        #player-container {
+            position: relative;
+            top: calc(50% - 200px);
+            margin: 0 auto;
+            width: 400px;
+            height: 400px;
+            background: #0e0f10;
+            border-radius: 9px;
+            box-shadow: 0px 0px 48px -12px rgba(30,100,190,0.20);
+        }
+
+            #player-container:before, #player-container:after {
+                pointer-events: none;
+                content: ' ';
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                background-image: url('https://soundadvicemusicdotnet.files.wordpress.com/2013/10/hot_since_82_little_black_book_cover.jpg');
+                background-repeat: no-repeat;
+                -webkit-transition: 0.36s cubic-bezier(.41,0,.38,1);
+                -moz-transition: 0.36s cubic-bezier(.41,0,.38,1);
+                transition: 0.36s cubic-bezier(.41,0,.38,1);
+            }
+
+            #player-container:before {
+                border-radius: 8px;
+                background-position: 50% -80px;
+                background-size: contain;
+                opacity: 0.16;
+            }
+
+            #player-container:after {
+                background-position: 10% 10%;
+                background-size: 60px;
+                opacity: 0.0;
+            }
+
+        .active#player-container:before {
+            opacity: 0.53;
+        }
+
+        #form {
+            position: relative;
+            top: 50%;
+            margin: 0 auto;
+            width: 400px;
+            height: 200px;
+            back-ground: #dedede;
+            overflow: hidden;
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
+            border-radius: 0 0 2px 2px;
+        }
+
+        #circ {
+            position: absolute;
+            top: 0;
+            right: 50px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #60B7AE; /* sea foam */
+            background: rgba(30, 130, 190, 1.0); /* skies */
+            background: rgba(190, 10, 60, 1.0); /* watermelon */
+            box-shadow: 0px 5px 16px rgba(255, 0, 60, 0.23);
+            transform-origin: top center;
+            transform: scale(1);
+            -webkit-transition: 0.36s cubic-bezier(.41,0,.38,1);
+            -moz-transition: 0.36s cubic-bezier(.41,0,.38,1);
+            transition: 0.36s cubic-bezier(.41,0,.38,1);
+            transition-property: transform, box-shadow;
+            -webkit-transition-property: transform, box-shadow;
+            -moz-transition-property: transform, box-shadow;
+        }
+
+            #circ:hover {
+                transform-origin: top center;
+                transform: scale(1.025);
+                box-shadow: 0px 12px 19px rgba(50, 0, 0, 0.22);
+            }
+
+        .active#circ:hover {
+            transform-origin: top center;
+            transform: scale(1);
+        }
+
+        #circPlay {
+            position: absolute;
+            top: 122px;
+            right: 172px;
+            width: 55px;
+            height: 55px;
+            border-radius: 100%;
+            background: #10f1b9;
+            transform-origin: center center;
+            transform: scale(9);
+        }
+
+        #Bg-panel {
+            position: absolute;
+            bottom: 0;
+            height: 172px;
+            width: 100%;
+            background: #13181B;
+            opacity: 1.0;
+            z-index: 0;
+            box-Shadow: 0px 3px 14px 3px rgba(0,0,0,0.36);
+            border-radius: 0 0 2px 2px;
+        }
+
+        #timeBar {
+            position: absolute;
+            top: 230px;
+            width: 400px;
+            height: 0px;
+            background: white;
+            opacity: 0.9;
+            border-radius: 1px 1px 0 0;
+        }
+
+        #timePos {
+            position: absolute;
+            left: 25%;
+            height: 100%;
+            width: 2px;
+            background: rgba(70,0,21,1.0);
+        }
+
+        .playButton {
+            cursor: pointer;
+            position: absolute;
+            top: 35%;
+            left: 57%;
+            width: 15px;
+            height: 0px;
+            background: rgba(0, 0, 0, 0.0);
+            border: 9px solid transparent;
+            border-left-color: rgba(0, 0, 0, 1.53);
+            transform: scaleX(1.55555);
+            opacity: 0.666;
+            pointer-events:;
+        }
+
+        .active #volumeBar {
+            position: absolute;
+            top: 53%;
+            left: 25%;
+            height: 2px;
+            width: 50%;
+            background: rgba(0, 0, 0, 0.15);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .active #knob {
+            position: absolute;
+            top: -7px;
+            right: 12%;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.96);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #volumeBar::before {
+            position: absolute;
+            display: block;
+            content: "";
+            top: 0%;
+            left: 0%;
+            height: 100%;
+            width: 85%;
+            background: white;
+        }
+
+        #volumeBar {
+            transform: scale(0);
+            right: 25%;
+            opacity: 0;
+            -webkit-transition: 0.4s 0.05s cubic-bezier(.41,0,.38,1);
+            -moz-transition: 0.4s 0.05s cubic-bezier(.41,0,.38,1);
+            transition: 0.4s 0.05s cubic-bezier(.41,0,.38,1);
+            transition-property: opacity, right, scale, transform;
+            -webkit-transition-property: opacity, right, scale, transform;
+            -moz-transition-property: opacity, right, scale, transform;
+            border-radius: 2px;
+        }
+
+        #knob {
+            cursor: pointer;
+            transform: scale(0);
+            right: 100%;
+            opacity: 0;
+            -webkit-transition: 0.6s 0.0s cubic-bezier(.41,0,.38,1);
+            -moz-transition: 0.6s 0.0s cubic-bezier(.41,0,.38,1);
+            transition: 0.6s 0.0s cubic-bezier(.41,0,.38,1);
+            transition-property: opacity, right, scale, transform;
+            -webkit-transition-property: opacity, right, scale, transform;
+            -moz-transition-property: opacity, right, scale, transform;
+            box-shadow: 0 1px 0.5px rgba(0,0,0,0.1);
+        }
+
+        #Xit {
+            width: 100%;
+            height: 100%;
+            opacity: 0.0;
+            z-index: 99;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 24px;
+            text-align: center;
+            line-height: 19px;
+        }
+
+            #Xit.active {
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                left: 7.5%;
+                top: 61%;
+            }
+
+        #fastForward {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            right: 21%;
+            width: 0px;
+            height: 0px;
+            border: 9px solid transparent;
+            border-left-color: rgba(0, 0, 0, 0.6);
+            transform: scaleY(.67);
+            opacity: 0;
+        }
+
+            #fastForward::before {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -9px;
+                left: 0.5px;
+                width: 0px;
+                height: 0px;
+                border: 9px solid transparent;
+                border-left-color: rgba(0, 0, 0, 0.6);
+            }
+
+
+        #rewind {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            left: 21%;
+            width: 0px;
+            height: 0px;
+            border: 9px solid transparent;
+            border-right-color: rgba(0, 0, 0, 0.6);
+            transform: scaleY(.67);
+            opacity: 0;
+        }
+
+            #rewind:before {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -9px;
+                right: 0.5px;
+                width: 0px;
+                height: 0px;
+                border: 9px solid transparent;
+                border-right-color: rgba(0, 0, 0, 0.6);
+            }
+
+
+        .measure {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: yellow;
+            DISPLAY: NONE;
+        }
+
+        .active #eqWave {
+            visibility: visible;
+            transform: scaleY(1);
+            top: 188px;
+            transition-delay: 60ms;
+            transition-duration: 700ms;
+            transition-timing-function: ease-out;
+            opacity: 1;
+        }
+
+        #eqWave {
+            transition: all 2.3s 0.0s cubic-bezier(.25,.2,.16,1);
+            transform: scaleY(0);
+            transform-origin: 50% 100%;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            width: intrinsic;
+            height: 15px;
+            top: 215px;
+            left: 20px;
+            background: none;
+        }
+
+        .eqBar {
+            position: relative;
+            float: left;
+            left: 0px;
+            bottom: 0;
+            width: 4px;
+            height: 100%;
+            margin: 0 5px 0 0px;
+            /* background-color: rgba(230,20,65,1); /*red*/
+            background-color: rgba(255,255,255,0.45);
+            transform: scaleY(0);
+            transform-origin: 50% 100%;
+            animation: barHeight 500ms infinite alternate;
+            animation-timing-function: cubic-bezier(.5,0.05,.6,0.95);
+        }
+
+        @keyframes barHeight {
+            0% {
+                transform: scaleY(0.2);
+                opacity: 1.5;
+            }
+
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        #Bar1 {
+            animation-duration: 400ms;
+            animation-delay: 0ms;
+        }
+
+        #Bar2 {
+            animation-duration: 400ms;
+            animation-delay: 133ms;
+        }
+
+        #Bar3 {
+            animation-duration: 400ms;
+            animation-delay: 266ms;
+        }
+
+        #Bar4 {
+            animation-duration: 400ms;
+            animation-delay: 399ms;
+        }
+
+        #Bar5 {
+            animation-duration: 400ms;
+            animation-delay: 532ms;
+        }
+
+        #Bar6 {
+            animation-duration: 400ms;
+            animation-delay: 665ms;
+        }
+    </style>
+</head>
+<body>
+    <body>
+
+        <section id="player-container">
+
+            <div id="timeBar">
+                <div id="timePos">
+
+                </div>
+            </div>
+
+            <div id="Bg-panel">
+
+            </div>
+
+
+            <div id="form">
+
+                <div id="circ">
+                    <div id="introPlay" class="playButton"> </div>
+
+                    <div id="volumeBar" class="">
+                        <div id="knob"></div>
+                    </div>
+
+                    <div id="fastForward"> </div>
+                    <div id="rewind"> </div>
+
+                    <div id="Xit" class="">+</div>
+
+                </div>
+
+            </div>
+
+            <div class="measure"></div>
+
+            <div id="eqWave">
+                <div class="eqBar" id="Bar1"></div>
+                <div class="eqBar" id="Bar2"></div>
+                <div class="eqBar" id="Bar3"></div>
+                <div class="eqBar" id="Bar4"></div>
+                <div class="eqBar" id="Bar5"></div>
+                <div class="eqBar" id="Bar6"></div>
+
+            </div>
+
+        </section>
+
+    </body>
+    <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js'></script>
+    <script>
+$(document).ready(function () {
+
+    //Burger menu animation with greensock / gsap
+    var form = $("#form"),
+    circ = $("#circ"),
+    play = $(".playButton"),
+    fast = $("#fastForward"),
+    rewind = $("#rewind"),
+    timebar = $("#timeBar"),
+    neckBolt = $(".neckBolt"),
+    Xit = $("#Xit"),
+    BG = $("#Bg-panel"),
+    playCont = $("#player-container"),
+    speed = .4;
+
+    //instantiate  timeline
+    var tl = new TimelineLite({ paused: true }); //pause default
+
+    //collapse menu
+    tl.
+    set(play, { top: "35%", left: '57%', ease: Quart.easeIn }).
+    set(fast, { opacity: 0, ease: Power4.easeIn }, "label--0").
+    set(rewind, { opacity: 0, ease: Power4.easeIn }, "label--0").
+
+
+    to(circ, .33, { height: 435, width: 435, ease: Quint.easeInOut, force3D: true }, "label--2").
+
+    to(form, .2, { transformOrigin: '0% 100%', top: 228, height: 172, ease: Quint.easeInOut, force3D: true }, "label--2").
+
+
+
+    to(circ, .36, { top: -132, right: -18, ease: Power4.easeInOut, force3D: true }, "label--2").
+
+    to(play, .4, { top: '40%', left: '48.125%', height: 15, width: 15, borderWidth: 0, scaleX: 1, boxShadow: "inset -5px 0px 0px black, inset 5px 0px 0px black", ease: Power4.easeInOut, force3D: true }, "label--2").
+
+    to(timebar, 0.3, { top: 208, height: 20, ease: Quint.easInOut, force3D: true }, "label--3-=0.3").
+    to(Xit, 0.4, { rotation: 225, opacity: 0.54, transformOrigin: "50%, 50%", ease: Quint.easOut, force3D: true }, "label--3-=0.4").
+
+
+
+    to(fast, .4, { opacity: 0.75, ease: Power4.easeInOut, force3D: true }, "label--3-=0.4").
+    to(rewind, .4, { opacity: 0.75, ease: Power4.easeInOut, force3D: true }, "label--3-=0.4");
+
+
+
+
+
+
+    // play timeline on click, reverse animation if active
+
+    Xit.on('mousedown', function () {
+        playCont.toggleClass('active');
+        circ.toggleClass('active');
+        $(this).toggleClass('active');
+
+        if ($(this).hasClass('active')) {
+            tl.play().timeScale(0.67);
+            // timeScale adjusts playback speed (2.0 = 2x double-time, 0.5 = 1/2 half-timed)
+        } else
+        {
+            tl.reverse().timeScale(0.67);
+        }
+    });
+
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>

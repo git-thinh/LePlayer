@@ -1,0 +1,644 @@
+﻿
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <!--<script src='https://static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
+    <script src='https://static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/seanfree/pen/RorjpB" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <style class="cp-pen-styles">
+        body {
+            background-color: #030303;
+            overflow: hidden;
+        }
+
+        #header {
+            position: fixed;
+            z-index: 100;
+            width: 100%;
+            padding: 20px;
+            color: #69cdd7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #title {
+            font-family: "Josefin Sans", sans-serif;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #controls {
+            display: flex;
+            padding: 15px;
+        }
+
+            #controls .btn {
+                position: relative;
+                margin: 0 10px;
+                cursor: pointer;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+                #controls .btn .fa {
+                    width: 16px;
+                    pointer-events: none;
+                }
+
+                    #controls .btn .fa.off {
+                        color: #efefef;
+                        opacity: 0.4;
+                    }
+
+                #controls .btn:active {
+                    -webkit-transform: scale(0.9);
+                    transform: scale(0.9);
+                }
+
+                #controls .btn.disabled {
+                    pointer-events: none;
+                    opacity: 0.2;
+                }
+
+        #flex-pad {
+            flex: 1;
+        }
+
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(rgba(105, 205, 215, 0.5), rgba(10, 20, 30, 0.5));
+            background-position: 100% 100%;
+            background-size: 200% 200%;
+            opacity: 1;
+            transition: opacity 2s ease-in-out;
+        }
+
+            #background.hidden {
+                opacity: 0;
+            }
+
+            #background.loading {
+                opacity: 0.2;
+            }
+
+                #background.loading + #loader {
+                    opacity: 1;
+                }
+
+                    #background.loading + #loader #spinner {
+                        -webkit-animation: spinner-anim 2s ease-out infinite;
+                        animation: spinner-anim 2s ease-out infinite;
+                    }
+
+                        #background.loading + #loader #spinner::before {
+                            -webkit-animation: spinner-anim 2s ease-out infinite;
+                            animation: spinner-anim 2s ease-out infinite;
+                        }
+
+                        #background.loading + #loader #spinner::after {
+                            -webkit-animation: spinner-anim 1s ease-out infinite;
+                            animation: spinner-anim 1s ease-out infinite;
+                        }
+
+        #loader {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100vw;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+            #loader #loading-text {
+                font-size: 1.8em;
+                font-family: "Josefin Sans", sans-serif;
+                color: #69cdd7;
+                transition: all 0.5s ease-in-out;
+            }
+
+            #loader #spinner {
+                height: 40px;
+                width: 40px;
+                border: 2px solid #efefef;
+                border-color: transparent transparent #69cdd7 #69cdd7;
+                border-radius: 50%;
+                margin-right: 10px;
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+                #loader #spinner::before, #loader #spinner::after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    border: 2px solid #efefef;
+                    border-color: transparent transparent #69cdd7 #69cdd7;
+                    border-radius: 50%;
+                }
+
+                #loader #spinner::before {
+                    top: 3px;
+                    left: 3px;
+                    height: 30px;
+                    width: 30px;
+                }
+
+                #loader #spinner::after {
+                    top: 8px;
+                    left: 8px;
+                    height: 20px;
+                    width: 20px;
+                }
+
+        #canvas, #glow-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #canvas {
+            z-index: 1;
+        }
+
+        #glow-layer {
+            z-index: 0;
+        }
+
+        #codepen-link {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+            width: 40px;
+            z-index: 10;
+            border-radius: 50%;
+            box-sizing: border-box;
+            background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/logo.jpg");
+            background-position: center center;
+            background-size: cover;
+            opacity: 0.4;
+            transition: all 0.25s;
+        }
+
+            #codepen-link:hover {
+                opacity: 0.8;
+                box-shadow: 0 0 6px #efefef;
+            }
+
+        #progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            width: 100%;
+            height: 4px;
+            background: #69cdd7;
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+            transition: -webkit-transform 0.5s linear;
+            transition: transform 0.5s linear;
+            transition: transform 0.5s linear, -webkit-transform 0.5s linear;
+        }
+
+        .make-google-happy-button {
+            position: absolute;
+            padding: 1rem 1rem 0.8rem 1rem;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 4;
+            border: 1px solid #69cdd7;
+            color: #69cdd7;
+            font-family: "Josefin Sans", sans-serif;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+            .make-google-happy-button:hover {
+                background: #69cdd7;
+                color: #333;
+            }
+
+            .make-google-happy-button.hidden {
+                opacity: 0;
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+            }
+
+        @media screen and (min-width: 600px) {
+            #header {
+                flex-direction: row;
+            }
+
+            #controls {
+                padding: 0;
+            }
+        }
+
+        @-webkit-keyframes spinner-anim {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner-anim {
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <h1 id="title"></h1>
+        <div id="controls">
+            <div class="btn" id="btn-wave"><i class="fa fa-exchange"></i></div>
+            <div class="btn" id="btn-lights"><i class="fa fa-sun-o"></i></div>
+            <div class="btn" id="btn-prev"><i class="fa fa-backward"></i></div>
+            <div class="btn" id="btn-play"><i class="fa fa-play"></i></div>
+            <div class="btn" id="btn-next"><i class="fa fa-forward"></i></div>
+            <div class="btn" id="btn-volume"><i class="fa fa-volume-up"></i></div>
+        </div>
+    </header>
+    <div id="background"></div>
+    <div id="loader">
+        <div id="spinner"></div>
+        <h2 id="loading-text">Loading...</h2>
+    </div>
+    <canvas id="glow-layer"></canvas>
+    <canvas id="canvas"></canvas>
+    <audio id="audio"></audio>
+    <div id="progress-bar"></div><a class="make-google-happy-button">Click to Start</a><a id="codepen-link" href="https://www.codepen.io/seanfree" target="_blank"></a>
+    <script src='https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js'></script>
+    <script src='https://rawgit.com/SeanFree/Vector2/master/Vector2.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.1/dat.gui.min.js'></script>
+    <script>
+        var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } var Particle = function () {
+            function Particle(index, parent) {
+                _classCallCheck(this, Particle);
+                this.index = index;
+                this.parent = parent;
+                this.minSize = 5;
+                this.init();
+            } _createClass(Particle, [{
+                key: "init", value: function init() {
+                    this.freqVal = this.parent.freqData[this.index] * 0.01;
+                    this.size =
+                        this.freqVal * (
+                            (this.parent.dimensions.x + this.parent.dimensions.y) * 0.5) *
+                        0.0125 +
+                        this.minSize;
+                    this.position = new Vector2(
+                        Math.random() * this.parent.dimensions.x,
+                        this.parent.dimensions.y + this.size + Math.random() * 50);
+
+                    this.velocity = new Vector2(2 - Math.random() * 4, 0);
+                }
+            }, {
+                key: "update", value: function update() {
+                    this.freqVal = this.parent.freqData[this.index] * 0.01;
+
+                    this.size = this.freqVal * 20 + this.minSize;
+
+                    this.hue =
+                        this.index / this.parent.analyser.frequencyBinCount * 360 + 120 + this.parent.tick / 6;
+                    this.saturation = this.freqVal * 50;
+                    this.alpha = this.freqVal * 0.3;
+
+                    this.fill = "hsla(" + this.hue + ", " + this.saturation + "%, 50%, " + this.alpha + ")";
+                    this.lift = Math.pow(this.freqVal, 3);
+
+                    this.position.subY(this.lift + 0.5);
+                    this.position.add(this.velocity);
+
+                    this.checkBounds();
+                }
+            }, {
+                key: "checkBounds", value: function checkBounds() {
+                    if (
+                        this.position.y < -this.size ||
+                        this.position.x < -this.parent.dimensions.x * 0.15 ||
+                        this.position.x > this.parent.dimensions.x * 1.15) {
+                        this.init();
+                    }
+                }
+            }]); return Particle;
+        }(); var
+
+
+            App = function () {
+                function App() {
+                    var _this = this; _classCallCheck(this, App);
+                    this.globalMovement = new Vector2();
+                    this.initCanvas();
+                    this.initUI();
+                    this.initAudio();
+                    this.btnMakeGoogleHappy = document.querySelector(".make-google-happy-button");
+                    this.btnMakeGoogleHappy.addEventListener("click", function () {
+                        _this.audioCtx.resume();
+                        _this.loadAudio();
+                        _this.btnMakeGoogleHappy.classList.add("hidden");
+                    });
+                    this.populate();
+                    this.render();
+                    window.onresize = function () {
+                        _this.resize();
+                    };
+                } _createClass(App, [{
+                    key: "initCanvas", value: function initCanvas() {
+                        this.tick = 0;
+                        this.dark = false;
+                        this.wave = true;
+                        this.canvas = document.getElementById("canvas");
+                        this.ctx = this.canvas.getContext("2d");
+                        this.glowLayer = document.getElementById("glow-layer");
+                        this.glowCtx = this.glowLayer.getContext("2d");
+                        this.dimensions = {};
+                        this.resize();
+                    }
+                }, {
+                    key: "resize", value: function resize() {
+                        this.canvas.width = this.glowLayer.width = this.dimensions.x = window.innerWidth;
+                        this.canvas.height = this.glowLayer.height = this.dimensions.y = window.innerHeight;
+                    }
+                }, {
+                    key: "initUI", value: function initUI() {
+                        var _this2 = this;
+                        this.progressBar = document.querySelector("#progress-bar");
+                        this.controls = {
+                            wave: document.querySelector("#btn-wave"),
+                            lights: document.querySelector("#btn-lights"),
+                            prev: document.querySelector("#btn-prev"),
+                            next: document.querySelector("#btn-next"),
+                            play: document.querySelector("#btn-play"),
+                            volume: document.querySelector("#btn-volume")
+                        };
+
+                        this.controls.wave.onclick = function () {
+                            var i = _this2.controls.wave.getElementsByTagName("i")[0];
+                            if (_this2.wave) {
+                                i.classList.add("off");
+                                _this2.wave = false;
+                            } else if (!_this2.wave) {
+                                i.classList.remove("off");
+                                _this2.wave = true;
+                            }
+                        };
+                        this.controls.lights.onclick = function () {
+                            var i = _this2.controls.lights.getElementsByTagName("i")[0];
+                            if (_this2.dark) {
+                                i.classList.remove("off");
+                                _this2.background.classList.remove("hidden");
+                                _this2.dark = false;
+                            } else if (!_this2.dark) {
+                                i.classList.add("off");
+                                _this2.background.classList.add("hidden");
+                                _this2.dark = true;
+                            }
+                        };
+                        this.controls.prev.onclick = function () {
+                            _this2.currentSong = _this2.currentSong > 1 ?
+                                _this2.currentSong - 1 :
+                                _this2.fileNames.length;
+                            _this2.loadAudio();
+                        };
+                        this.controls.next.onclick = function () {
+                            _this2.currentSong = _this2.currentSong < _this2.fileNames.length ?
+                                _this2.currentSong + 1 :
+                                1;
+                            _this2.loadAudio();
+                        };
+                        this.controls.play.onclick = function () {
+                            var i = _this2.controls.play.getElementsByTagName("i")[0];
+                            if (_this2.playing && _this2.audioReady) {
+                                i.classList.remove("fa-pause");
+                                i.classList.add("fa-play");
+                                _this2.playing = false;
+                                _this2.audio.pause();
+                            } else if (!_this2.playing && _this2.audioReady) {
+                                i.classList.remove("fa-play");
+                                i.classList.add("fa-pause");
+                                _this2.playing = true;
+                                _this2.audio.play();
+                            }
+                        };
+                        this.controls.volume.onclick = function () {
+                            var i = _this2.controls.volume.getElementsByTagName("i")[0];
+                            _this2.volume = _this2.volume > 0 ? _this2.volume - 0.5 : 1;
+                            switch (_this2.volume) {
+                                case 1:
+                                    i.classList.remove("fa-volume-off");
+                                    i.classList.add("fa-volume-up");
+                                    break;
+                                case 0.5:
+                                    i.classList.remove("fa-volume-up");
+                                    i.classList.add("fa-volume-down");
+                                    break;
+                                case 0:
+                                    i.classList.remove("fa-volume-down");
+                                    i.classList.add("fa-volume-off");
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            _this2.gainNode.gain.value = _this2.volume;
+                        };
+                        this.background = document.getElementById("background");
+                        this.title = document.getElementById("title");
+                    }
+                }, {
+                    key: "initAudio", value: function initAudio() {
+                        var _this3 = this;
+                        this.currentSong = 1;
+                        this.volume = 1;
+                        this.baseURL = "https://res.cloudinary.com/sf-cloudinary/video/upload/v1525440046/";
+                        this.fileNames = [
+                            "dmwaltz.mp3",
+                            "nocturne92.mp3",
+                            "mozart25.mp3",
+                            "trista.mp3",
+                            "waltzflowers.mp3"];
+
+                        this.songTitles = [
+                            "Dmitri Shostakovich - Waltz No. 2",
+                            "Frederic Chopin - Nocturne op. 9 no. 2",
+                            "Mozart - Symphony no. 25",
+                            "Heitor Villa-Lobos - Tristorosa",
+                            "Pyotr Tchaikovsky - Waltz of the Flowers"];
+
+
+                        this.audio = document.getElementById("audio");
+                        this.audio.addEventListener("ended", function () {
+                            _this3.audio.currentTime = 0;
+                            _this3.audio.pause();
+                            _this3.currentSong = _this3.currentSong < _this3.fileNames.length ?
+                                _this3.currentSong + 1 :
+                                1;
+                            _this3.loadAudio();
+                        });
+                        this.audio.addEventListener("timeupdate", function () {
+                            _this3.progressBar.style = "transform: scaleX(" + _this3.audio.currentTime / _this3.audio.duration + ")";
+                        });
+
+                        this.audioCtx = new AudioContext();
+
+                        this.source = this.audioCtx.createMediaElementSource(this.audio);
+                        this.gainNode = this.audioCtx.createGain();
+
+                        this.analyser = this.audioCtx.createAnalyser();
+                        this.analyser.smoothingTimeConstant = 0.92;
+                        this.analyser.fftSize = 2048;
+                        this.analyser.minDecibels = -125;
+                        this.analyser.maxDecibels = -10;
+
+                        this.source.connect(this.gainNode);
+                        this.gainNode.connect(this.analyser);
+                        this.analyser.connect(this.audioCtx.destination);
+
+                        this.gainNode.gain.value = this.volume;
+                        this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
+                    }
+                }, {
+                    key: "loadAudio", value: function loadAudio() {
+                        var _this4 = this;
+                        var request = new XMLHttpRequest();
+
+                        this.audioReady = false;
+                        this.playing = false;
+                        this.background.classList.add("loading");
+
+                        this.controls.prev.classList.add("disabled");
+                        this.controls.next.classList.add("disabled");
+                        this.controls.play.classList.add("disabled");
+
+                        request.open(
+                            "GET",
+                            this.baseURL + this.fileNames[this.currentSong - 1],
+                            true);
+
+                        request.responseType = "blob";
+
+                        request.onprogress = function () {
+                            if (request.response)
+                                _this4.playAudio(request.response);
+                        };
+
+                        request.send();
+                    }
+                }, {
+                    key: "playAudio", value: function playAudio(
+                        data) {
+                        this.audioReady = true;
+                        this.playing = true;
+
+                        this.background.classList.remove("loading");
+                        this.title.innerHTML = this.songTitles[this.currentSong - 1];
+
+                        this.controls.prev.classList.remove("disabled");
+                        this.controls.next.classList.remove("disabled");
+                        this.controls.play.classList.remove("disabled");
+
+                        this.controls.play.getElementsByTagName("i")[0].classList.remove("fa-play");
+                        this.controls.play.getElementsByTagName("i")[0].classList.add("fa-pause");
+
+                        this.audio.src = window.URL.createObjectURL(data);
+                        this.audio.play();
+                    }
+                }, {
+                    key: "populate", value: function populate() {
+                        this.particles = [];
+                        for (var i = 0; i < 625; i++) {
+                            this.particles.push(new Particle(i, this));
+                        }
+                    }
+                }, {
+                    key: "update", value: function update() {
+                        this.ctx.clearRect(0, 0, this.dimensions.x, this.dimensions.y);
+                        this.ctx.save();
+                        this.ctx.globalCompositeOperation = "lighten";
+                        for (var i = this.particles.length - 1; i >= 0; i--) {
+                            var particle = this.particles[i];
+                            if (this.freqData[i] > 0) {
+                                particle.update();
+                                if (this.wave) particle.position.add(this.globalMovement);
+                                this.ctx.beginPath();
+                                this.ctx.fillStyle = particle.fill;
+                                this.ctx.beginPath();
+                                this.ctx.arc(
+                                    particle.position.x,
+                                    particle.position.y,
+                                    particle.size,
+                                    0,
+                                    2 * Math.PI);
+
+                                this.ctx.fill();
+                                this.ctx.closePath();
+                            }
+                        }
+                        this.ctx.restore();
+                        this.glowCtx.clearRect(0, 0, this.dimensions.x, this.dimensions.y);
+                        this.glowCtx.filter = "blur(8px) saturate(150%) brightness(150%)";
+                        this.glowCtx.drawImage(this.canvas, 0, 0);
+                    }
+                }, {
+                    key: "render", value: function render() {
+                        this.tick++;
+                        if (this.wave) this.globalMovement.x = Math.sin(this.tick * 0.01) * 2;
+                        this.analyser.getByteFrequencyData(this.freqData);
+                        this.update();
+                        window.requestAnimationFrame(this.render.bind(this));
+                    }
+                }]); return App;
+            }();
+
+
+        window.requestAnimationFrame = function () {
+            return (
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                });
+
+        }();
+
+        window.onload = function () {
+            var app = new App();
+        };
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>

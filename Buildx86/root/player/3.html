@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="normalize.min.css" rel="stylesheet" />
+    <link href="plyr.css" rel="stylesheet" />
+    
+    <script src="plyr.min.js"></script>
+    <script src="plyr.polyfilled.min.js"></script>
+
+    <style class="cp-pen-styles">
+        .container {
+            margin: 20px auto;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="nIwU-9ZTTJc"></div>
+    </div>
+    <script>
+        // Change "{}" to your options: bTqVqk7FSmY
+        // https://github.com/sampotts/plyr/#options
+        var player = new Plyr('#player', {});
+
+        // Expose player so it can be used from the console
+        window.player = player;
+    </script>
+</body>
+</html>
