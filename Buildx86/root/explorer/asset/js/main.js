@@ -8,29 +8,16 @@
         '   <div class="playback play"><i class="icon-play"></i></div>' +
         '   <div class="playback unavailable forward"><i class="icon-forward"></i></div>' +
         '</div>' +
+
         '<div class="volume">' +
         '   <i class="icon-volume-down"></i>' +
         '   <i class="icon-volume-up"></i>' +
-        '   <div class="vol"></div>' +
-        '   <div class="volCtrlContainer"><div class="volCtrl"><span></span></div></div>' +
+        '   <div class="vol" style="width:50%;"></div>' +
+        '   <input type="range" min="1" max="100" value="50" class="slider" id="ui-volume">' + 
         '</div>' +
 
-        '<div class="info">' +
-        '   <div class="appleLogo" style="display: none;"></div>' +
-        '   <div class="songInfo" style="display: block;">' +
-        '       <i class="icon-play"></i>' +
-        '       <div class="title">Place where I belong<br>Neotanzmusik</div>' +
-        '       <div class="timeline">' +
-        '           <div class="timeLapsed">1:26</div>' +
-        '           <div class="progressBar">' +
-        '           <div class="progress" style="width: 223.6px;"></div>' +
-        '           <div class="indicator ui-draggable" style="left: 217.6px;"></div>' +
-        '       </div>' +
-        '       <div class="timeRemained">-2:08</div>' +
-        '   </div>' +
-        '   <i class="icon-undo"></i>' +
-        '   </div>' +
-        '</div>' +
+        '<input type="range" min="1" max="100" value="50" class="slider" id="ui-timeline">' +
+        '<div id="ui-timeline-val" style="width:50%;"></div>' +
 
         '<div class="searchBox">' +
         '   <i class="icon-search"></i>' +
