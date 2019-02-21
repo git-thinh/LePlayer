@@ -260,10 +260,10 @@ namespace LePlayer
 
             //frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY);
 
-            var f = new frmMediaShortcut(this);
+            var f = new frmMediaExplorer(this);
             f.FormClosing += (se, ev) =>
-            { 
-                ev.Cancel = true; 
+            {
+                ev.Cancel = true;
                 this.ExitThreadCore();
             };
             f.Show();
