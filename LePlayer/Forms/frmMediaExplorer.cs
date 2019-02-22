@@ -15,14 +15,14 @@ using System.Windows.Forms;
 
 namespace LePlayer
 {
-    public class frmMediaExplorer : frmBase
+    public class frmMediaExplorer : frmMonitor
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }
 
         const string URL = "http://root/explorer/index.html";
         readonly StringBuilder LogBuilder;
-        public frmMediaExplorer(IContext context) : base(FORM_TYPE.DICTIONARY, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmMediaExplorer(IContext context) : base(FORM_TYPE.MEDIA_EXPLORER, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
             this.Text = "";
             this.VisiblePanelTransparentToMove = false;

@@ -66,7 +66,7 @@ namespace System
         BROWSER = 1,
 
         MEDIA_VIDEO = 2,
-        MEDIA_LIST = 3,
+        MEDIA_EXPLORER = 3,
         MEDIA_SHORTCUT = 4,
         MEDIA_YOUTUBE_SEARCH = 5,
         MEDIA_YOUTUBE_VIDEO = 6,

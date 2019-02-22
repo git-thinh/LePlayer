@@ -7,7 +7,7 @@ using System;
 
 namespace LePlayer
 {
-    public partial class frmMediaShortcut : frmBase, IForm_MediaVideo
+    public partial class frmMediaShortcut : frmMonitor, IForm_MediaVideo
     {
         #region [ Contractor ]
 

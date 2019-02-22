@@ -260,13 +260,7 @@ namespace LePlayer
 
             //frmBase.createAndShowForm(this, FORM_TYPE.DICTIONARY);
 
-            var f = new frmMediaExplorer(this);
-            f.FormClosing += (se, ev) =>
-            {
-                ev.Cancel = true;
-                this.ExitThreadCore();
-            };
-            f.Show();
+            frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_EXPLORER);
 
             //_dictionary = new frmDictionary(this);
             //_dictionary.FormClosing += (se, ev) =>
@@ -310,10 +304,12 @@ namespace LePlayer
             _mainIcon.Text = "Player";
             _mainIcon.Icon = LePlayer.Properties.Resources.icon;
             _mainIcon.ContextMenu = new ContextMenu();
-            _mainIcon.ContextMenu.MenuItems.Add("Browser...", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.BROWSER));
+            _mainIcon.ContextMenu.MenuItems.Add("Browser...", (s, e) => frmMonitor.createAndShowByFormType(this, FORM_TYPE.BROWSER));
             _mainIcon.ContextMenu.MenuItems.Add("-");
-            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.DICTIONARY));
-            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmBase.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO));
+            _mainIcon.ContextMenu.MenuItems.Add("Dictionary...", (s, e) => frmMonitor.createAndShowByFormType(this, FORM_TYPE.DICTIONARY));
+            _mainIcon.ContextMenu.MenuItems.Add("-");
+            _mainIcon.ContextMenu.MenuItems.Add("Media Video", (s, e) => frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO));
+            _mainIcon.ContextMenu.MenuItems.Add("Media Explorer", (s, e) => frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_EXPLORER));
             //_mainIcon.ContextMenu.MenuItems.Add("Text to speech", (s, e) => frmBase.createAndShowForm(FORM_TYPE.MEDIA_VIDEO)); 
             _mainIcon.ContextMenu.MenuItems.Add("-");
             _mainIcon.ContextMenu.MenuItems.Add("About...", (s, e) =>
@@ -329,7 +325,7 @@ namespace LePlayer
             {
                 if (ev.Button == MouseButtons.Left)
                 {
-                    frmBase.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO);
+                    frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO);
                 }
             };
 

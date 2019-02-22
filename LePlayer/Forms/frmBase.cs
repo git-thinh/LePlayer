@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 
 namespace System
 {
-    public partial class frmBase : Form, IForm
+    public partial class frmMonitor : Form, IForm
     {
         static ConcurrentDictionary<FORM_TYPE, object> storeForm = new ConcurrentDictionary<FORM_TYPE, object>() { };
         public static void createAndShowByFormType(IContext context, FORM_TYPE formType)
@@ -43,6 +43,11 @@ namespace System
                         storeForm.TryAdd(formType, video);
                         video.Show();
                         break;
+                    case FORM_TYPE.MEDIA_EXPLORER:
+                        var mex = new frmMediaExplorer(context);
+                        storeForm.TryAdd(formType, mex);
+                        mex.Show();
+                        break;
                 }
             }
         }
@@ -72,7 +77,7 @@ namespace System
         public bool VisibleMenuButton { get; set; }
         public bool VisiblePanelTransparentToMove { get; set; }
 
-        public frmBase(FORM_TYPE formType, IContext context, FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmMonitor(FORM_TYPE formType, IContext context, FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
         {
             this.FormType = formType;
             this.FormStyle = formStyle;

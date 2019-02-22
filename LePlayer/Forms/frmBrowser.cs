@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace LePlayer
 {
-    public class frmBrowser : frmBase, IForm_Browser
+    public class frmBrowser : frmMonitor, IForm_Browser
     {
         //public IWinFormsWebBrowser Browser { get; private set; }
         public ChromiumWebBrowser Browser { get; private set; }

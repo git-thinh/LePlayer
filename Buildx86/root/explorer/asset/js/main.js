@@ -58,8 +58,19 @@ $(document).ready(function () {
         name: 'list',
         style: 'border:none;padding:0;border-left:1px solid rgb(165,165,165);',
         method: 'GET', // need this to avoid 412 error on Safari
-        show: { lineNumbers: true },
+        show: {
+            selectColumn: true,
+            lineNumbers: false,
+        },
+        multiSelect: true,
         columns: [ // Name Time Artist Album Genre Rating Plays
+            {
+                field: 'recid', caption: '#', size: '20px', frozen: true,
+                render: function (record, index, column_index) {
+                    var html = '<div>' + (index+1) + '</div>';
+                    return html;
+                }
+            },
             { field: 'fname', caption: 'Name', size: '250px', frozen: true, sortable: true },
             { field: 'lname', caption: 'Time', size: '150px', sortable: true },
             { field: 'email', caption: 'Artist', size: '200px', sortable: true },

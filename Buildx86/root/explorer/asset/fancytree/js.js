@@ -11,7 +11,7 @@ $(document).ready(function () {
             icon: function (event, data) {
                 return !data.node.isTopLevel();
             },
-            source: { url: "json/ajax-tree-products.json" },
+            source: { url: "json/tree.json" },
             lazyLoad: function (event, data) {
                 data.result = { url: "json/ajax-sub2.json" };
             },

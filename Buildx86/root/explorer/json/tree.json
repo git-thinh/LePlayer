@@ -1,0 +1,85 @@
+[
+  {
+    "title": "History",
+    "expanded": false,
+    "folder": true,
+    "children": [
+      {
+        "title": "Art of War",
+        "type": "book",
+        "price": 5.95
+      },
+      {
+        "title": "The Hobbit",
+        "type": "book",
+        "price": 8.97
+      }
+    ]
+  },
+  {
+    "title": "Playlist",
+    "folder": true,
+    "children": [
+      {
+        "title": "Nevermind",
+        "type": "music",
+        "price": 15.95
+      },
+      {
+        "title": "Autobahn",
+        "type": "music",
+        "price": 23.98
+      }
+    ]
+  },
+  {
+    "title": "Books",
+    "expanded": false,
+    "folder": true,
+    "children": [
+      {
+        "title": "Cell Phones",
+        "folder": true,
+        "children": [
+          {
+            "title": "Moto G",
+            "type": "phone",
+            "price": 224.99
+          },
+          {
+            "title": "Galaxy S8",
+            "type": "phone",
+            "price": 509.99
+          }
+        ]
+      },
+      {
+        "title": "PC",
+        "folder": true,
+        "children": [
+          {
+            "title": "ThinkPad",
+            "type": "computer",
+            "price": 749.90
+          },
+          {
+            "title": "C64",
+            "type": "computer",
+            "price": 595.00
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Youtube",
+    "folder": true,
+    "lazy": true
+  },
+  {
+    "title": "Files on PC",
+    "folder": true,
+    "expanded": true,
+    "lazy": true
+  }
+]
