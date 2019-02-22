@@ -48,7 +48,7 @@ $(function () {
             { type: 'main', content: '<div id="ui-list"></div>', style: 'border:none;padding:0;' },
             { type: 'preview', size: 150, resizable: true, hidden: true, content: '<div id="ui-info"></div>', style: 'border:none;padding:0;' },
             { type: 'right', size: 200, resizable: true, hidden: true, content: '<div id="ui-property"></div>', style: 'border:none;padding:0;' },
-            { type: 'bottom', size: 24, resizable: false, hidden: true, content: '<div id="ui-status">' + status_ + '</div>', overflow: 'hidden', style: 'border:none;padding:0;' }
+            { type: 'bottom', size: 24, resizable: false, hidden: false, content: '<div id="ui-status">' + status_ + '</div>', overflow: 'hidden', style: 'border:none;padding:0;' }
         ]
     });
 });

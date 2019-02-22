@@ -16,7 +16,8 @@ namespace System
             if (storeForm.ContainsKey(formType))
             {
                 Form f = (Form)storeForm[formType];
-                if (f.IsDisposed) {
+                if (f.IsDisposed)
+                {
                     object val = null;
                     storeForm.TryRemove(formType, out val);
                     createAndShowByFormType(context, formType);
@@ -67,6 +68,7 @@ namespace System
         public FORM_STYLE FormStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE;
         public FORM_TYPE FormType { get; private set; }
         public bool VisibleMoveButton { get; set; }
+        public bool EnableResize { get; set; } = true;
         public bool VisibleMenuButton { get; set; }
         public bool VisiblePanelTransparentToMove { get; set; }
 
@@ -186,7 +188,12 @@ namespace System
             //////////////////////////////////////////////////////////////////////////// 
             ui_title.Visible = false;
             ui_control.Location = new Point(0, 0);
-            ui_control.Height = this.Height - 5;
+
+            if (EnableResize)
+                ui_control.Height = this.Height - 5;
+            else
+                ui_control.Height = this.Height;
+
             switch (this.FormStyle)
             {
                 case FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE:
@@ -229,7 +236,7 @@ namespace System
         {
             this.ui_control.Controls.Add(control);
         }
-        
+
         public IContext Context { get; private set; }
         public string URL_NEXT { get; set; }
 

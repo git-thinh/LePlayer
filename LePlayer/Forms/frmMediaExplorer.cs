@@ -28,6 +28,7 @@ namespace LePlayer
             this.VisiblePanelTransparentToMove = false;
             this.VisibleMenuButton = false;
             this.VisibleMoveButton = true;
+            this.EnableResize = false;
 
             LogBuilder = new StringBuilder();
 
