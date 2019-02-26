@@ -22,7 +22,7 @@ namespace LePlayer
 
         const string URL = "http://root/explorer/index.html";
         readonly StringBuilder LogBuilder;
-        public frmMediaExplorer(IContext context) : base(FORM_TYPE.MEDIA_EXPLORER, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmMediaExplorer(IContext context) : base(FORM_TYPE.MEDIA_EXPLORER, context, FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE, 800, 600)
         {
             this.Text = "";
             this.VisiblePanelTransparentToMove = false;
@@ -32,11 +32,11 @@ namespace LePlayer
 
             LogBuilder = new StringBuilder();
 
-            this.Shown += (se, ev) =>
-            {
-                this.Width = 800;
-                this.Height = 480;
-            };
+            //this.Shown += (se, ev) =>
+            //{
+            //this.Width = 800;
+            //this.Height = 480;
+            //};
 
             var browser = new ChromiumWebBrowser(URL)
             {

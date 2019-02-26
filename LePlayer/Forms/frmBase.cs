@@ -77,27 +77,29 @@ namespace System
         public bool VisibleMenuButton { get; set; }
         public bool VisiblePanelTransparentToMove { get; set; }
 
-        public frmMonitor(FORM_TYPE formType, IContext context, FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE)
+        public frmMonitor(FORM_TYPE formType, IContext context, FORM_STYLE formStyle = FORM_STYLE.TEXT_COLOR_BLACK___BG_COLOR_WHITE,int formWidth = 800, int formHeight = 600)
         {
+            this.Width = formWidth;
+            this.Height = formHeight;
+
             this.FormType = formType;
             this.FormStyle = formStyle;
             this.Context = context;
 
+            this.Icon = LePlayer.Properties.Resources.icon;
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.DoubleBuffered = true;
+            //this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.Shown += (se, ev) => LoadControls();
+
+
             ui_control = new Panel()
             {
                 Padding = new Padding(0),
-                Height = 800,
-                Width = 600,
-                //Location = new Point(0, _TITLE_HEIGHT),
-                //BackColor = Color.Blue,
+                Height = this.Width,
+                Width = this.Height
             };
             this.Controls.Add(ui_control);
-
-            this.Icon = LePlayer.Properties.Resources.icon;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.Shown += (se, ev) => LoadControls();
 
             switch (this.FormStyle)
             {
@@ -113,8 +115,8 @@ namespace System
 
         void LoadControls()
         {
-            this.Width = 600;
-            this.Height = 340;
+            //this.Width = 600;
+            //this.Height = 340;
             Color TEXT_COLOR = Color.Black;
             Color BG_COLOR = Color.White;
 
@@ -334,24 +336,25 @@ namespace System
                     return;
                 }
             }
-            else if (m.Msg == 0x85)
-            {
-                // WM_NCPAINT
-                var ncAttr = NativeMethods.DWMWINDOWATTRIBUTE.DWMWA_NCRENDERING_POLICY;
-                var dwAttrPntr = 2;
-                NativeMethods.DwmSetWindowAttribute(Handle, ncAttr, ref dwAttrPntr, 4);
+            //else
+            //if (m.Msg == 0x85)
+            //{
+            //    // WM_NCPAINT
+            //    var ncAttr = NativeMethods.DWMWINDOWATTRIBUTE.DWMWA_NCRENDERING_POLICY;
+            //    var dwAttrPntr = 2;
+            //    NativeMethods.DwmSetWindowAttribute(Handle, ncAttr, ref dwAttrPntr, 4);
 
-                var margins = new NativeMethods.MARGINS()
-                {
-                    cyBottomHeight = 0,
-                    cxLeftWidth = 0,
-                    cxRightWidth = 0,
-                    cyTopHeight = 0
-                };
+            //    var margins = new NativeMethods.MARGINS()
+            //    {
+            //        cyBottomHeight = 0,
+            //        cxLeftWidth = 0,
+            //        cxRightWidth = 0,
+            //        cyTopHeight = 0
+            //    };
 
-                NativeMethods.DwmExtendFrameIntoClientArea(Handle, ref margins);
+            //    NativeMethods.DwmExtendFrameIntoClientArea(Handle, ref margins);
 
-            }
+            //}
             base.WndProc(ref m);
         }
 
@@ -383,7 +386,7 @@ namespace System
                 // WS_EX_COMPOSITED : paints bottom-to-top. Reduces flicker greatly
 
                 cp.Style = cp.Style | WS_MINIMIZEBOX;
-                cp.ExStyle |= WS_EX_COMPOSITED;
+                //cp.ExStyle |= WS_EX_COMPOSITED;
 
                 return cp;
             }

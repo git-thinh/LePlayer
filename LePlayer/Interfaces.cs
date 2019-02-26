@@ -76,9 +76,10 @@ namespace System
 
     public enum FORM_STYLE
     {
-        TEXT_COLOR_BLACK___BG_COLOR_WHITE = 0,
-        TEXT_COLOR_WHITE___BG_COLOR_BLACK = 1,
-        TEXT_COLOR_GRAY___BG_COLOR_BLACK = 2,
+        NONE = 0,
+        TEXT_COLOR_BLACK___BG_COLOR_WHITE = 1,
+        TEXT_COLOR_WHITE___BG_COLOR_BLACK = 2,
+        TEXT_COLOR_GRAY___BG_COLOR_BLACK = 3,
     }
 
     public enum ICON_TYPE
