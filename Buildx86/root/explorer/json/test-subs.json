@@ -1,0 +1,13 @@
+[
+  {
+    "key": "test10",
+    "title": "Sub item",
+    "lazy": true
+  },
+  {
+    "key": "test11",
+    "title": "Sub folder",
+    "folder": true,
+    "lazy": true
+  }
+]

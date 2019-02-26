@@ -29,3 +29,7 @@ ul.fancytree-container {
     ul.fancytree-container > li > ul {
         padding-left: 0;
     }
+
+.fancytree-plain span.fancytree-title {
+    line-height: 16px;
+}

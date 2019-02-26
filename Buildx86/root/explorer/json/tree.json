@@ -1,5 +1,6 @@
 [
   {
+    "key": "history",
     "title": "History",
     "expanded": false,
     "folder": true,
@@ -17,6 +18,7 @@
     ]
   },
   {
+    "key": "playlist",
     "title": "Playlist",
     "folder": true,
     "children": [
@@ -33,6 +35,7 @@
     ]
   },
   {
+    "key": "book",
     "title": "Books",
     "expanded": false,
     "folder": true,
@@ -72,14 +75,33 @@
     ]
   },
   {
+    "key": "youtube",
     "title": "Youtube",
     "folder": true,
     "lazy": true
   },
   {
-    "title": "Files on PC",
+    "key": "googledrive",
+    "title": "Google Drive",
     "folder": true,
-    "expanded": true,
+    "lazy": true
+  },
+  {
+    "key": "pc_office",
+    "title": "PC Office",
+    "folder": true,
+    "lazy": true
+  },
+  {
+    "key": "pc_home",
+    "title": "PC Home",
+    "folder": true,
+    "lazy": true
+  },
+  {
+    "key": "test",
+    "title": "Test",
+    "folder": true,
     "lazy": true
   }
 ]

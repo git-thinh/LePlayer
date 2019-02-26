@@ -1,0 +1,47 @@
+{
+  "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomNameList",
+  "kingdomNames": [
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "1",
+      "kingdomName": "Bacteria",
+      "tsn": "202421"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "2",
+      "kingdomName": "Protozoa",
+      "tsn": "630577"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "3",
+      "kingdomName": "Plantae",
+      "tsn": "202422"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "4",
+      "kingdomName": "Fungi",
+      "tsn": "555705"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "5",
+      "kingdomName": "Animalia",
+      "tsn": "202423"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "6",
+      "kingdomName": "Chromista",
+      "tsn": "630578"
+    },
+    {
+      "class": "gov.usgs.itis.itis_service.metadata.SvcKingdomName",
+      "kingdomId": "7",
+      "kingdomName": "Archaea",
+      "tsn": "935939"
+    }
+  ]
+}
