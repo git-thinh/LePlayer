@@ -23,6 +23,7 @@ namespace LePlayer
             AbstractCefSettings settings = new CefSettings();
             settings.ExternalMessagePump = false;
 
+            
             // Set Google API keys, used for Geolocation requests sans GPS.  See http://www.chromium.org/developers/how-tos/api-keys
             // Environment.SetEnvironmentVariable("GOOGLE_API_KEY", "");
             // Environment.SetEnvironmentVariable("GOOGLE_DEFAULT_CLIENT_ID", "");
@@ -250,6 +251,7 @@ namespace LePlayer
             }
             ////Cef.AddCrossOriginWhitelistEntry(BaseUrl, "https", "cefsharp.com", false);
             //Cef.AddCrossOriginWhitelistEntry("http://hook/", "http", "hook", false);
+            Cef.AddCrossOriginWhitelistEntry("http://pc/", "http", "pc", false);
         }
 
         public MainContext()

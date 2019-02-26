@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Classes\API.cs" />
     <Compile Include="Classes\ControlTransparent.cs">
       <SubType>Component</SubType>
     </Compile>

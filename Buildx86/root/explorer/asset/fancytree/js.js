@@ -1,4 +1,8 @@
-﻿var _tree;
+﻿//(async function () { await CefSharp.BindObjectAsync('boundAsync'); alert(1); })();
+
+//console.log('store_pc_getDirves = ', bound.storeGetDirves()); 
+
+var _tree;
 
 function logEvent(event, data, msg) {
     //        var args = $.isArray(args) ? args.join(", ") :
@@ -186,10 +190,10 @@ function tree_lazyLoad(event, data) {
                 url = 'json/' + node.key + '.json';
                 break;
             case 'pc_office':
-                url = 'json/' + node.key + '.json';
+                url = 'http://pc/api/drive';
                 break;
             case 'pc_home':
-                url = 'json/' + node.key + '.json';
+                url = 'http://pc/api/drive';
                 break;
             case 'test':
                 url = 'json/test-subs.json';
@@ -200,7 +204,7 @@ function tree_lazyLoad(event, data) {
         }
     }
 
-    data.result = { url: url };
+    data.result = { url: url, cache: true };
 }
 
 function tree_postProcess(event, data) {
