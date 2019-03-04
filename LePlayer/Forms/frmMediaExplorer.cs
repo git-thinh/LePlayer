@@ -138,9 +138,9 @@ namespace LePlayer
 
 
             browser.IsBrowserInitializedChanged += (se, ev) =>
-        {
-            browser.ShowDevTools();
-        };
+            {
+                browser.ShowDevTools();
+            };
             browser.MenuHandler = new MenuHandler(this);
 
             this.AddControl(browser);

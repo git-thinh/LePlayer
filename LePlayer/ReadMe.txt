@@ -1,4 +1,8 @@
-﻿
+﻿For Origin file:// is not allowed by Access-Control-Allow-Origin.) error, you can set this settings 
+
+                browser.BrowserSettings.FileAccessFromFileUrlsAllowed = true;
+                browser.BrowserSettings.UniversalAccessFromFileUrlsAllowed = true;
+                browser.BrowserSettings.WebSecurityDisabled = true; 
 
 
 D:\MrThinh\EL\[G.S Nguyễn Quốc Hùng] - Làm thế nào để tự xây dựng môi trường học tiếng anh hiệu quả -.mp4

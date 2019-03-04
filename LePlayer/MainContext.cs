@@ -260,8 +260,8 @@ namespace LePlayer
 
             setupIcon();
 
-            //frmMonitor.createAndShowByFormType(this, FORM_TYPE.DICTIONARY);
-            frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_EXPLORER);
+            frmMonitor.createAndShowByFormType(this, FORM_TYPE.DICTIONARY);
+            //frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_EXPLORER);
             //frmMonitor.createAndShowByFormType(this, FORM_TYPE.MEDIA_VIDEO);
 
             //_dictionary = new frmDictionary(this);

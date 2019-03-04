@@ -73,9 +73,10 @@ namespace LePlayer
                 {
                     DefaultEncoding = "UTF-8",
                     WebGl = CefState.Disabled,
-                    WebSecurity = CefState.Disabled,
+                    //For Origin file:// is not allowed by Access-Control-Allow-Origin.) error
                     FileAccessFromFileUrls = CefState.Enabled,
                     UniversalAccessFromFileUrls = CefState.Enabled,
+                    WebSecurity = CefState.Disabled,
                     //ApplicationCache = CefState.Disabled
                 }
             };
@@ -105,8 +106,29 @@ namespace LePlayer
             this.AddControl(browser);
             this.Browser = browser;
 
+            CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+            //browser.JavascriptObjectRepository.Register("bound", new BoundObject(), isAsync: false);
+            browser.JavascriptObjectRepository.Register("boundAsync", new BoundObject(), true);
 
         }
+
+        private void jsCall()
+        {
+            string EvaluateJavaScriptResult;
+            var frame = this.Browser.GetMainFrame();
+            var task = frame.EvaluateScriptAsync("(function() { return document.getElementById('searchInput').value; })();", null);
+
+            task.ContinueWith(t =>
+            {
+                if (!t.IsFaulted)
+                {
+                    var response = t.Result;
+                    EvaluateJavaScriptResult = response.Success ? (response.Result.ToString() ?? "null") : response.Message;
+                    MessageBox.Show(EvaluateJavaScriptResult);
+                }
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
         ~frmDictionary()
         {
             this.Browser.Dispose();

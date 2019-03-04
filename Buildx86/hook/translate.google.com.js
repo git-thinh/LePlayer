@@ -1,4 +1,13 @@
-﻿CoreInterface.prototype = {
+﻿
+
+(async function () {
+    await CefSharp.BindObjectAsync("boundAsync", "bound");
+
+    //boundAsync.showMessage('Message from JS');
+    console.log('store_pc_getDirves = ', boundAsync.storeGetDirves()); 
+})();
+
+CoreInterface.prototype = {
     _timeOutAutoSave: 15000,
     _hasChangeData: false,
     _elSuggestion: document.getElementById('gt-src-is'),

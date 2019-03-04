@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CefSharp;
 using Newtonsoft.Json;
 
@@ -32,7 +33,10 @@ namespace LePlayer
             catch { }
             return s;
         }
-
+        public void showMessage(string msg)
+        {
+            MessageBox.Show(msg);
+        }
         public void TestCallback(IJavascriptCallback javascriptCallback)
         {
             const int taskDelay = 1500;
