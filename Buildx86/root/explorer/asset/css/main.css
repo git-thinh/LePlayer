@@ -30,6 +30,8 @@
 body {
     padding: 0px;
     margin: 0px;
+    /*font-family: Verdana,Arial,sans-serif;*/
+    font-family: "Lucida Grande", Arial, sans-serif;
 }
 
 #ui-app,
