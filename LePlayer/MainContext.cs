@@ -258,6 +258,8 @@ namespace LePlayer
         {
             CefInit();
 
+            OwinServer.Start();
+
             setupIcon();
 
             //frmMonitor.createAndShowByFormType(this, FORM_TYPE.DICTIONARY);

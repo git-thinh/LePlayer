@@ -75,6 +75,15 @@
     <Reference Include="CefSharp.WinForms">
       <HintPath>dll\CefSharp.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>dll\FluentValidation\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.ValidatorAttribute">
+      <HintPath>dll\FluentValidation\FluentValidation.ValidatorAttribute.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi">
+      <HintPath>dll\FluentValidation\FluentValidation.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.WMPLib">
       <HintPath>dll\Interop.WMPLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -98,6 +107,11 @@
       <HintPath>dll\Microsoft\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\FluentValidation\System.ComponentModel.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -108,6 +122,10 @@
       <HintPath>dll\Microsoft\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.ValueTuple, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\FluentValidation\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors">
       <HintPath>dll\Microsoft\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -162,6 +180,8 @@
     </Compile>
     <Compile Include="Interfaces.cs" />
     <Compile Include="MainContext.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\PersonCreateRequestModel.cs" />
     <Compile Include="OpenSource\Fleck\ConnectionNotAvailableException.cs" />
     <Compile Include="OpenSource\Fleck\FleckLog.cs" />
     <Compile Include="OpenSource\Fleck\FrameType.cs" />
@@ -220,7 +240,146 @@
     <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StaticFileResponseContext.cs" />
     <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StreamCopyOperation.cs" />
     <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\____Resources.cs" />
+    <Compile Include="OpenSource\Microsoft.Owin\OwinServer.cs" />
     <Compile Include="OpenSource\Microsoft.Owin\StaticFileContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\ActivationException.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\AdvancedExtensions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\BehaviorDeprecationExtensions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\DefaultConstructorResolutionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\DefaultDependencyInjectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\DefaultLifestyleSelectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\DefaultPropertySelectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\IConstructorResolutionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\IDependencyInjectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\ILifestyleSelectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\InitializationContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\InitializerContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\InstanceInitializationData.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\Internal\LazyScope.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\Internal\LazyScopedRegistration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\IPropertySelectionBehavior.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\KnownRelationship.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\PropertyInjectionHelper.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Advanced\PropertyInjectionHelper.full.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Common.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Common.full.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.Batch.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.CollectionRegistrator.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.Collections.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.Conditional.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Registration.Decorators.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Resolving.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Container.Verification.cs" />
+    <Compile Include="OpenSource\SimpleInjector\ContainerOptions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\DecoratorContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\DecoratorPredicateContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\CompositeHelpers.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\ContainerUncontrolledServicesDecoratorInterceptor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\DecoratorExpressionInterceptor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\DecoratorExpressionInterceptorData.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\DecoratorHelpers.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\DecoratorInfo.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\DecoratorInterceptor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\ServiceDecoratorExpressionInterceptor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Decorators\ServiceTypeDecoratorInfo.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\AmbiguousLifestylesDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\AmbiguousLifestylesAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\ContainerRegisteredServiceAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\DisposableTransientComponentAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\LifestyleMismatchAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\ShortCircuitedDependencyAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\SingleResponsibilityViolationsAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Analyzers\TornLifestyleContainerAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\ContainerAnalyzerProvider.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\ContainerRegisteredServiceDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Debugger\ContainerDebugView.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Debugger\DebuggerGeneralWarningsContainerAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\Debugger\DebuggerViewItem.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DiagnosticGroup.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DiagnosticResultGrouper.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DiagnosticSeverity.enum.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DiagnosticType.enum.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\DisposableTransientComponentDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\IContainerAnalyzer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\KnownRelationshipCollection.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\LifestyleMismatchChecker.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\LifestyleMismatchDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\ShortCircuitedDependencyDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\SingleResponsibilityViolationDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\TornLifestyleDiagnosticResult.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Diagnostics\TypeGeneralizer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\DiagnosticVerificationException.cs" />
+    <Compile Include="OpenSource\SimpleInjector\ExpressionBuildingEventArgs.cs" />
+    <Compile Include="OpenSource\SimpleInjector\ExpressionBuiltEventArgs.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Helpers.cs" />
+    <Compile Include="OpenSource\SimpleInjector\InjectionConsumerInfo.cs" />
+    <Compile Include="OpenSource\SimpleInjector\InjectionTargetInfo.cs" />
+    <Compile Include="OpenSource\SimpleInjector\InstanceProducer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\InstanceProducerOfT.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ArgumentMapping.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\AsyncLocal.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\CollectionResolver.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\CompilationHelpers.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\CompilationHelpers.full.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ConditionalHashSet.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ConstantArrayIndexizerVisitor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ConstantFinderVisitor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ContainerControlledCollection.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ContainerControlledCollectionResolver.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ContainerControlledItem.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ContainerUncontrolledCollectionResolver.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\CyclicDependencyException.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\CyclicDependencyValidator.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ExcludeFromCodeCoverageAttribute.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\GenericArgumentFinder.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\GenericRegistrationEntry.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\GenericTypeBuilder.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\IContainerControlledCollection.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\InstanceProducerVisualizer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\InternalsFinderVisitor.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\IRegistrationEntry.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\NonGenericRegistrationEntry.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\OverriddenParameter.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ParameterDictionary.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ReferenceEqualityComparer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\ReflectionExtensions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\RegistrationEntry.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\SubExpressionReplacer.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Internals\TypeConstraintValidator.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\AsyncScopedLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\CustomLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\DefaultFallbackScopedHybridLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ExpressionRegistration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\FlowingScopedLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\HybridLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\HybridRegistration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\IHybridLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\LifestyleSelectionBehaviorProxyLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\LifestyleSelectorScopedHybridLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ScopedProxyLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ScopedRegistration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ScopedScopeLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ScopeManager.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\SingletonLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\ThreadScopedLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\TransientLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Lifestyles\UnknownLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\PredicateContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Registration.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Requires.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Scope.cs" />
+    <Compile Include="OpenSource\SimpleInjector\ScopedLifestyle.cs" />
+    <Compile Include="OpenSource\SimpleInjector\StringResources.cs" />
+    <Compile Include="OpenSource\SimpleInjector\TypeFactoryContext.cs" />
+    <Compile Include="OpenSource\SimpleInjector\Types.cs" />
+    <Compile Include="OpenSource\SimpleInjector\TypesExtensions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\TypesToRegisterOptions.cs" />
+    <Compile Include="OpenSource\SimpleInjector\UnregisteredTypeEventArgs.cs" />
+    <Compile Include="OpenSource\SimpleInjector\VerificationOption.enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

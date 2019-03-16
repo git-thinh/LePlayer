@@ -1,6 +1,7 @@
 Microsoft.AspNet.WebApi.Client.5.2.7 = System.Net.Http.Formatting.dll
 Microsoft.AspNet.WebApi.Core.5.2.7 = System.Web.Http
 Microsoft.AspNet.WebApi.Owin.5.2.7 = System.Web.Http.Owin
+
 Microsoft.AspNet.WebApi.OwinSelfHost.5.2.7 = 
 Microsoft.Owin.4.0.0 = Microsoft.Owin
 Microsoft.Owin.Host.HttpListener.2.0.2 = Microsoft.Owin.Host.HttpListener
