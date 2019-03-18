@@ -82,17 +82,14 @@
       <HintPath>dll\Interop.WMPLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection">
-      <HintPath>dll\Microsoft\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <HintPath>dll\Microsoft\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>dll\Microsoft\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Cors">
       <HintPath>dll\Microsoft\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems">
+      <HintPath>dll\Microsoft\Microsoft.Owin.FileSystems.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.HttpListener">
       <HintPath>dll\Microsoft\Microsoft.Owin.Host.HttpListener.dll</HintPath>
@@ -100,8 +97,12 @@
     <Reference Include="Microsoft.Owin.Hosting">
       <HintPath>dll\Microsoft\Microsoft.Owin.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Owin.StaticFiles">
+      <HintPath>dll\Microsoft\Microsoft.Owin.StaticFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Microsoft\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>dll\Microsoft\Owin.dll</HintPath>
@@ -180,8 +181,6 @@
     </Compile>
     <Compile Include="Interfaces.cs" />
     <Compile Include="MainContext.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\PersonCreateRequestModel.cs" />
     <Compile Include="OpenSource\Fleck\ConnectionNotAvailableException.cs" />
     <Compile Include="OpenSource\Fleck\FleckLog.cs" />
     <Compile Include="OpenSource\Fleck\FrameType.cs" />
@@ -209,169 +208,7 @@
     <Compile Include="OpenSource\Fleck\WebSocketHttpRequest.cs" />
     <Compile Include="OpenSource\Fleck\WebSocketServer.cs" />
     <Compile Include="OpenSource\Fleck\WebSocketStatusCodes.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.DependencyInjectionExtensions\DependencyInjectionExtensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.DependencyInjectionExtensions\ServiceCollectionExtensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.ValidatorAttribute\AttributedValidatorFactory.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.ValidatorAttribute\IParameterValidatorFactory.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.ValidatorAttribute\ValidatorAttribute.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\CustomizeValidatorAttribute.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\FluentValidationBodyModelValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\FluentValidationModelValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\FluentValidationModelValidatorProvider.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\IValidatorInterceptor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation.WebApi\ValidationResultExtension.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\AbstractValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\AssemblyInfo.FluentValidation.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\AssemblyScanner.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\CollectionValidatorExtensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\DefaultValidatorExtensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\DefaultValidatorOptions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Enums.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\InlineValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\AccessorCache.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\CollectionPropertyRule.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\Comparer.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\ConditionBuilder.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\DefaultValidatorSelector.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\DisplayNameCache.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\Extensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\IConfigurable.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\IncludeRule.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\IValidatorSelector.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\MemberNameValidatorSelector.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\MessageBuilderContext.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\MessageFormatter.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\PropertyChain.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\PropertyRule.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\RuleBuilder.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\RulesetValidatorSelector.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Internal\TrackingCollection.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\IValidationRule.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\IValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\IValidatorDescriptor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\IValidatorFactory.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\MemberAccessor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\ErrorCodeLanguageStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\ILanguageManager.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\IStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Language.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\LanguageManager.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\LanguageStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\AlbanianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\ArabicLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\ChineseSimplifiedLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\ChineseTraditionalLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\CroatianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\CzechLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\DanishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\DutchLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\EnglishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\FinnishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\FrenchLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\GeorgianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\GermanLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\GreekLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\HebrewLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\HindiLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\ItalianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\JapaneseLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\KoreanLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\MacedonianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\NorwegianBokmalLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\PersianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\PolishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\PortugueseBrazilLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\PortugueseLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\RomanianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\RussianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\SlovakLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\SpanishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\SwedishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\TurkishLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\Languages\UkrainianLanguage.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\LazyStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\LocalizedStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\ResourceAccessor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Resources\StaticStringSource.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Results\ValidationFailure.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Results\ValidationResult.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Syntax.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\ITestPropertyChain.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\IValidationResultTester.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\TestPropertyChain.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\TestValidationResult.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\ValidationResultTester.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\ValidationTestException.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\TestHelper\ValidatorTestExtensions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidationContext.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidationException.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidatorDescriptor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidatorFactoryBase.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidatorMetadata.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\ValidatorOptions.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\AbstractComparisonValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\AsyncPredicateValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\AsyncValidatorBase.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\ChildValidatorAdaptor.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\CreditCardValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\CustomValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\DelegatingValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\EmailValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\EmptyValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\EnumValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\EqualValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\ExclusiveBetweenValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\GreaterThanOrEqualValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\GreaterThanValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\InclusiveBetweenValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\IPropertyValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\LengthValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\LessThanOrEqualValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\LessThanValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\NoopPropertyValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\NotEmptyValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\NotEqualValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\NotNullValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\NullValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\OnFailureValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\PredicateValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\PropertyValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\PropertyValidatorContext.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\RegularExpressionValidator.cs" />
-    <Compile Include="OpenSource\FluentValidation\FluentValidation\Validators\ScalePrecisionValidator.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.FileSystems\EmbeddedResourceFileSystem.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.FileSystems\IFileInfo.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.FileSystems\IFileSystem.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.FileSystems\PhysicalFileSystem.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\Constants.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\ContentTypes\FileExtensionContentTypeProvider.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\ContentTypes\IContentTypeProvider.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DefaultFilesExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DefaultFilesMiddleware.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DefaultFilesOptions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DirectoryBrowserExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DirectoryBrowserMiddleware.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DirectoryBrowserOptions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DirectoryFormatters\HtmlDirectoryFormatter.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\DirectoryFormatters\IDirectoryFormatter.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\FileServerExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\FileServerOptions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\GlobalSuppressions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\Helpers.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\Infrastructure\RangeHelpers.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\Infrastructure\SharedOptions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\Infrastructure\SharedOptionsBase.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\SendFileExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\SendFileMiddleware.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\SendFileResponseExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StaticFileExtensions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StaticFileMiddleware.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StaticFileOptions.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StaticFileResponseContext.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\StreamCopyOperation.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\Microsoft.Owin.StaticFiles\____Resources.cs" />
     <Compile Include="OpenSource\Microsoft.Owin\OwinServer.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\StaticFileContext.cs" />
     <Compile Include="OpenSource\SimpleInjector\ActivationException.cs" />
     <Compile Include="OpenSource\SimpleInjector\Advanced\AdvancedExtensions.cs" />
     <Compile Include="OpenSource\SimpleInjector\Advanced\BehaviorDeprecationExtensions.cs" />
@@ -536,6 +373,9 @@
     <Content Include="icon.ico" />
     <Content Include="ReadMe.txt" />
     <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

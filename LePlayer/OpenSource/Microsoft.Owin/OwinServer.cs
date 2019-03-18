@@ -1,5 +1,4 @@
 ﻿using Fleck;
-using FluentValidation.WebApi;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.FileSystems;
@@ -119,7 +118,7 @@ namespace System
             );
             config.MessageHandlers.Add(new CustomHeaderHandler());
 
-            FluentValidationModelValidatorProvider.Configure(config);
+            //FluentValidationModelValidatorProvider.Configure(config);
             //------------------------------------------------------------------------
 
 
