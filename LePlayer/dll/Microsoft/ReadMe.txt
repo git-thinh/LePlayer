@@ -1,8 +1,13 @@
 Microsoft.AspNet.WebApi.Client.5.2.7 = System.Net.Http.Formatting.dll
 Microsoft.AspNet.WebApi.Core.5.2.7 = System.Web.Http
 Microsoft.AspNet.WebApi.Owin.5.2.7 = System.Web.Http.Owin
-
 Microsoft.AspNet.WebApi.OwinSelfHost.5.2.7 = 
+
+<package id="Microsoft.AspNet.WebApi.Client" version="5.2.7" targetFramework="net452" />
+<package id="Microsoft.AspNet.WebApi.Core" version="5.2.7" targetFramework="net452" />
+<package id="Newtonsoft.Json" version="6.0.4" targetFramework="net452" />
+
+
 Microsoft.Owin.4.0.0 = Microsoft.Owin
 Microsoft.Owin.Host.HttpListener.2.0.2 = Microsoft.Owin.Host.HttpListener
 Microsoft.Owin.Hosting.2.0.2 = Microsoft.Owin.Hosting
