@@ -1,4 +1,29 @@
-﻿https://groups.google.com/forum/#!topic/cefglue/EhskGZ9OndY
+﻿
+
+
+https://github.com/filipw/WebApi.ActionInjector
+https://github.com/tugberkugurlu/DotNetDoodle.Owin.Dependencies
+https://www.strathweb.com/2014/07/dependency-injection-directly-actions-asp-net-web-api/
+
+
+https://github.com/simpleinjector/SimpleInjector
+https://github.com/simpleinjector/SimpleInjector/issues/138
+https://weblog.west-wind.com/posts/2016/dec/12/loading-net-assemblies-out-of-seperate-folders
+https://stackoverflow.com/questions/10988749/self-hosting-webapi-application-referencing-controller-from-different-assembly/24434526#24434526
+https://stackoverflow.com/questions/48652339/making-owin-use-assemblyresolved-assemblies
+
+https://exceptionnotfound.net/custom-validation-in-asp-net-web-api-with-fluentvalidation/
+https://github.com/JeremySkinner/FluentValidation/issues/157
+https://fluentvalidation.net/start
+https://stackoverflow.com/questions/9984144/what-is-the-correct-way-to-register-fluentvalidation-with-simpleinjector
+https://stackoverflow.com/questions/10940988/how-to-configure-simple-injector-ioc-to-use-ravendb
+https://simpleinjector.readthedocs.io/en/latest/windowsformsintegration.html
+
+
+
+
+
+https://groups.google.com/forum/#!topic/cefglue/EhskGZ9OndY
 
 
 Re: [CefGlue] Re: Async Javascript to Native C# with Params ???
