@@ -208,7 +208,6 @@
     <Compile Include="OpenSource\Fleck\WebSocketHttpRequest.cs" />
     <Compile Include="OpenSource\Fleck\WebSocketServer.cs" />
     <Compile Include="OpenSource\Fleck\WebSocketStatusCodes.cs" />
-    <Compile Include="OpenSource\Microsoft.Owin\OwinServer.cs" />
     <Compile Include="OpenSource\SimpleInjector\ActivationException.cs" />
     <Compile Include="OpenSource\SimpleInjector\Advanced\AdvancedExtensions.cs" />
     <Compile Include="OpenSource\SimpleInjector\Advanced\BehaviorDeprecationExtensions.cs" />
@@ -376,6 +375,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="OpenSource\Microsoft.Owin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

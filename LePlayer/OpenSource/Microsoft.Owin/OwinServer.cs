@@ -34,30 +34,30 @@ namespace System
                     ServerFactory = "Microsoft.Owin.Host.HttpListener"
                 });
 
-                var server = new WebSocketServer("ws://0.0.0.0:8181");
-                server.Start(socket =>
-                {
-                    socket.OnOpen = () =>
-                    {
-                        //Console.WriteLine("Open!");
-                        File.WriteAllText("log.txt", string.Empty);
-                    };
-                    socket.OnClose = () =>
-                    {
-                        //Console.WriteLine("Close!");
-                    };
-                    socket.OnMessage = message =>
-                    {
-                        //socket.Send(message);
-                        Console.WriteLine();
-                        Console.WriteLine(message);
-                        Console.WriteLine();
-                        using (StreamWriter w = File.AppendText("log.txt"))
-                        {
-                            w.WriteLine(message);
-                        }
-                    };
-                });
+                //var server = new WebSocketServer("ws://0.0.0.0:8181");
+                //server.Start(socket =>
+                //{
+                //    socket.OnOpen = () =>
+                //    {
+                //        //Console.WriteLine("Open!");
+                //        File.WriteAllText("log.txt", string.Empty);
+                //    };
+                //    socket.OnClose = () =>
+                //    {
+                //        //Console.WriteLine("Close!");
+                //    };
+                //    socket.OnMessage = message =>
+                //    {
+                //        //socket.Send(message);
+                //        Console.WriteLine();
+                //        Console.WriteLine(message);
+                //        Console.WriteLine();
+                //        using (StreamWriter w = File.AppendText("log.txt"))
+                //        {
+                //            w.WriteLine(message);
+                //        }
+                //    };
+                //});
 
                 _TERMINAL.WaitOne();
             });
@@ -110,17 +110,6 @@ namespace System
 
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-            config.MessageHandlers.Add(new CustomHeaderHandler());
-
-            //FluentValidationModelValidatorProvider.Configure(config);
-            //------------------------------------------------------------------------
-
 
             //Enable Cors
             app.UseCors(CorsOptions.AllowAll);
@@ -141,6 +130,17 @@ namespace System
             //});
 
             //====== Run WebApi by config ============
+            HttpConfiguration config = new HttpConfiguration();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            config.MessageHandlers.Add(new CustomHeaderHandler());
+
+            //FluentValidationModelValidatorProvider.Configure(config);
+            //------------------------------------------------------------------------
+
             app.UseWebApi(config);
 
             //var physicalFileSystem = new PhysicalFileSystem(@"./www");

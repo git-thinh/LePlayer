@@ -258,7 +258,6 @@ namespace LePlayer
         {
             CefInit();
 
-            OwinServer.Start();
 
             setupIcon();
 

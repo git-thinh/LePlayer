@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Owin;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Web.Http;
 using System.Windows.Forms;
 
 namespace LePlayer
@@ -57,10 +60,16 @@ namespace LePlayer
             //{
             //    try
             //    {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //OwinServer.Start();
+            Microsoft.Owin.Hosting.WebApp.Start<Startup>(url: "http://*:10101/");
+
             Application.Run(new MainContext());
             CefSharp.Cef.Shutdown();
+
             //    }
             //    finally
             //    {
@@ -68,6 +77,40 @@ namespace LePlayer
             //    }
             //}
         }
+
+        public class ValuesController : ApiController
+        {
+            public IEnumerable<string> Get()
+            {
+                return new List<string> { "ASP.NET", "Docker", "Windows Containers" };
+            }
+        }
+
+        public class Startup
+        {
+            public void Configuration(IAppBuilder app)
+            {
+                HttpConfiguration config = new HttpConfiguration();
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                );
+                app.UseWebApi(config);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }
