@@ -1,4 +1,0 @@
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Google\obj\Debug\Microsoft.Owin.Security.Google.csprojAssemblyReference.cache
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Google\obj\Debug\Microsoft.Owin.Security.Google.Resources.resources
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Google\obj\Debug\Microsoft.Owin.Security.Google.csproj.GenerateResource.cache
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Google\obj\Debug\Microsoft.Owin.Security.Google.csproj.CoreCompileInputs.cache

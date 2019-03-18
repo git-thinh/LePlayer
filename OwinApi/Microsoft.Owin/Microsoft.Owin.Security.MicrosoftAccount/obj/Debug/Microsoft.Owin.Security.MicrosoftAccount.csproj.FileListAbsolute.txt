@@ -1,4 +1,0 @@
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.MicrosoftAccount\obj\Debug\Microsoft.Owin.Security.MicrosoftAccount.csprojAssemblyReference.cache
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.MicrosoftAccount\obj\Debug\Microsoft.Owin.Security.MicrosoftAccount.Resources.resources
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.MicrosoftAccount\obj\Debug\Microsoft.Owin.Security.MicrosoftAccount.csproj.GenerateResource.cache
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.MicrosoftAccount\obj\Debug\Microsoft.Owin.Security.MicrosoftAccount.csproj.CoreCompileInputs.cache

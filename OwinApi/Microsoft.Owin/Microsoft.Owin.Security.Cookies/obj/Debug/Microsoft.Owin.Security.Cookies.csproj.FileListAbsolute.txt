@@ -1,2 +1,0 @@
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Cookies\obj\Debug\Microsoft.Owin.Security.Cookies.csprojAssemblyReference.cache
-C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Cookies\obj\Debug\Microsoft.Owin.Security.Cookies.csproj.CoreCompileInputs.cache
