@@ -1,0 +1,4 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.WsFederation\obj\Debug\Microsoft.Owin.Security.WsFederation.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.WsFederation\obj\Debug\Microsoft.Owin.Security.WsFederation.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.WsFederation\obj\Debug\Microsoft.Owin.Security.WsFederation.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.WsFederation\obj\Debug\Microsoft.Owin.Security.WsFederation.csproj.CoreCompileInputs.cache

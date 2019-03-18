@@ -23,13 +23,11 @@ namespace System
 {
     public class OwinServer
     {
-        public static string PATH_ROOT = @"./";
+        public static string PATH_ROOT = System.Reflection.Assembly.GetEntryAssembly().Location;
         static AutoResetEvent _TERMINAL = new AutoResetEvent(false);
 
-        public static void Start(string baseAddress = "http://127.0.0.1:12345/", string pathRoot = "./")
+        public static void Start(string baseAddress = "http://+:10101/")
         {
-            PATH_ROOT = pathRoot;
-
             Task.Factory.StartNew(() =>
             {
                 WebApp.Start<Startup>(new StartOptions(baseAddress)

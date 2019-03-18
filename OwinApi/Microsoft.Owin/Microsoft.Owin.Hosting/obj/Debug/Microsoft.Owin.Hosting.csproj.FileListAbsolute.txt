@@ -1,0 +1,5 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Hosting\obj\Debug\Microsoft.Owin.Hosting.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Hosting\obj\Debug\Microsoft.Owin.Hosting.App_Packages.Owin.Loader.LoaderResources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Hosting\obj\Debug\Microsoft.Owin.Hosting.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Hosting\obj\Debug\Microsoft.Owin.Hosting.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Hosting\obj\Debug\Microsoft.Owin.Hosting.csproj.CoreCompileInputs.cache

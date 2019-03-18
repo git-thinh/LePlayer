@@ -1,0 +1,3 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Facebook\obj\Debug\Microsoft.Owin.Security.Facebook.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Facebook\obj\Debug\Microsoft.Owin.Security.Facebook.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Facebook\obj\Debug\Microsoft.Owin.Security.Facebook.csproj.CoreCompileInputs.cache

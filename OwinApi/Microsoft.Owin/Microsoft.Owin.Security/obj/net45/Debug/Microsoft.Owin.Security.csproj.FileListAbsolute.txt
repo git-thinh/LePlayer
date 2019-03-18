@@ -1,0 +1,4 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security\obj\net45\Debug\Microsoft.Owin.Security.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security\obj\net45\Debug\Microsoft.Owin.Security.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security\obj\net45\Debug\Microsoft.Owin.Security.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security\obj\net45\Debug\Microsoft.Owin.Security.csproj.CoreCompileInputs.cache

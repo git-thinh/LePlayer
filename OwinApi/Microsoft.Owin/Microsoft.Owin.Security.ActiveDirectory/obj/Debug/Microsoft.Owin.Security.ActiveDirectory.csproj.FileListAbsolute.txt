@@ -1,0 +1,3 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.ActiveDirectory\obj\Debug\Microsoft.Owin.Security.ActiveDirectory.Properties.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.ActiveDirectory\obj\Debug\Microsoft.Owin.Security.ActiveDirectory.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.ActiveDirectory\obj\Debug\Microsoft.Owin.Security.ActiveDirectory.csproj.CoreCompileInputs.cache

@@ -1,0 +1,4 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Jwt\obj\Debug\Microsoft.Owin.Security.Jwt.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Jwt\obj\Debug\Microsoft.Owin.Security.Jwt.Properties.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Jwt\obj\Debug\Microsoft.Owin.Security.Jwt.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Jwt\obj\Debug\Microsoft.Owin.Security.Jwt.csproj.CoreCompileInputs.cache

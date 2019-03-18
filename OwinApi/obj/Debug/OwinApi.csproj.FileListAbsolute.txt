@@ -1,0 +1,11 @@
+C:\LePlayer\ApiBuild\OwinApi.exe.config
+C:\LePlayer\ApiBuild\OwinApi.exe
+C:\LePlayer\ApiBuild\OwinApi.pdb
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.csprojAssemblyReference.cache
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.Microsoft.Owin.Microsoft.Owin.Resources.resources
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.csproj.GenerateResource.cache
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.csproj.CoreCompileInputs.cache
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.csproj.CopyComplete
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.exe
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.pdb
+C:\LePlayer\OwinApi\obj\Debug\OwinApi.Microsoft.Owin.Microsoft.Owin.StaticFiles.Resources.resources

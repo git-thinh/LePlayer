@@ -1,0 +1,3 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Twitter\obj\Debug\Microsoft.Owin.Security.Twitter.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Twitter\obj\Debug\Microsoft.Owin.Security.Twitter.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.Twitter\obj\Debug\Microsoft.Owin.Security.Twitter.csproj.CoreCompileInputs.cache

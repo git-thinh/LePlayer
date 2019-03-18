@@ -1,4 +1,11 @@
-﻿For Origin file:// is not allowed by Access-Control-Allow-Origin.) error, you can set this settings 
+﻿
+
+error CS8107: Feature 'default literal' is not available in C# 7.0. Please use language version 7.1 or greater
+-> Project -> Project Properties (bottom) -> Build -> Advanced -> Language Version. Change to minor version (latest) or C# 7.1
+
+----------------------------------------------------------------------------------------
+
+For Origin file:// is not allowed by Access-Control-Allow-Origin.) error, you can set this settings 
 
                 browser.BrowserSettings.FileAccessFromFileUrlsAllowed = true;
                 browser.BrowserSettings.UniversalAccessFromFileUrlsAllowed = true;

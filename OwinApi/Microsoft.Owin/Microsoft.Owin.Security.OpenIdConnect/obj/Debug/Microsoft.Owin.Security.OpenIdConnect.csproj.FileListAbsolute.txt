@@ -1,0 +1,4 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.OpenIdConnect\obj\Debug\Microsoft.Owin.Security.OpenIdConnect.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.OpenIdConnect\obj\Debug\Microsoft.Owin.Security.OpenIdConnect.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.OpenIdConnect\obj\Debug\Microsoft.Owin.Security.OpenIdConnect.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Security.OpenIdConnect\obj\Debug\Microsoft.Owin.Security.OpenIdConnect.csproj.CoreCompileInputs.cache

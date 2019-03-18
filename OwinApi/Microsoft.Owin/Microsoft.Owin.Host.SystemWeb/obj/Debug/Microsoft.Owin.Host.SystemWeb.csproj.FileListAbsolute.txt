@@ -1,0 +1,5 @@
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Host.SystemWeb\obj\Debug\Microsoft.Owin.Host.SystemWeb.csprojAssemblyReference.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Host.SystemWeb\obj\Debug\Microsoft.Owin.Host.SystemWeb.App_Packages.Owin.Loader.LoaderResources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Host.SystemWeb\obj\Debug\Microsoft.Owin.Host.SystemWeb.Resources.resources
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Host.SystemWeb\obj\Debug\Microsoft.Owin.Host.SystemWeb.csproj.GenerateResource.cache
+C:\_____\AspNetKatana-dev\src\Microsoft.Owin.Host.SystemWeb\obj\Debug\Microsoft.Owin.Host.SystemWeb.csproj.CoreCompileInputs.cache
